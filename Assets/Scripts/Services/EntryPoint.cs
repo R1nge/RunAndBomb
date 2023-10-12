@@ -14,11 +14,11 @@ namespace Services
         [SerializeField] private Enemy enemy;
         [SerializeField] private GeneratorConfig generatorConfig;
         private IObjectResolver _objectResolver;
-        private EnemyCounter _enemyCounter;
+        private StateMachine _stateMachine;
         private PlayerFactory _playerFactory;
+        private EnemyCounter _enemyCounter;
         private EnemyFactory _enemyFactory;
         private MapGenerator _mapGenerator;
-        private StateMachine _stateMachine;
 
         [Inject]
         private void Inject(IObjectResolver objectResolver, StateMachine stateMachine, EnemyCounter enemyCounter)

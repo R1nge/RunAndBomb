@@ -11,16 +11,13 @@ namespace Services
         private readonly Player _playerPrefab;
         private readonly Vector3 _spawnPosition;
 
-        public PlayerFactory(IObjectResolver objectResolver, Player playerPrefab, Vector3 position)
+        public PlayerFactory(IObjectResolver objectResolver, Player playerPrefab, Vector3 spawnPosition)
         {
             _objectResolver = objectResolver;
             _playerPrefab = playerPrefab;
-            _spawnPosition = position;
+            _spawnPosition = spawnPosition;
         }
 
-        public void Spawn()
-        {
-            _objectResolver.Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity);
-        }
+        public void Spawn() => _objectResolver.Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity);
     }
 }

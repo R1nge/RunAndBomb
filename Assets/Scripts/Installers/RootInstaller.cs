@@ -1,5 +1,4 @@
-﻿using Services;
-using Services.States;
+﻿using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,9 +8,12 @@ namespace Installers
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<EnemyCounter>(Lifetime.Singleton).AsSelf();
-            builder.Register<StateMachine>(Lifetime.Singleton).AsSelf();
-            builder.RegisterComponentInHierarchy<EntryPoint>().AsSelf();
+        }
+
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+            SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
         }
     }
 }
