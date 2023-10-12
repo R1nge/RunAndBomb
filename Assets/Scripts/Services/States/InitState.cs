@@ -2,19 +2,19 @@
 {
     public class InitState : IState
     {
-        private readonly PlayerSpawner _playerSpawner;
+        private readonly PlayerFactory _playerFactory;
         private readonly MapGenerator _mapGenerator;
 
-        public InitState(PlayerSpawner playerSpawner, MapGenerator mapGenerator)
+        public InitState(PlayerFactory playerFactory, MapGenerator mapGenerator)
         {
-            _playerSpawner = playerSpawner;
+            _playerFactory = playerFactory;
             _mapGenerator = mapGenerator;
         }
         
         public void Enter()
         {
             _mapGenerator.Generate();
-            _playerSpawner.Spawn();
+            _playerFactory.Spawn();
         }
 
         public void Exit()

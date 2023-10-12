@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05cfa4314a74c4ea0a43f180d488895, type: 3}
   m_Name: GeneratorData
   m_EditorClassIdentifier: 
-  sizeX: 12
-  sizeY: 12
+  sizeX: 3
+  sizeZ: 3
+  platformSizeX: 3.1
+  platformSizeZ: 3.1
   platform: {fileID: 1218064924676731496, guid: 5f4d4c923485d624b8b14782ae311a6a, type: 3}

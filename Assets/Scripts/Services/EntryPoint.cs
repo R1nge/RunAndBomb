@@ -2,17 +2,17 @@
 using Services.States;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Services
 {
-    public class EntryPoint : MonoBehaviour, IStartable
+    public class EntryPoint : MonoBehaviour
     {
+        [SerializeField] private Transform spawnPoint;
         [SerializeField] private Player.Player player;
         [SerializeField] private GeneratorData generatorData;
         private IObjectResolver _objectResolver;
         private Logger _logger;
-        private PlayerSpawner _playerSpawner;
+        private PlayerFactory _playerFactory;
         private MapGenerator _mapGenerator;
         private StateMachine _stateMachine;
 
@@ -26,11 +26,11 @@ namespace Services
         public void Start()
         {
             _logger = new Logger();
-            
-            _playerSpawner = new PlayerSpawner(_objectResolver, player);
-            _mapGenerator = new MapGenerator(_logger, generatorData);
-            
-            _stateMachine.AddState(new InitState(_playerSpawner, _mapGenerator));
+
+            _playerFactory = new PlayerFactory(_objectResolver, player, spawnPoint.position);
+            _mapGenerator = new MapGenerator(_objectResolver, _logger, generatorData);
+
+            _stateMachine.AddState(new InitState(_playerFactory, _mapGenerator));
 
             _stateMachine.ChangeState();
         }
