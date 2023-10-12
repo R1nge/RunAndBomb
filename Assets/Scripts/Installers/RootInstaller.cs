@@ -9,6 +9,7 @@ namespace Installers
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<EnemyCounter>(Lifetime.Singleton).AsSelf();
             builder.Register<StateMachine>(Lifetime.Singleton).AsSelf();
             builder.RegisterComponentInHierarchy<EntryPoint>().AsSelf();
         }

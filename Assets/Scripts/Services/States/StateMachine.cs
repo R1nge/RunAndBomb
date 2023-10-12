@@ -4,15 +4,15 @@ namespace Services.States
 {
     public class StateMachine
     {
-        private readonly Queue<IState> _states = new();
+        private readonly Dictionary<StateType, IState> _states = new();
         private IState _currentState;
 
-        public void AddState(IState newState) => _states.Enqueue(newState);
+        public void AddState(StateType stateType, IState newState) => _states[stateType] = newState;
 
-        public void ChangeState()
+        public void ChangeState(StateType stateType)
         {
             _currentState?.Exit();
-            _currentState = _states.Dequeue();
+            _currentState = _states[stateType];
             _currentState.Enter();
         }
     }
