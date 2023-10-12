@@ -2,8 +2,8 @@
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "GeneratorData", menuName = "GeneratorData")]
-    public class GeneratorData : ScriptableObject
+    [CreateAssetMenu(fileName = "GeneratorConfig", menuName = "GeneratorConfig")]
+    public class GeneratorConfig : ScriptableObject
     {
         [SerializeField] private int sizeX, sizeZ;
         [SerializeField] private float platformSizeX, platformSizeZ;

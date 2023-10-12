@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private float speed;
-        [SerializeField] private float gravity;
+        [SerializeField] private PlayerConfig playerConfig;
         [SerializeField] private Transform model;
         private CharacterController _characterController;
         private PlayerInput _input;
@@ -37,7 +37,7 @@ namespace Player
             _moveDirection = input.x * right + input.y * forward;
         }
 
-        private void Gravity() => _moveDirection += Vector3.down * gravity;
+        private void Gravity() => _moveDirection += Vector3.down * playerConfig.Gravity;
 
         private void Rotate()
         {
@@ -47,7 +47,7 @@ namespace Player
 
         private void Move()
         {
-            var motion = _moveDirection * (speed * Time.deltaTime);
+            var motion = _moveDirection * (playerConfig.Speed * Time.deltaTime);
             _characterController.Move(motion);
         }
 

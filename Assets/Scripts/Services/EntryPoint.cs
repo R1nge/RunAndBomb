@@ -9,7 +9,7 @@ namespace Services
     {
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Player.Player player;
-        [SerializeField] private GeneratorData generatorData;
+        [SerializeField] private GeneratorConfig generatorConfig;
         private IObjectResolver _objectResolver;
         private Logger _logger;
         private PlayerFactory _playerFactory;
@@ -28,9 +28,10 @@ namespace Services
             _logger = new Logger();
 
             _playerFactory = new PlayerFactory(_objectResolver, player, spawnPoint.position);
-            _mapGenerator = new MapGenerator(_objectResolver, _logger, generatorData);
+            _mapGenerator = new MapGenerator(_objectResolver, generatorConfig);
 
             _stateMachine.AddState(new InitState(_playerFactory, _mapGenerator));
+            _stateMachine.AddState(new GameState());
 
             _stateMachine.ChangeState();
         }

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1572851758}
   player: {fileID: -4720092114169730536, guid: d79a53eddeaef9845870fd12d6b84bad, type: 3}
-  generatorData: {fileID: 11400000, guid: ee3c72aabb41474479926e3e86f4cfed, type: 2}
+  generatorConfig: {fileID: 11400000, guid: ee3c72aabb41474479926e3e86f4cfed, type: 2}
 --- !u!4 &800305526
 Transform:
   m_ObjectHideFlags: 0

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f05cfa4314a74c4ea0a43f180d488895, type: 3}
-  m_Name: GeneratorData
+  m_Script: {fileID: 11500000, guid: b0033fd0aade40f9843e88a591976a1a, type: 3}
+  m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  sizeX: 3
-  sizeZ: 3
-  platformSizeX: 3.1
-  platformSizeZ: 3.1
-  platform: {fileID: 1218064924676731496, guid: 5f4d4c923485d624b8b14782ae311a6a, type: 3}
+  speed: 5
+  gravity: 9.81
