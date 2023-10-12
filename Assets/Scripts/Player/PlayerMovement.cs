@@ -39,7 +39,11 @@ namespace Player
 
         private void Gravity() => _moveDirection += Vector3.down * gravity;
 
-        private void Rotate() => model.transform.rotation = Quaternion.LookRotation(_moveDirection);
+        private void Rotate()
+        {
+            if (_moveDirection == Vector3.zero) return;
+            model.transform.rotation = Quaternion.LookRotation(_moveDirection);
+        }
 
         private void Move()
         {

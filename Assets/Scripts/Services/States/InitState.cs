@@ -1,25 +1,24 @@
-﻿using UnityEngine;
-
-namespace Services.States
+﻿namespace Services.States
 {
     public class InitState : IState
     {
-        private PlayerSpawner _playerSpawner;
+        private readonly PlayerSpawner _playerSpawner;
+        private readonly MapGenerator _mapGenerator;
 
-        public InitState(PlayerSpawner playerSpawner)
+        public InitState(PlayerSpawner playerSpawner, MapGenerator mapGenerator)
         {
             _playerSpawner = playerSpawner;
+            _mapGenerator = mapGenerator;
         }
         
         public void Enter()
         {
+            _mapGenerator.Generate();
             _playerSpawner.Spawn();
-            Debug.Log("ENTER INIT");
         }
 
         public void Exit()
         {
-            
         }
     }
 }
