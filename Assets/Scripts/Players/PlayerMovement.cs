@@ -1,6 +1,5 @@
 ﻿using Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Players
 {
@@ -9,29 +8,21 @@ namespace Players
         [SerializeField] private PlayerConfig playerConfig;
         [SerializeField] private Transform model;
         private CharacterController _characterController;
-        private PlayerInput _input;
-        private InputAction _move;
         private Vector3 _moveDirection;
 
-        private void Awake()
-        {
-            _characterController = GetComponent<CharacterController>();
-            _input = GetComponent<PlayerInput>();
-            _input.actions.Enable();
-            _move = _input.actions.FindActionMap("Player").FindAction("Move");
-        }
+        public float CurrentSpeed => (Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.z)) * playerConfig.Speed;
+
+        private void Awake() => _characterController = GetComponent<CharacterController>();
 
         private void Update()
         {
-            GetInput();
             Rotate();
             Gravity();
             Move();
         }
 
-        private void GetInput()
+        public void SendInput(Vector2 input)
         {
-            var input = _move.ReadValue<Vector2>();
             var forward = transform.TransformDirection(Vector3.forward);
             var right = transform.TransformDirection(Vector3.right);
             _moveDirection = input.x * right + input.y * forward;
@@ -50,7 +41,5 @@ namespace Players
             var motion = _moveDirection * (playerConfig.Speed * Time.deltaTime);
             _characterController.Move(motion);
         }
-
-        private void OnDestroy() => _input.actions.Disable();
     }
 }
