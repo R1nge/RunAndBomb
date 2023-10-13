@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347bfcc871ff46919f1f73f3657084f6, type: 3}
+  m_Name: BombSkins
+  m_EditorClassIdentifier: 
+  bombs:
+  - {fileID: 3491040620093798488, guid: 406c550722373f0458f52803e6503020, type: 3}

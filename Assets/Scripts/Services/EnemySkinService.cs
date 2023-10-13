@@ -6,13 +6,10 @@ namespace Services
 {
     public class EnemySkinService
     {
-        private readonly Random _random;
+        private readonly Random _random = new();
         private readonly EnemySkinsConfig _enemySkins;
 
-        public EnemySkinService(EnemySkinsConfig enemySkins)
-        {
-            _enemySkins = enemySkins;
-        }
+        public EnemySkinService(EnemySkinsConfig enemySkins) => _enemySkins = enemySkins;
 
         public Enemy GetRandomSkin()
         {

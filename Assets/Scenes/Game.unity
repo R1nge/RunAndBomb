@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1572851758}
   player: {fileID: -4720092114169730536, guid: d79a53eddeaef9845870fd12d6b84bad, type: 3}
-  enemies: {fileID: 11400000, guid: 97dea8bc07d7fd6479740b522bdb5ad4, type: 2}
+  enemySkins: {fileID: 11400000, guid: 97dea8bc07d7fd6479740b522bdb5ad4, type: 2}
   generatorConfig: {fileID: 11400000, guid: ee3c72aabb41474479926e3e86f4cfed, type: 2}
 --- !u!4 &800305526
 Transform:
@@ -705,6 +705,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 800305524}
   - {fileID: 405905932}
+  bombSkinsConfig: {fileID: 11400000, guid: 09c6d25e690448541b9c2a14de0ad684, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

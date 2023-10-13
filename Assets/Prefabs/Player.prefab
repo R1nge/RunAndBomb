@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6235348082282741838}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4150323, y: -0.000000015072445, z: 0.000000006875693, w: 0.9098067}
+  m_LocalRotation: {x: 0.4150323, y: -0.000000010664612, z: 0.000000004864944, w: 0.90980667}
   m_LocalPosition: {x: 0, y: 6.33, z: -5.4943075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -267,7 +267,6 @@ GameObject:
   - component: {fileID: 4900699035270618532}
   - component: {fileID: 7309026745187846322}
   - component: {fileID: 746067315550389469}
-  - component: {fileID: 3775296884204733809}
   - component: {fileID: 1336920933764272129}
   m_Layer: 0
   m_Name: Player
@@ -400,18 +399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7203129129759102847}
---- !u!114 &3775296884204733809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8814835284728001307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc4dbe94f2b48aebbfe4e432a07acf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1336920933764272129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,7 +411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af21903ba67b4dbba85f611a381cd2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 0}
+  throwInterval: 5
+  model: {fileID: 7111986113395120569}
+  maxThrowForce: 1
 --- !u!1001 &7107250216768339349
 PrefabInstance:
   m_ObjectHideFlags: 0
