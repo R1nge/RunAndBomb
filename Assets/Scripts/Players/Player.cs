@@ -20,10 +20,13 @@ namespace Players
         private void Awake()
         {
             _playerInputs = GetComponent<PlayerInputs>();
+            _playerInputs.Joystick.OnJoystickReleased += JoystickReleased;
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAnimator = GetComponent<PlayerAnimator>();
             _bombController = GetComponent<BombController>();
         }
+
+        private void JoystickReleased() => ThrowBomb();
 
         private void Update()
         {
@@ -35,11 +38,6 @@ namespace Players
             _playerMovement.SendInput(_playerInputs.MovementDirection);
             _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
             _bombController.SetCurrentThrowForce(_playerMovement.CurrentSpeed);
-
-            if (_playerMovement.CurrentSpeed <= 0)
-            {
-                ThrowBomb();
-            }
         }
 
         private void ThrowBomb()
@@ -62,5 +60,7 @@ namespace Players
             _playerAnimator.SetDeathState(_isDead);
             _stateMachine.ChangeState(StateType.Lose);
         }
+
+        private void OnDestroy() => _playerInputs.Joystick.OnJoystickReleased -= JoystickReleased;
     }
 }

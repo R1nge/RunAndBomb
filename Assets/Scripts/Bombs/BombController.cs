@@ -9,7 +9,7 @@ namespace Bombs
     {
         [SerializeField] private float throwInterval;
         [SerializeField] private Transform model;
-        [SerializeField, Range(1, 5)] private float maxThrowForce;
+        [SerializeField, Range(1, 500)] private float maxThrowForce;
         private float _currentThrowForce;
         private BombFactory _bombFactory;
         private bool _canThrow = true;
@@ -17,9 +17,10 @@ namespace Bombs
         [Inject]
         private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
 
+        //Save force before the player has stopped
         public void SetCurrentThrowForce(float force)
         {
-            _currentThrowForce = Mathf.Clamp(force, 0, maxThrowForce);
+            _currentThrowForce = maxThrowForce;
         }
 
         public bool TryThrow()

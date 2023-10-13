@@ -1,22 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Players
 {
     public class PlayerInputs : MonoBehaviour
     {
-        private PlayerInput _input;
-        private InputAction _move;
+        [SerializeField] private Joystick joystick;
 
-        private void Awake()
-        {
-            _input = GetComponent<PlayerInput>();
-            _input.actions.Enable();
-            _move = _input.actions.FindActionMap("Player").FindAction("Move");
-        }
+        public Joystick Joystick => joystick;
 
-        public Vector2 MovementDirection => _move.ReadValue<Vector2>();
-
-        private void OnDestroy() => _input.actions.Disable();
+        public Vector2 MovementDirection => joystick.Direction;
     }
 }
