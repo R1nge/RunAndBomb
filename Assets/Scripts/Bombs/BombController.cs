@@ -10,20 +10,13 @@ namespace Bombs
         [SerializeField] private float throwInterval;
         [SerializeField] private Transform model;
         [SerializeField, Range(1, 500)] private float maxThrowForce;
-        private float _currentThrowForce;
         private BombFactory _bombFactory;
         private bool _canThrow = true;
 
         [Inject]
         private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
 
-        //Save force before the player has stopped
-        public void SetCurrentThrowForce(float force)
-        {
-            _currentThrowForce = maxThrowForce;
-        }
-
-        public bool TryThrow()
+        public bool TryThrow(float multiplier)
         {
             if (!_canThrow)
             {
@@ -34,7 +27,7 @@ namespace Bombs
 
             var bomb = _bombFactory.Create(0);
             bomb.transform.position = transform.position;
-            bomb.Throw(model.transform.forward, _currentThrowForce);
+            bomb.Throw(model.transform.forward, maxThrowForce * multiplier);
             StartCoroutine(ResetThrow());
 
             return true;

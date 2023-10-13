@@ -26,8 +26,6 @@ namespace Players
             _bombController = GetComponent<BombController>();
         }
 
-        private void JoystickReleased() => ThrowBomb();
-
         private void Update()
         {
             if (_isDead)
@@ -37,12 +35,13 @@ namespace Players
 
             _playerMovement.SendInput(_playerInputs.MovementDirection);
             _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
-            _bombController.SetCurrentThrowForce(_playerMovement.CurrentSpeed);
         }
 
-        private void ThrowBomb()
+        private void JoystickReleased(Vector2 input) => ThrowBomb(input.magnitude);
+
+        private void ThrowBomb(float multiplier)
         {
-            if (_bombController.TryThrow())
+            if (_bombController.TryThrow(multiplier))
             {
                 _playerAnimator.PlayThrowBombAnimation();
             }
