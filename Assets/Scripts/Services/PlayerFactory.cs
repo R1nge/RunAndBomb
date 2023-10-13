@@ -18,6 +18,6 @@ namespace Services
             _spawnPosition = spawnPosition;
         }
 
-        public void Spawn() => _objectResolver.Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity);
+        public void Create() => _objectResolver.Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity);
     }
 }

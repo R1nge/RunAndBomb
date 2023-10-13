@@ -16,8 +16,8 @@
         public void Enter()
         {
             _mapGenerator.Generate();
-            _playerFactory.Spawn();
-            _enemyFactory.Spawn();
+            _playerFactory.Create();
+            _enemyFactory.Create();
         }
 
         public void Exit()

@@ -1,5 +1,4 @@
-﻿using Enemies;
-using VContainer;
+﻿using VContainer;
 using VContainer.Unity;
 
 namespace Services
@@ -7,19 +6,19 @@ namespace Services
     public class EnemyFactory
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly Enemy _enemy;
+        private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
 
-        public EnemyFactory(IObjectResolver objectResolver, Enemy enemy, EnemyCounter enemyCounter)
+        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter)
         {
             _objectResolver = objectResolver;
-            _enemy = enemy;
+            _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
         }
 
-        public void Spawn()
+        public void Create()
         {
-            _objectResolver.Instantiate(_enemy);
+            _objectResolver.Instantiate(_enemySkinService.GetRandomSkin());
             _enemyCounter.Increase();
         }
     }

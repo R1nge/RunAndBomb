@@ -1,5 +1,4 @@
 ﻿using Data;
-using Enemies;
 using Players;
 using Services.States;
 using UnityEngine;
@@ -11,11 +10,12 @@ namespace Services
     {
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Player player;
-        [SerializeField] private Enemy enemy;
+        [SerializeField] private EnemySkinsConfig enemySkins;
         [SerializeField] private GeneratorConfig generatorConfig;
         private IObjectResolver _objectResolver;
         private StateMachine _stateMachine;
         private PlayerFactory _playerFactory;
+        private EnemySkinService _enemySkinService;
         private EnemyCounter _enemyCounter;
         private EnemyFactory _enemyFactory;
         private MapGenerator _mapGenerator;
@@ -30,6 +30,7 @@ namespace Services
 
         public void Start()
         {
+            _enemySkinService = new EnemySkinService(enemySkins);
             _mapGenerator = new MapGenerator(_objectResolver, generatorConfig);
 
             CreateFactories();
@@ -41,7 +42,7 @@ namespace Services
         private void CreateFactories()
         {
             _playerFactory = new PlayerFactory(_objectResolver, player, spawnPoint.position);
-            _enemyFactory = new EnemyFactory(_objectResolver, enemy, _enemyCounter);
+            _enemyFactory = new EnemyFactory(_objectResolver, _enemySkinService, _enemyCounter);
         }
 
         private void InitStateMachine()
