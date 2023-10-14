@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 746067315550389469}
   - component: {fileID: 1336920933764272129}
   - component: {fileID: -6604846308212314379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,8 @@
-﻿using Bombs;
+﻿using System;
+using System.Collections;
+using Bombs;
+using Common;
+using Data;
 using Players;
 using Services;
 using UnityEngine;
@@ -9,53 +13,30 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        private EnemyStateType _currentState;
+        [SerializeField] private EnemyConfig enemyConfig;
+        private EnemyStateMachine _enemyStateMachine;
         private EnemyCounter _enemyCounter;
         private EnemyMovement _enemyMovement;
         private EnemyAttack _enemyAttack;
         private EnemyAnimator _enemyAnimator;
         private NavMeshAgent _navMeshAgent;
         private BombController _bombController;
+        private RagdollController _ragdollController;
+        private ColliderController _colliderController;
+        private CoroutineRunner _coroutineRunner;
 
         //Create a state machine
-        
+
         [Inject]
-        public void Inject(EnemyCounter enemyCounter) => _enemyCounter = enemyCounter;
-
-        private void Awake()
+        public void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
         {
-            _enemyAnimator = GetComponent<EnemyAnimator>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _bombController = GetComponent<BombController>();
-
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent);
-            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
+            _enemyCounter = enemyCounter;
+            _coroutineRunner = coroutineRunner;
         }
 
-        private void Update()
+        public void OnTriggerEntered(Collider other)
         {
-            switch (_currentState)
-            {
-                case EnemyStateType.Patrol:
-                    Patrol();
-                    break;
-                case EnemyStateType.Chase:
-                    Chase();
-                    break;
-                case EnemyStateType.Attack:
-                    Attack();
-                    break;
-                case EnemyStateType.Death:
-                    Die();
-                    break;
-            }
-
-            print($"[{gameObject.name}] State: {_currentState}");
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (_currentState != EnemyStateType.Patrol)
+            if (_enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol)
             {
                 return;
             }
@@ -63,15 +44,43 @@ namespace Enemies
             if (other.TryGetComponent(out Player player))
             {
                 _enemyMovement.SetTarget(player.transform);
-                _currentState = EnemyStateType.Chase;
+                _enemyStateMachine.ChangeState(EnemyStateType.Chase);
                 return;
             }
 
             if (other.TryGetComponent(out Enemy enemy))
             {
                 _enemyMovement.SetTarget(enemy.transform);
-                _currentState = EnemyStateType.Chase;
+                _enemyStateMachine.ChangeState(EnemyStateType.Chase);
             }
+        }
+
+        public void Damage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
+
+        private void Awake()
+        {
+            _enemyAnimator = GetComponent<EnemyAnimator>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _bombController = GetComponent<BombController>();
+            _ragdollController = GetComponent<RagdollController>();
+            _colliderController = GetComponent<ColliderController>();
+
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent);
+            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
+        }
+
+        private void Start()
+        {
+            _enemyStateMachine = new EnemyStateMachine();
+            _enemyStateMachine.AddState(EnemyStateType.Patrol, new EnemyPatrolState(_enemyMovement));
+            // _enemyStateMachine.AddState(EnemyStateType.Chase);
+            // _enemyStateMachine.AddState(EnemyStateType.Attack);
+            _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
+        }
+
+        private void Update()
+        {
+            _enemyStateMachine.Update();
         }
 
         private void Patrol() => _enemyMovement.Patrol();
@@ -83,11 +92,6 @@ namespace Enemies
 
         private void Die()
         {
-            _enemyCounter.Decrease();
-            //TODO: create a ragdoll controller
-            Destroy(this);
         }
-
-        public void Damage() => _currentState = EnemyStateType.Death;
     }
 }
