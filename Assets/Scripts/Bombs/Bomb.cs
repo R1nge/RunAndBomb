@@ -8,15 +8,9 @@ namespace Bombs
         private GameObject _owner;
         private Rigidbody _rigidbody;
 
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
+        private void Awake() => _rigidbody = GetComponent<Rigidbody>();
 
-        public void SetOwner(GameObject owner)
-        {
-            _owner = owner;
-        }
+        public void SetOwner(GameObject owner) => _owner = owner;
 
         public void Throw(Vector3 direction, float force)
         {

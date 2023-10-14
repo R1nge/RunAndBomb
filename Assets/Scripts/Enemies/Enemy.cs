@@ -2,7 +2,6 @@
 using Common;
 using Data;
 using Enemies.States;
-using Players;
 using Services;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,8 +32,6 @@ namespace Enemies
 
         public void OnTriggerEntered(Collider other)
         {
-            print($"[OnTriggerEnter] Name {other.gameObject.name}");
-
             bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
 
             if (isChasing)
@@ -67,9 +64,7 @@ namespace Enemies
             _enemyStateMachine.AddState(EnemyStateType.Patrol, new EnemyPatrolState(_enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Chase, new EnemyChaseState(_enemyStateMachine, _enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
-            _enemyStateMachine.AddState(EnemyStateType.Death,
-                new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController,
-                    _coroutineRunner, enemyConfig));
+            _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
 
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
         }

@@ -20,7 +20,7 @@ namespace Players
         private void Awake()
         {
             _playerInputs = GetComponent<PlayerInputs>();
-            _playerInputs.Joystick.OnJoystickReleased += JoystickReleased;
+            _playerInputs.OnJoystickReleased += JoystickReleased;
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAnimator = GetComponent<PlayerAnimator>();
             _bombController = GetComponent<BombController>();
@@ -61,6 +61,6 @@ namespace Players
             _stateMachine.ChangeState(GameStateType.Lose);
         }
 
-        private void OnDestroy() => _playerInputs.Joystick.OnJoystickReleased -= JoystickReleased;
+        private void OnDestroy() => _playerInputs.OnJoystickReleased -= JoystickReleased;
     }
 }

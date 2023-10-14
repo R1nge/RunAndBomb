@@ -19,7 +19,6 @@ namespace Installers
             builder.Register<BombFactory>(Lifetime.Singleton);
             builder.Register<EnemyCounter>(Lifetime.Singleton);
             builder.Register<StateMachine>(Lifetime.Singleton);
-            builder.RegisterComponentInHierarchy<EntryPoint>();
         }
     }
 }

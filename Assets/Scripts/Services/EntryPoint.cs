@@ -17,6 +17,8 @@ namespace Services
         private EnemySkinService _enemySkinService;
         private EnemyCounter _enemyCounter;
         private EnemyFactory _enemyFactory;
+        private IPlayerDataProvider _playerDataProvider;
+        private PlayerStatisticsModel _playerStatisticsModel;
 
         [Inject]
         private void Inject(IObjectResolver objectResolver, StateMachine stateMachine, EnemyCounter enemyCounter)
@@ -28,6 +30,15 @@ namespace Services
 
         public void Start()
         {
+            _playerDataProvider = new PlayerPrefsPlayerDataProvider();
+            _playerStatisticsModel = _playerDataProvider.Load();
+            
+            print(_playerStatisticsModel.Level);
+
+            _playerStatisticsModel.Level++;
+            
+            _playerDataProvider.Save(_playerStatisticsModel);
+
             _enemySkinService = new EnemySkinService(enemySkins);
 
             CreateFactories();
@@ -47,7 +58,7 @@ namespace Services
             _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory, _enemyFactory));
             _stateMachine.AddState(GameStateType.Game, new GameState());
             _stateMachine.AddState(GameStateType.Lose, new LoseGameState());
-            _stateMachine.AddState(GameStateType.Win, new WinGameState());
+            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerStatisticsModel));
         }
     }
 }
