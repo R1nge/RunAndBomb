@@ -36,7 +36,7 @@ namespace Services
             CreateFactories();
             InitStateMachine();
 
-            _stateMachine.ChangeState(StateType.Init);
+            _stateMachine.ChangeState(GameStateType.Init);
         }
 
         private void CreateFactories()
@@ -49,10 +49,11 @@ namespace Services
         {
             _stateMachine = new StateMachine();
 
-            _stateMachine.AddState(StateType.Init, new InitState(_mapGenerator, _playerFactory, _enemyFactory));
-            _stateMachine.AddState(StateType.Game, new GameState());
-            _stateMachine.AddState(StateType.Lose, new LoseState());
-            _stateMachine.AddState(StateType.Win, new WinState());
+            //TODO: create a state factory???
+            _stateMachine.AddState(GameStateType.Init, new InitGameState(_mapGenerator, _playerFactory, _enemyFactory));
+            _stateMachine.AddState(GameStateType.Game, new GameState());
+            _stateMachine.AddState(GameStateType.Lose, new LoseGameState());
+            _stateMachine.AddState(GameStateType.Win, new WinGameState());
         }
     }
 }

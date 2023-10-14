@@ -57,7 +57,7 @@ namespace Players
             _isDead = true;
 
             _playerAnimator.SetDeathState(_isDead);
-            _stateMachine.ChangeState(StateType.Lose);
+            _stateMachine.ChangeState(GameStateType.Lose);
         }
 
         private void OnDestroy() => _playerInputs.Joystick.OnJoystickReleased -= JoystickReleased;

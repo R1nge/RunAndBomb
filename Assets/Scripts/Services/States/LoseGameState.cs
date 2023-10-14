@@ -2,9 +2,9 @@
 
 namespace Services.States
 {
-    public class LoseState : IState
+    public class LoseGameState : IGameState
     {
-        public LoseState()
+        public LoseGameState()
         {
         }
 

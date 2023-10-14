@@ -1,6 +1,6 @@
 ﻿namespace Services.States
 {
-    public class GameState : IState
+    public class GameState : IGameState
     {
         public GameState()
         {

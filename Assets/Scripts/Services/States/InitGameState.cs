@@ -1,12 +1,12 @@
 ﻿namespace Services.States
 {
-    public class InitState : IState
+    public class InitGameState : IGameState
     {
         private readonly MapGenerator _mapGenerator;
         private readonly PlayerFactory _playerFactory;
         private readonly EnemyFactory _enemyFactory;
 
-        public InitState(MapGenerator mapGenerator, PlayerFactory playerFactory, EnemyFactory enemyFactory)
+        public InitGameState(MapGenerator mapGenerator, PlayerFactory playerFactory, EnemyFactory enemyFactory)
         {
             _mapGenerator = mapGenerator;
             _playerFactory = playerFactory;

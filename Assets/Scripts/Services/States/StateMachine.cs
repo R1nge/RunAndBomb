@@ -4,16 +4,16 @@ namespace Services.States
 {
     public class StateMachine
     {
-        private readonly Dictionary<StateType, IState> _states = new();
-        private IState _currentState;
+        private readonly Dictionary<GameStateType, IGameState> _states = new();
+        private IGameState _currentGameState;
 
-        public void AddState(StateType stateType, IState newState) => _states[stateType] = newState;
+        public void AddState(GameStateType gameStateType, IGameState newGameState) => _states[gameStateType] = newGameState;
 
-        public void ChangeState(StateType stateType)
+        public void ChangeState(GameStateType gameStateType)
         {
-            _currentState?.Exit();
-            _currentState = _states[stateType];
-            _currentState.Enter();
+            _currentGameState?.Exit();
+            _currentGameState = _states[gameStateType];
+            _currentGameState.Enter();
         }
     }
 }

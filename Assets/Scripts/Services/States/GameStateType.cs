@@ -1,6 +1,6 @@
 ﻿namespace Services.States
 {
-    public enum StateType
+    public enum GameStateType
     {
         Init = 0,
         Game = 1,

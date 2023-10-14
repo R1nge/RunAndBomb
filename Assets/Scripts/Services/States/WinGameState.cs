@@ -1,8 +1,8 @@
 ﻿namespace Services.States
 {
-    public class WinState : IState
+    public class WinGameState : IGameState
     {
-        public WinState()
+        public WinGameState()
         {
         }
 
