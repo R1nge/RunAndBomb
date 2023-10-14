@@ -31,12 +31,12 @@ namespace Bombs
                 {
                     if (bombController.OwnerId != _owner)
                     {
-                        damageable.Damage();
+                        damageable.TakeDamage();
                     }
                 }
                 else
                 {
-                    damageable.Damage();
+                    damageable.TakeDamage();
                 }
             }
         }

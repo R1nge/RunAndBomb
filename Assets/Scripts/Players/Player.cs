@@ -47,7 +47,7 @@ namespace Players
             }
         }
 
-        public void Damage()
+        public void TakeDamage()
         {
             if (_isDead)
             {

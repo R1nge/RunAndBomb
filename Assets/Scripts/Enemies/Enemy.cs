@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Bombs;
+﻿using Bombs;
 using Common;
 using Data;
 using Players;
@@ -24,8 +22,6 @@ namespace Enemies
         private RagdollController _ragdollController;
         private ColliderController _colliderController;
         private CoroutineRunner _coroutineRunner;
-
-        //Create a state machine
 
         [Inject]
         public void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
@@ -55,7 +51,7 @@ namespace Enemies
             }
         }
 
-        public void Damage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
+        public void TakeDamage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
 
         private void Awake()
         {
@@ -78,20 +74,6 @@ namespace Enemies
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
         }
 
-        private void Update()
-        {
-            _enemyStateMachine.Update();
-        }
-
-        private void Patrol() => _enemyMovement.Patrol();
-
-        private void Chase() => _enemyMovement.Chase();
-
-        //TODO: calculate and pass attack modifier
-        private void Attack() => _enemyAttack.Attack();
-
-        private void Die()
-        {
-        }
+        private void Update() => _enemyStateMachine.Update();
     }
 }
