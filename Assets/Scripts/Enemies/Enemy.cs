@@ -1,5 +1,4 @@
-﻿using System;
-using Bombs;
+﻿using Bombs;
 using Players;
 using Services;
 using UnityEngine;
@@ -18,6 +17,8 @@ namespace Enemies
         private NavMeshAgent _navMeshAgent;
         private BombController _bombController;
 
+        //Create a state machine
+        
         [Inject]
         public void Inject(EnemyCounter enemyCounter) => _enemyCounter = enemyCounter;
 
@@ -26,8 +27,8 @@ namespace Enemies
             _enemyAnimator = GetComponent<EnemyAnimator>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _bombController = GetComponent<BombController>();
-            
-            _enemyMovement = new EnemyMovement(_navMeshAgent);
+
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
         }
 
@@ -48,10 +49,17 @@ namespace Enemies
                     Die();
                     break;
             }
+
+            print($"[{gameObject.name}] State: {_currentState}");
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            if (_currentState != EnemyStateType.Patrol)
+            {
+                return;
+            }
+
             if (other.TryGetComponent(out Player player))
             {
                 _enemyMovement.SetTarget(player.transform);
@@ -76,6 +84,8 @@ namespace Enemies
         private void Die()
         {
             _enemyCounter.Decrease();
+            //TODO: create a ragdoll controller
+            Destroy(this);
         }
 
         public void Damage() => _currentState = EnemyStateType.Death;

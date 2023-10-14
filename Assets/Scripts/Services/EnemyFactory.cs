@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
 namespace Services
@@ -8,18 +9,23 @@ namespace Services
         private readonly IObjectResolver _objectResolver;
         private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
+        private readonly Transform[] _positions;
 
-        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter)
+        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, Transform[] positions)
         {
             _objectResolver = objectResolver;
             _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
+            _positions = positions;
         }
 
         public void Create()
         {
-            _objectResolver.Instantiate(_enemySkinService.GetRandomSkin());
-            _enemyCounter.Increase();
+            for (int i = 1; i < _positions.Length; i++)
+            {
+                _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _positions[i].position, Quaternion.identity);
+                _enemyCounter.Increase();
+            }
         }
     }
 }
