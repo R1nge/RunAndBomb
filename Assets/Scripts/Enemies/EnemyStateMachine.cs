@@ -16,8 +16,8 @@ namespace Enemies
         {
             _currentEnemyState?.Exit();
             _currentEnemyState = _states[enemyStateType];
-            _currentEnemyState.Enter();
             _currentEnemyStateType = enemyStateType;
+            _currentEnemyState.Enter();
         }
 
         public void Update() => _currentEnemyState?.Update();

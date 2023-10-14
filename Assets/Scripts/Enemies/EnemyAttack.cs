@@ -17,7 +17,7 @@ namespace Enemies
         {
             if (_bombController.TryThrow(1))
             {
-                _enemyAnimator.PlayAttackAnimation();
+                _enemyAnimator.PlayThrowBombAnimation();
             }
         }
     }

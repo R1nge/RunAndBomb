@@ -26,6 +26,8 @@ namespace Players
             _bombController = GetComponent<BombController>();
         }
 
+        //TODO: create a state machine???
+        
         private void Update()
         {
             if (_isDead)
@@ -56,7 +58,6 @@ namespace Players
 
             _isDead = true;
 
-            _playerAnimator.SetDeathState(_isDead);
             _stateMachine.ChangeState(GameStateType.Lose);
         }
 

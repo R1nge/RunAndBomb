@@ -32,7 +32,9 @@ namespace Enemies
 
         public void OnTriggerEntered(Collider other)
         {
-            if (_enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol)
+            bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
+
+            if (isChasing)
             {
                 return;
             }
@@ -61,16 +63,17 @@ namespace Enemies
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
 
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig);
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig, _enemyAnimator);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
         }
 
         private void Start()
         {
             _enemyStateMachine = new EnemyStateMachine();
+            
             _enemyStateMachine.AddState(EnemyStateType.Patrol, new EnemyPatrolState(_enemyMovement));
-            // _enemyStateMachine.AddState(EnemyStateType.Chase);
-            // _enemyStateMachine.AddState(EnemyStateType.Attack);
+            _enemyStateMachine.AddState(EnemyStateType.Chase, new EnemyChaseState(_enemyStateMachine, _enemyMovement));
+            _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
             
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
