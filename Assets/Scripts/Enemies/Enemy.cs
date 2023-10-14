@@ -33,6 +33,8 @@ namespace Enemies
 
         public void OnTriggerEntered(Collider other)
         {
+            print($"[OnTriggerEnter] Name {other.gameObject.name}");
+
             bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
 
             if (isChasing)
@@ -40,18 +42,8 @@ namespace Enemies
                 return;
             }
 
-            if (other.TryGetComponent(out Player player))
-            {
-                _enemyMovement.SetTarget(player.transform);
-                _enemyStateMachine.ChangeState(EnemyStateType.Chase);
-                return;
-            }
-
-            if (other.TryGetComponent(out Enemy enemy))
-            {
-                _enemyMovement.SetTarget(enemy.transform);
-                _enemyStateMachine.ChangeState(EnemyStateType.Chase);
-            }
+            _enemyMovement.SetTarget(other.transform);
+            _enemyStateMachine.ChangeState(EnemyStateType.Chase);
         }
 
         public void TakeDamage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
@@ -71,12 +63,14 @@ namespace Enemies
         private void Start()
         {
             _enemyStateMachine = new EnemyStateMachine();
-            
+
             _enemyStateMachine.AddState(EnemyStateType.Patrol, new EnemyPatrolState(_enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Chase, new EnemyChaseState(_enemyStateMachine, _enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
-            _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
-            
+            _enemyStateMachine.AddState(EnemyStateType.Death,
+                new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController,
+                    _coroutineRunner, enemyConfig));
+
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
         }
 

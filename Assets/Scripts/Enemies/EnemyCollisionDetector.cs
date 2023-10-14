@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Players;
+using UnityEngine;
 
 namespace Enemies
 {
@@ -6,6 +7,16 @@ namespace Enemies
     {
         [SerializeField] private Enemy enemy;
 
-        private void OnTriggerEnter(Collider other) => enemy.OnTriggerEntered(other);
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out Enemy otherEnemy))
+            {
+                enemy.OnTriggerEntered(other);
+            }
+            else if (other.TryGetComponent(out Player player))
+            {
+                enemy.OnTriggerEntered(other);
+            }
+        }
     }
 }

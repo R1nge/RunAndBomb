@@ -5,7 +5,7 @@ namespace Bombs
     [RequireComponent(typeof(Rigidbody))]
     public class Bomb : MonoBehaviour
     {
-        private sbyte _owner;
+        private GameObject _owner;
         private Rigidbody _rigidbody;
 
         private void Awake()
@@ -13,7 +13,7 @@ namespace Bombs
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        public void SetOwner(sbyte owner)
+        public void SetOwner(GameObject owner)
         {
             _owner = owner;
         }
@@ -29,10 +29,13 @@ namespace Bombs
             {
                 if (other.TryGetComponent(out BombController bombController))
                 {
-                    if (bombController.OwnerId != _owner)
+                    if (_owner == other.gameObject)
                     {
-                        damageable.TakeDamage();
+                        print("The same object");
+                        return;
                     }
+
+                    damageable.TakeDamage();
                 }
                 else
                 {

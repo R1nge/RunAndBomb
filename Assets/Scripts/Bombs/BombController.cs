@@ -7,15 +7,11 @@ namespace Bombs
 {
     public class BombController : MonoBehaviour
     {
-        [SerializeField] private sbyte ownerId;
         [SerializeField] private float throwInterval;
         [SerializeField] private Transform model;
         [SerializeField, Range(1, 500)] private float maxThrowForce;
         private BombFactory _bombFactory;
         private bool _canThrow = true;
-
-        //TODO: find a better approach
-        public sbyte OwnerId => ownerId;
 
         [Inject]
         private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
@@ -31,7 +27,7 @@ namespace Bombs
 
             var bomb = _bombFactory.Create(0);
             bomb.transform.position = transform.position;
-            bomb.SetOwner(ownerId);
+            bomb.SetOwner(gameObject);
             bomb.Throw(model.transform.forward, maxThrowForce * multiplier);
             StartCoroutine(ResetThrow());
 
