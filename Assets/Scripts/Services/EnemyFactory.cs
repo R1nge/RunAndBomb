@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UIs;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -23,7 +24,8 @@ namespace Services
         {
             for (int i = 1; i < _positions.Length; i++)
             {
-                _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _positions[i].position, Quaternion.identity);
+                var enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _positions[i].position, Quaternion.identity);
+                enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
                 _enemyCounter.Increase();
             }
         }

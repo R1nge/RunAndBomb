@@ -1,4 +1,5 @@
 ﻿using Data;
+using UnityEngine;
 
 namespace Services.States
 {
@@ -13,7 +14,13 @@ namespace Services.States
             _playerStatisticsModel = playerStatisticsModel;
         }
 
-        public void Enter() => _dataProvider.Save(_playerStatisticsModel);
+        public void Enter()
+        {
+            _playerStatisticsModel.Level++;
+            _dataProvider.Save(_playerStatisticsModel);
+            
+            Debug.Log($"[WIN] Level: {_playerStatisticsModel.Level}");
+        }
 
         public void Exit() { }
     }

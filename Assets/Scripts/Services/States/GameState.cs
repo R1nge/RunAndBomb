@@ -2,16 +2,18 @@
 {
     public class GameState : IGameState
     {
-        public GameState()
+        private readonly EnemyFactory _enemyFactory;
+
+        public GameState(EnemyFactory enemyFactory)
         {
+            _enemyFactory = enemyFactory;
         }
 
         public void Enter()
         {
+            _enemyFactory.Create();
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
     }
 }

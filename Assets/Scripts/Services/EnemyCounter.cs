@@ -1,4 +1,6 @@
 ﻿using System;
+using Services.States;
+using VContainer;
 
 namespace Services
 {
@@ -6,6 +8,14 @@ namespace Services
     {
         public event Action<int> OnEnemyCountChanged;
         private int _enemyCount;
+        private readonly StateMachine _stateMachine;
+
+        //TODO: make a separate save service
+        [Inject]
+        private EnemyCounter(StateMachine stateMachine)
+        {
+            _stateMachine = stateMachine;
+        }
 
         public void Increase()
         {
@@ -17,6 +27,11 @@ namespace Services
         {
             _enemyCount--;
             OnEnemyCountChanged?.Invoke(_enemyCount);
+
+            if (_enemyCount <= 0)
+            {
+                _stateMachine.ChangeState(GameStateType.Win);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Collections;
+using Data;
 using Players;
 using Services.States;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace Services
         private EnemyCounter _enemyCounter;
         private EnemyFactory _enemyFactory;
         private IPlayerDataProvider _playerDataProvider;
-        private PlayerStatisticsModel _playerStatisticsModel;
+        private PlayerDataHolder _playerDataHolder;
 
         [Inject]
         private void Inject(IObjectResolver objectResolver, StateMachine stateMachine, EnemyCounter enemyCounter)
@@ -31,13 +32,10 @@ namespace Services
         public void Start()
         {
             _playerDataProvider = new PlayerPrefsPlayerDataProvider();
-            _playerStatisticsModel = _playerDataProvider.Load();
+            _playerDataHolder = new PlayerDataHolder(_playerDataProvider.Load());
             
-            print(_playerStatisticsModel.Level);
-
-            _playerStatisticsModel.Level++;
-            
-            _playerDataProvider.Save(_playerStatisticsModel);
+            print($"[DATA] Level: {_playerDataHolder.PlayerStatisticsModel.Level}");
+            print($"[DATA] Name: {_playerDataHolder.PlayerStatisticsModel.Name}");
 
             _enemySkinService = new EnemySkinService(enemySkins);
 
@@ -45,20 +43,28 @@ namespace Services
             InitStateMachine();
 
             _stateMachine.ChangeState(GameStateType.Init);
+
+            StartCoroutine(StartNext());
+        }
+
+        private IEnumerator StartNext()
+        {
+            yield return new WaitForSeconds(3);
+            _stateMachine.ChangeState(GameStateType.Game);
         }
 
         private void CreateFactories()
         {
-            _playerFactory = new PlayerFactory(_objectResolver, player, spawnPoints[0].position);
+            _playerFactory = new PlayerFactory(_objectResolver, player, spawnPoints[0].position, _playerDataHolder);
             _enemyFactory = new EnemyFactory(_objectResolver, _enemySkinService, _enemyCounter, spawnPoints);
         }
 
         private void InitStateMachine()
         {
-            _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory, _enemyFactory));
-            _stateMachine.AddState(GameStateType.Game, new GameState());
+            _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory));
+            _stateMachine.AddState(GameStateType.Game, new GameState( _enemyFactory));
             _stateMachine.AddState(GameStateType.Lose, new LoseGameState());
-            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerStatisticsModel));
+            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerDataHolder.PlayerStatisticsModel));
         }
     }
 }

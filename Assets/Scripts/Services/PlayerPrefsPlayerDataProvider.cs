@@ -17,7 +17,7 @@ namespace Services
             if (string.IsNullOrEmpty(json))
             {
                 Debug.LogWarning("Data doesn't exist. Creating a new one");
-                data = new PlayerStatisticsModel(1);
+                data = new PlayerStatisticsModel("NoName", 1);
             }
             else
             {
