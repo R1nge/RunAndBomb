@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96798cf722ea494c8ada79e8d8f8d0c5, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
+  walkRadius: 15
   disableColliderDelay: 4

@@ -61,7 +61,7 @@ namespace Enemies
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
 
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent);
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
         }
 
@@ -72,6 +72,8 @@ namespace Enemies
             // _enemyStateMachine.AddState(EnemyStateType.Chase);
             // _enemyStateMachine.AddState(EnemyStateType.Attack);
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
+            
+            _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
         }
 
         private void Update() => _enemyStateMachine.Update();
