@@ -5,7 +5,7 @@ using Services;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Enemies
+namespace Enemies.States
 {
     public class EnemyDeathState : IEnemyState
     {

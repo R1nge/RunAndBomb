@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Enemies
+namespace Enemies.States
 {
     public class EnemyStateMachine
     {

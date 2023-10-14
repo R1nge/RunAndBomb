@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Enemies
+﻿namespace Enemies.States
 {
     public class EnemyChaseState : IEnemyState
     {
@@ -23,10 +21,8 @@ namespace Enemies
             {
                 _enemyStateMachine.ChangeState(EnemyStateType.Attack);
             }
-            
-            Debug.Log("[EnemyChaseState] Update");
         }
 
-        public void Exit() { Debug.Log("[EnemyChaseState] Exit");}
+        public void Exit() { }
     }
 }

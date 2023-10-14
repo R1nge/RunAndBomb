@@ -1,6 +1,7 @@
 ﻿using Bombs;
 using Common;
 using Data;
+using Enemies.States;
 using Players;
 using Services;
 using UnityEngine;
