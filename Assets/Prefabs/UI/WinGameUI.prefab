@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 004165cc47385524cb40221b92e3e295, type: 3}
+  m_Texture: {fileID: 2800000, guid: da84b520b35e7964e9e0261a39a7263c, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 7786461158109286667}
   - component: {fileID: 4281781429862199865}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8091f53106acf7c48a6603d43c4f6cd8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1eae3ade344ae2d44ad07fdd4b291870, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retry
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 8835010805989234052}
   - component: {fileID: 1950114032895962095}
   - component: {fileID: 7087618256078551930}
-  - component: {fileID: 7174521048110445603}
+  - component: {fileID: 9030254264123082883}
   m_Layer: 5
   m_Name: WinGameUI
   m_TagString: Untagged
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7174521048110445603
+--- !u!114 &9030254264123082883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
