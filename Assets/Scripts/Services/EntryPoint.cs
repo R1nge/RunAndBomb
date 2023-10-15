@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Data;
 using Players;
 using Services.States;
@@ -18,7 +19,7 @@ namespace Services
         private EnemySkinService _enemySkinService;
         private EnemyCounter _enemyCounter;
         private EnemyFactory _enemyFactory;
-        private IPlayerDataProvider _playerDataProvider;
+        private PlayerPrefsPlayerDataProvider _playerDataProvider;
         private PlayerDataHolder _playerDataHolder;
 
         [Inject]
@@ -32,7 +33,17 @@ namespace Services
         public void Start()
         {
             _playerDataProvider = new PlayerPrefsPlayerDataProvider();
-            _playerDataHolder = new PlayerDataHolder(_playerDataProvider.Load());
+            _playerDataHolder = new PlayerDataHolder();
+
+            var loadings = new List<ILoadingOperation>
+            {
+                new PlayerPrefsDataLoadingOperation(_playerDataProvider, _playerDataHolder)
+            };
+
+            for (int i = 0; i < loadings.Count; i++)
+            {
+                loadings[i].Load();
+            }
             
             print($"[DATA] Level: {_playerDataHolder.PlayerStatisticsModel.Level}");
             print($"[DATA] Name: {_playerDataHolder.PlayerStatisticsModel.Name}");
@@ -62,9 +73,10 @@ namespace Services
         private void InitStateMachine()
         {
             _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory));
-            _stateMachine.AddState(GameStateType.Game, new GameState( _enemyFactory));
+            _stateMachine.AddState(GameStateType.Game, new GameState(_enemyFactory));
             _stateMachine.AddState(GameStateType.Lose, new LoseGameState());
-            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerDataHolder.PlayerStatisticsModel));
+            _stateMachine.AddState(GameStateType.Win,
+                new WinGameState(_playerDataProvider, _playerDataHolder.PlayerStatisticsModel));
         }
     }
 }

@@ -4,13 +4,12 @@ namespace Services
 {
     public class PlayerDataHolder
     {
-        private readonly PlayerStatisticsModel _playerStatisticsModel;
-
-        public PlayerDataHolder(PlayerStatisticsModel playerStatisticsModel)
+        public PlayerStatisticsModel PlayerStatisticsModel
         {
-            _playerStatisticsModel = playerStatisticsModel;
+            get => _playerStatisticsModel;
+            set => _playerStatisticsModel = value;
         }
 
-        public PlayerStatisticsModel PlayerStatisticsModel => _playerStatisticsModel;
+        private PlayerStatisticsModel _playerStatisticsModel;
     }
 }
