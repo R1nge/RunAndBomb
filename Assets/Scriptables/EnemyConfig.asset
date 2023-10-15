@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkRadius: 15
   disableColliderDelay: 4
+  spawnPositions:
+  - {x: -0.29999995, y: 1.55, z: 3.75}
+  - {x: -3.8, y: 1.55, z: 0.25}
+  - {x: -0.29999995, y: 1.55, z: -4}

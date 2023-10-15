@@ -1,4 +1,6 @@
-﻿using UIs;
+﻿using Data;
+using Enemies;
+using UIs;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,21 +12,21 @@ namespace Services
         private readonly IObjectResolver _objectResolver;
         private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
-        private readonly Transform[] _positions;
+        private readonly EnemyConfig _enemyConfig;
 
-        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, Transform[] positions)
+        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, EnemyConfig enemyConfig)
         {
             _objectResolver = objectResolver;
             _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
-            _positions = positions;
+            _enemyConfig = enemyConfig;
         }
 
         public void Create()
         {
-            for (int i = 1; i < _positions.Length; i++)
+            for (int i = 0; i < _enemyConfig.SpawnPositions.Length; i++)
             {
-                var enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _positions[i].position, Quaternion.identity);
+                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _enemyConfig.SpawnPositions[i], Quaternion.identity);
                 enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
                 _enemyCounter.Increase();
             }

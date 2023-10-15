@@ -599,14 +599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ade4c32687432094c2da48e7d515ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 145091622}
-  - {fileID: 459864978}
-  - {fileID: 16765352}
-  - {fileID: 227533400}
-  player: {fileID: -4720092114169730536, guid: d79a53eddeaef9845870fd12d6b84bad, type: 3}
-  enemySkins: {fileID: 11400000, guid: 97dea8bc07d7fd6479740b522bdb5ad4, type: 2}
-  uiConfig: {fileID: 11400000, guid: 6442f413d25a4014d8cb3acd4d6d4f93, type: 2}
 --- !u!4 &800305526
 Transform:
   m_ObjectHideFlags: 0
@@ -809,8 +801,12 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 800305524}
-  bombSkinsConfig: {fileID: 11400000, guid: 09c6d25e690448541b9c2a14de0ad684, type: 2}
   coroutineRunner: {fileID: 889383498}
+  playerConfig: {fileID: 11400000, guid: 0ca38877ab1ae824187b09cdf74a8b0f, type: 2}
+  enemyConfig: {fileID: 11400000, guid: 9a925beca8c8c7a448a5546b913cc9d5, type: 2}
+  enemySkinsConfig: {fileID: 11400000, guid: 97dea8bc07d7fd6479740b522bdb5ad4, type: 2}
+  bombSkinsConfig: {fileID: 11400000, guid: 09c6d25e690448541b9c2a14de0ad684, type: 2}
+  uiConfig: {fileID: 11400000, guid: 6442f413d25a4014d8cb3acd4d6d4f93, type: 2}
 --- !u!4 &425519204702830314
 Transform:
   m_ObjectHideFlags: 0
