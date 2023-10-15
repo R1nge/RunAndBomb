@@ -11,11 +11,13 @@ namespace Installers
     {
         [SerializeField] private CoroutineRunner coroutineRunner;
         [SerializeField] private ConfigProvider configProvider;
+        [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(configProvider);
             builder.RegisterComponent(coroutineRunner);
+            builder.RegisterComponent(spawnPositionsProvider);
             
             builder.Register<PlayerDataHolder>(Lifetime.Singleton);
             builder.Register<PlayerPrefsPlayerDataProvider>(Lifetime.Singleton);

@@ -4,13 +4,22 @@ namespace Common
 {
     public class ColliderController : MonoBehaviour
     {
-        [SerializeField] private Collider[] colliders;
+        [SerializeField] private Collider[] ragdollColliders;
+        [SerializeField] private Collider[] characterColliders;
 
-        public void DisableAllColliders()
+        public void DisableRagdollColliders()
         {
-            for (int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < ragdollColliders.Length; i++)
             {
-                colliders[i].enabled = false;
+                ragdollColliders[i].enabled = false;
+            }
+        }
+
+        public void DisableCharacterColliders()
+        {
+            for (int i = 0; i < characterColliders.Length; i++)
+            {
+                characterColliders[i].enabled = false;
             }
         }
     }

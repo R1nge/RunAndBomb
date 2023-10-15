@@ -27,6 +27,7 @@ namespace Enemies
 
         public void Die()
         {
+            _colliderController.DisableCharacterColliders();
             _navMeshAgent.isStopped = true;
             _enemyCounter.Decrease();
             _ragdollController.EnableRagdoll();
@@ -36,7 +37,7 @@ namespace Enemies
         private IEnumerator FallThroughFloor()
         {
             yield return new WaitForSeconds(_configProvider.EnemyConfig.DisableColliderDelay);
-            _colliderController.DisableAllColliders();
+            _colliderController.DisableRagdollColliders();
         }
     }
 }

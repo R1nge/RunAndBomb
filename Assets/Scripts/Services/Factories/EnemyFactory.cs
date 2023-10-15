@@ -1,5 +1,4 @@
-﻿using Data;
-using Enemies;
+﻿using Enemies;
 using UIs;
 using UnityEngine;
 using VContainer;
@@ -12,23 +11,22 @@ namespace Services.Factories
         private readonly IObjectResolver _objectResolver;
         private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
-        private readonly ConfigProvider _configProvider;
+        private readonly SpawnPositionsProvider _spawnPositionsProvider;
 
         private EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService,
-            EnemyCounter enemyCounter, ConfigProvider configProvider)
+            EnemyCounter enemyCounter, SpawnPositionsProvider spawnPositionsProvider)
         {
             _objectResolver = objectResolver;
             _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
-            _configProvider = configProvider;
+            _spawnPositionsProvider = spawnPositionsProvider;
         }
 
         public void Create()
         {
-            EnemyConfig enemyConfig = _configProvider.EnemyConfig;
-            for (int i = 0; i < enemyConfig.SpawnPositions.Length; i++)
+            for (int i = 1; i < _spawnPositionsProvider.SpawnPositions.Length; i++)
             {
-                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), enemyConfig.SpawnPositions[i], Quaternion.identity);
+                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _spawnPositionsProvider.SpawnPositions[i].position, Quaternion.identity);
                 enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
                 _enemyCounter.Increase();
             }
