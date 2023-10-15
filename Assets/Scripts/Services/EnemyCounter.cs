@@ -10,12 +10,10 @@ namespace Services
         private int _enemyCount;
         private readonly StateMachine _stateMachine;
 
-        //TODO: make a separate save service
+        public int EnemyCount => _enemyCount;
+        
         [Inject]
-        private EnemyCounter(StateMachine stateMachine)
-        {
-            _stateMachine = stateMachine;
-        }
+        private EnemyCounter(StateMachine stateMachine) => _stateMachine = stateMachine;
 
         public void Increase()
         {

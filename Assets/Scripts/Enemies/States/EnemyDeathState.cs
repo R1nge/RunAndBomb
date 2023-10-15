@@ -28,6 +28,7 @@ namespace Enemies.States
 
         public void Enter()
         {
+            Debug.Log("Died");
             _navMeshAgent.isStopped = true;
             _enemyCounter.Decrease();
             _ragdollController.EnableRagdoll();
