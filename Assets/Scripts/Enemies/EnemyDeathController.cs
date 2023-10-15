@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Common;
-using Data;
 using Services;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,16 +13,16 @@ namespace Enemies
         private readonly RagdollController _ragdollController;
         private readonly ColliderController _colliderController;
         private readonly CoroutineRunner _coroutineRunner;
-        private readonly EnemyConfig _enemyConfig;
+        private readonly ConfigProvider _configProvider;
 
-        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, EnemyConfig enemyConfig)
+        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
         {
             _navMeshAgent = navMeshAgent;
             _enemyCounter = enemyCounter;
             _ragdollController = ragdollController;
             _colliderController = colliderController;
             _coroutineRunner = coroutineRunner;
-            _enemyConfig = enemyConfig;
+            _configProvider = configProvider;
         }
 
         public void Die()
@@ -36,7 +35,7 @@ namespace Enemies
         
         private IEnumerator FallThroughFloor()
         {
-            yield return new WaitForSeconds(_enemyConfig.DisableColliderDelay);
+            yield return new WaitForSeconds(_configProvider.EnemyConfig.DisableColliderDelay);
             _colliderController.DisableAllColliders();
         }
     }

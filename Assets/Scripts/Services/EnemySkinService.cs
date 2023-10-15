@@ -7,14 +7,15 @@ namespace Services
     public class EnemySkinService
     {
         private readonly Random _random = new();
-        private readonly EnemySkinsConfig _enemySkins;
+        private readonly ConfigProvider _configProvider;
 
-        private EnemySkinService(EnemySkinsConfig enemySkins) => _enemySkins = enemySkins;
+        private EnemySkinService(ConfigProvider configProvider) => _configProvider = configProvider;
 
         public Enemy GetRandomSkin()
         {
-            var index = _random.Next(0, _enemySkins.Skins.Length);
-            var skin = _enemySkins.Skins[index];
+            EnemySkinsConfig enemyConfig = _configProvider.EnemySkinsConfig;
+            var index = _random.Next(0, enemyConfig.Skins.Length);
+            var skin = enemyConfig.Skins[index];
             return skin;
         }
     }

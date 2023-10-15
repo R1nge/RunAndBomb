@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using Services;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,17 +8,17 @@ namespace Enemies
     {
         private readonly Transform _transform;
         private readonly NavMeshAgent _navMeshAgent;
-        private readonly EnemyConfig _enemyConfig;
+        private readonly ConfigProvider _configProvider;
         private readonly EnemyAnimator _enemyAnimator;
         private Transform _target;
         private Vector3 _destination;
         private bool _inProgress;
 
-        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, EnemyConfig enemyConfig, EnemyAnimator enemyAnimator)
+        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, ConfigProvider configProvider, EnemyAnimator enemyAnimator)
         {
             _transform = transform;
             _navMeshAgent = navMeshAgent;
-            _enemyConfig = enemyConfig;
+            _configProvider = configProvider;
             _enemyAnimator = enemyAnimator;
         }
 
@@ -37,9 +37,9 @@ namespace Enemies
             }
             else
             {
-                Vector3 randomDirection = Random.insideUnitSphere * _enemyConfig.WalkRadius;
+                Vector3 randomDirection = Random.insideUnitSphere * _configProvider.EnemyConfig.WalkRadius;
                 randomDirection += _transform.position;
-                NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _enemyConfig.WalkRadius, 1);
+                NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _configProvider.EnemyConfig.WalkRadius, 1);
                 _destination = hit.position;
                 _navMeshAgent.destination = _destination;
 

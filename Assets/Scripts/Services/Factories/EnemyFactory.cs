@@ -12,21 +12,23 @@ namespace Services.Factories
         private readonly IObjectResolver _objectResolver;
         private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
-        private readonly EnemyConfig _enemyConfig;
+        private readonly ConfigProvider _configProvider;
 
-        private EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, EnemyConfig enemyConfig)
+        private EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService,
+            EnemyCounter enemyCounter, ConfigProvider configProvider)
         {
             _objectResolver = objectResolver;
             _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
-            _enemyConfig = enemyConfig;
+            _configProvider = configProvider;
         }
 
         public void Create()
         {
-            for (int i = 0; i < _enemyConfig.SpawnPositions.Length; i++)
+            EnemyConfig enemyConfig = _configProvider.EnemyConfig;
+            for (int i = 0; i < enemyConfig.SpawnPositions.Length; i++)
             {
-                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _enemyConfig.SpawnPositions[i], Quaternion.identity);
+                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), enemyConfig.SpawnPositions[i], Quaternion.identity);
                 enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
                 _enemyCounter.Increase();
             }

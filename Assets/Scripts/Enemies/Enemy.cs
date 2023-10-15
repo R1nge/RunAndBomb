@@ -1,6 +1,5 @@
 ﻿using Bombs;
 using Common;
-using Data;
 using Enemies.States;
 using Services;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        [SerializeField] private EnemyConfig enemyConfig;
         private EnemyStateMachine _enemyStateMachine;
         private EnemyCounter _enemyCounter;
         private EnemyMovement _enemyMovement;
@@ -23,12 +21,14 @@ namespace Enemies
         private ColliderController _colliderController;
         private CoroutineRunner _coroutineRunner;
         private EnemyDeathController _enemyDeathController;
+        private ConfigProvider _configProvider;
 
         [Inject]
-        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
+        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
         {
             _enemyCounter = enemyCounter;
             _coroutineRunner = coroutineRunner;
+            _configProvider = configProvider;
         }
 
         public void OnTriggerEntered(Collider other)
@@ -57,9 +57,9 @@ namespace Enemies
 
         private void Start()
         {
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig, _enemyAnimator);
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
-            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig);
+            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider);
 
             _enemyStateMachine = new EnemyStateMachine();
 

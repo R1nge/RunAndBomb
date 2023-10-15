@@ -1,5 +1,4 @@
-﻿using Data;
-using UIs;
+﻿using UIs;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,14 +7,14 @@ namespace Services.Factories
     public class WinScreenFactory : IUIFactory<WinUI>
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly UIConfig _uiConfig;
+        private readonly ConfigProvider _configProvider;
 
-        private WinScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
+        private WinScreenFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
         {
             _objectResolver = objectResolver;
-            _uiConfig = uiConfig;
+            _configProvider = configProvider;
         }
 
-        public WinUI Create() => _objectResolver.Instantiate(_uiConfig.Win);
+        public WinUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.Win);
     }
 }

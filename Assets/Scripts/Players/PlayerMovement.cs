@@ -1,16 +1,20 @@
-﻿using Data;
+﻿using Services;
 using UnityEngine;
+using VContainer;
 
 namespace Players
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private PlayerConfig playerConfig;
         [SerializeField] private Transform model;
+        private ConfigProvider _configProvider;
         private CharacterController _characterController;
         private Vector3 _moveDirection;
 
-        public float CurrentSpeed => (Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.z)) * playerConfig.Speed;
+        public float CurrentSpeed => (Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.z)) *_configProvider.PlayerConfig.Speed;
+
+        [Inject]
+        private void Inject(ConfigProvider configProvider) => _configProvider = configProvider;
 
         private void Awake() => _characterController = GetComponent<CharacterController>();
 
@@ -28,7 +32,7 @@ namespace Players
             _moveDirection = input.x * right + input.y * forward;
         }
 
-        private void Gravity() => _moveDirection += Vector3.down * playerConfig.Gravity;
+        private void Gravity() => _moveDirection += Vector3.down * _configProvider.PlayerConfig.Gravity;
 
         private void Rotate()
         {
@@ -38,7 +42,7 @@ namespace Players
 
         private void Move()
         {
-            var motion = _moveDirection * (playerConfig.Speed * Time.deltaTime);
+            var motion = _moveDirection * (_configProvider.PlayerConfig.Speed * Time.deltaTime);
             _characterController.Move(motion);
         }
     }

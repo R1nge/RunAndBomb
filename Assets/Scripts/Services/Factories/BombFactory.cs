@@ -1,5 +1,4 @@
 ﻿using Bombs;
-using Data;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,18 +7,18 @@ namespace Services.Factories
     public class BombFactory
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly BombSkinsConfig _bombSkinsConfig;
+        private readonly ConfigProvider _configProvider;
 
         [Inject]
-        private BombFactory(IObjectResolver objectResolver, BombSkinsConfig bombSkinsConfig)
+        private BombFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
         {
             _objectResolver = objectResolver;
-            _bombSkinsConfig = bombSkinsConfig;
+            _configProvider = configProvider;
         }
 
         public Bomb Create(int skinIndex)
         {
-            var bomb = _objectResolver.Instantiate(_bombSkinsConfig.Bombs[skinIndex].gameObject);
+            var bomb = _objectResolver.Instantiate(_configProvider.BombSkinsConfig.Bombs[skinIndex].gameObject);
             return bomb.GetComponent<Bomb>();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace Services.States
 {
@@ -27,8 +26,7 @@ namespace Services.States
             {
                 loadings[i].Load();
             }
-
-            Debug.Log("Changed state");
+            
             _stateMachine.ChangeState(GameStateType.Init);
         }
 

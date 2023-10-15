@@ -1,5 +1,4 @@
-﻿using Data;
-using UIs;
+﻿using UIs;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,14 +7,14 @@ namespace Services.Factories
     public class GamePlayScreenFactory : IUIFactory<InGameUI>
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly UIConfig _uiConfig;
+        private readonly ConfigProvider _configProvider;
 
-        private GamePlayScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
+        private GamePlayScreenFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
         {
             _objectResolver = objectResolver;
-            _uiConfig = uiConfig;
+            _configProvider = configProvider;
         }
 
-        public InGameUI Create() => _objectResolver.Instantiate(_uiConfig.GamePlayScreen);
+        public InGameUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.GamePlayScreen);
     }
 }

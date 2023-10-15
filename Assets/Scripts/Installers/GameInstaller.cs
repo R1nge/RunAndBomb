@@ -1,5 +1,4 @@
-﻿using Data;
-using Services;
+﻿using Services;
 using Services.Factories;
 using Services.States;
 using UnityEngine;
@@ -11,19 +10,11 @@ namespace Installers
     public class GameInstaller : LifetimeScope
     {
         [SerializeField] private CoroutineRunner coroutineRunner;
-        [SerializeField] private PlayerConfig playerConfig;
-        [SerializeField] private EnemyConfig enemyConfig;
-        [SerializeField] private EnemySkinsConfig enemySkinsConfig;
-        [SerializeField] private BombSkinsConfig bombSkinsConfig;
-        [SerializeField] private UIConfig uiConfig;
-        
+        [SerializeField] private ConfigProvider configProvider;
+
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(playerConfig);
-            builder.RegisterInstance(enemyConfig);
-            builder.RegisterInstance(enemySkinsConfig);
-            builder.RegisterInstance(bombSkinsConfig);
-            builder.RegisterInstance(uiConfig);
+            builder.RegisterComponent(configProvider);
             builder.RegisterComponent(coroutineRunner);
             
             builder.Register<PlayerDataHolder>(Lifetime.Singleton);
