@@ -13,8 +13,8 @@
 
         public void Enter()
         {
-            _playerFactory.Create();
             _uiService.ShowStartScreen();
+            _playerFactory.Create();
         }
 
         public void Exit() { }

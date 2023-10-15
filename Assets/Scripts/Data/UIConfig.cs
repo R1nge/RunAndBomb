@@ -8,12 +8,12 @@ namespace Data
     {
         [SerializeField] private StartUI startScreen;
         [SerializeField] private InGameUI gamePlayScreen;
-        [SerializeField] private EndUI win;
-        [SerializeField] private EndUI lose;
+        [SerializeField] private WinUI win;
+        [SerializeField] private LoseUI lose;
 
         public StartUI StartScreen => startScreen;
         public InGameUI GamePlayScreen => gamePlayScreen;
-        public EndUI Win => win;
-        public EndUI Lose => lose;
+        public WinUI Win => win;
+        public LoseUI Lose => lose;
     }
 }

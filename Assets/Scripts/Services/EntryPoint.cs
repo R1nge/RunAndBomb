@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data;
 using Players;
 using Services.States;
@@ -68,14 +67,6 @@ namespace Services
             InitStateMachine();
 
             _stateMachine.ChangeState(GameStateType.Init);
-
-            StartCoroutine(StartNext());
-        }
-
-        private IEnumerator StartNext()
-        {
-            yield return new WaitForSeconds(3);
-            _stateMachine.ChangeState(GameStateType.Game);
         }
 
         private void CreateFactories()

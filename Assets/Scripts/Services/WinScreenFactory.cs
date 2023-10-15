@@ -4,17 +4,17 @@ using VContainer.Unity;
 
 namespace Services
 {
-    public class WinScreenFactory : IUIFactory<EndUI>
+    public class WinScreenFactory : IUIFactory<WinUI>
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly EndUI _win;
+        private readonly WinUI _win;
 
-        public WinScreenFactory(IObjectResolver objectResolver, EndUI win)
+        public WinScreenFactory(IObjectResolver objectResolver, WinUI win)
         {
             _objectResolver = objectResolver;
             _win = win;
         }
 
-        public EndUI Create() => _objectResolver.Instantiate(_win);
+        public WinUI Create() => _objectResolver.Instantiate(_win);
     }
 }

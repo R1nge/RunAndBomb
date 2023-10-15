@@ -15,4 +15,4 @@ MonoBehaviour:
   startScreen: {fileID: 4634488057581359143, guid: a09f566c8a52bb24ab7d3cf707ba8d7b, type: 3}
   gamePlayScreen: {fileID: 1385722223825770846, guid: 142edf50aebb99b4383a0aadd1461d3b, type: 3}
   win: {fileID: 7174521048110445603, guid: f4a66ebe10f67e5408dd9a72ecbbe644, type: 3}
-  lose: {fileID: 450584434726500519, guid: 306691734009d1544a5af2e4836f62b5, type: 3}
+  lose: {fileID: 8393287441306019768, guid: 1a35546c6731f20479ca0fb51483dd02, type: 3}
