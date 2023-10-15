@@ -4,6 +4,7 @@
     {
         private readonly PlayerPrefsPlayerDataProvider _playerPrefsPlayerDataProvider;
         private readonly PlayerDataHolder _playerDataHolder;
+        
         public PlayerPrefsDataLoadingOperation(PlayerPrefsPlayerDataProvider playerDataProvider, PlayerDataHolder playerDataHolder)
         {
             _playerPrefsPlayerDataProvider = playerDataProvider;

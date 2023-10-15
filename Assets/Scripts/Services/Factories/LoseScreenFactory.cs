@@ -3,19 +3,19 @@ using UIs;
 using VContainer;
 using VContainer.Unity;
 
-namespace Services
+namespace Services.Factories
 {
-    public class GamePlayScreenFactory : IUIFactory<InGameUI>
+    public class LoseScreenFactory : IUIFactory<LoseUI>
     {
         private readonly IObjectResolver _objectResolver;
         private readonly UIConfig _uiConfig;
 
-        public GamePlayScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
+        private LoseScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
         {
             _objectResolver = objectResolver;
             _uiConfig = uiConfig;
         }
 
-        public InGameUI Create() => _objectResolver.Instantiate(_uiConfig.GamePlayScreen);
+        public LoseUI Create() => _objectResolver.Instantiate(_uiConfig.Lose);
     }
 }

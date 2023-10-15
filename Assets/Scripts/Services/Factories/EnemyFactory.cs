@@ -5,7 +5,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Services
+namespace Services.Factories
 {
     public class EnemyFactory
     {
@@ -14,7 +14,7 @@ namespace Services
         private readonly EnemyCounter _enemyCounter;
         private readonly EnemyConfig _enemyConfig;
 
-        public EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, EnemyConfig enemyConfig)
+        private EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService, EnemyCounter enemyCounter, EnemyConfig enemyConfig)
         {
             _objectResolver = objectResolver;
             _enemySkinService = enemySkinService;

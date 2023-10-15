@@ -9,8 +9,7 @@ namespace Services.States
         private readonly PlayerDataHolder _playerDataHolder;
         private readonly StateMachine _stateMachine;
 
-        public PreInit(PlayerPrefsPlayerDataProvider playerPrefsPlayerDataProvider, PlayerDataHolder playerDataHolder,
-            StateMachine stateMachine)
+        public PreInit(PlayerPrefsPlayerDataProvider playerPrefsPlayerDataProvider, PlayerDataHolder playerDataHolder, StateMachine stateMachine)
         {
             _playerDataProvider = playerPrefsPlayerDataProvider;
             _playerDataHolder = playerDataHolder;

@@ -25,7 +25,7 @@ namespace Enemies
         private EnemyDeathController _enemyDeathController;
 
         [Inject]
-        public void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
+        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
         {
             _enemyCounter = enemyCounter;
             _coroutineRunner = coroutineRunner;

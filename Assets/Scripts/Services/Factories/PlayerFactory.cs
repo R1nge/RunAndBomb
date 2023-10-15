@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Services
+namespace Services.Factories
 {
     public class PlayerFactory
     {
@@ -12,7 +12,7 @@ namespace Services
         private readonly PlayerConfig _playerConfig;
         private readonly PlayerDataHolder _playerDataHolder;
 
-        public PlayerFactory(IObjectResolver objectResolver, PlayerConfig playerConfig, PlayerDataHolder playerDataHolder)
+        private PlayerFactory(IObjectResolver objectResolver, PlayerConfig playerConfig, PlayerDataHolder playerDataHolder)
         {
             _objectResolver = objectResolver;
             _playerConfig = playerConfig;

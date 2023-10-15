@@ -1,4 +1,4 @@
-﻿namespace Services
+﻿namespace Services.Factories
 {
     public interface IUIFactory<T>
     {

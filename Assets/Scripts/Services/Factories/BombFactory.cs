@@ -3,7 +3,7 @@ using Data;
 using VContainer;
 using VContainer.Unity;
 
-namespace Services
+namespace Services.Factories
 {
     public class BombFactory
     {

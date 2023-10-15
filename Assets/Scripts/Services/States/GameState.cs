@@ -1,4 +1,6 @@
-﻿namespace Services.States
+﻿using Services.Factories;
+
+namespace Services.States
 {
     public class GameState : IGameState
     {

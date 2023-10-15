@@ -1,6 +1,5 @@
 ﻿using System;
 using Services.States;
-using VContainer;
 
 namespace Services
 {
@@ -11,8 +10,7 @@ namespace Services
         private readonly StateMachine _stateMachine;
 
         public int EnemyCount => _enemyCount;
-        
-        [Inject]
+
         private EnemyCounter(StateMachine stateMachine) => _stateMachine = stateMachine;
 
         public void Increase()

@@ -9,7 +9,7 @@ namespace Services
         private readonly Random _random = new();
         private readonly EnemySkinsConfig _enemySkins;
 
-        public EnemySkinService(EnemySkinsConfig enemySkins) => _enemySkins = enemySkins;
+        private EnemySkinService(EnemySkinsConfig enemySkins) => _enemySkins = enemySkins;
 
         public Enemy GetRandomSkin()
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Services.Factories;
+using UnityEngine;
 
 namespace Services
 {
@@ -11,7 +12,7 @@ namespace Services
 
         private GameObject _previousScreen;
 
-        public UIService(StartScreenFactory startScreenFactory, GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory, LoseScreenFactory loseScreenFactory)
+        private UIService(StartScreenFactory startScreenFactory, GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory, LoseScreenFactory loseScreenFactory)
         {
             _startScreenFactory = startScreenFactory;
             _gamePlayScreenFactory = gamePlayScreenFactory;

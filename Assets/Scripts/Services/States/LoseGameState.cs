@@ -6,10 +6,7 @@ namespace Services.States
     {
         private readonly UIService _uiService;
 
-        public LoseGameState(UIService uiService)
-        {
-            _uiService = uiService;
-        }
+        public LoseGameState(UIService uiService) => _uiService = uiService;
 
         public void Enter()
         {

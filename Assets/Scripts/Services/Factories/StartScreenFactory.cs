@@ -3,19 +3,19 @@ using UIs;
 using VContainer;
 using VContainer.Unity;
 
-namespace Services
+namespace Services.Factories
 {
-    public class WinScreenFactory : IUIFactory<WinUI>
+    public class StartScreenFactory : IUIFactory<StartUI>
     {
         private readonly IObjectResolver _objectResolver;
         private readonly UIConfig _uiConfig;
 
-        public WinScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
+        private StartScreenFactory(IObjectResolver objectResolver, UIConfig uiConfig)
         {
             _objectResolver = objectResolver;
             _uiConfig = uiConfig;
         }
 
-        public WinUI Create() => _objectResolver.Instantiate(_uiConfig.Win);
+        public StartUI Create() => _objectResolver.Instantiate(_uiConfig.StartScreen);
     }
 }
