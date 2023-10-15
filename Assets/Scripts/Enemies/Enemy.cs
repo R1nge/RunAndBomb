@@ -22,6 +22,7 @@ namespace Enemies
         private RagdollController _ragdollController;
         private ColliderController _colliderController;
         private CoroutineRunner _coroutineRunner;
+        private EnemyDeathController _enemyDeathController;
 
         [Inject]
         public void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner)
@@ -52,19 +53,20 @@ namespace Enemies
             _bombController = GetComponent<BombController>();
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
-
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig, _enemyAnimator);
-            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
         }
 
         private void Start()
         {
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, enemyConfig, _enemyAnimator);
+            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
+            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig);
+
             _enemyStateMachine = new EnemyStateMachine();
 
             _enemyStateMachine.AddState(EnemyStateType.Patrol, new EnemyPatrolState(_enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Chase, new EnemyChaseState(_enemyStateMachine, _enemyMovement));
             _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
-            _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, enemyConfig));
+            _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_enemyDeathController));
 
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
         }
