@@ -31,10 +31,6 @@ namespace Bombs
 
                     damageable.TakeDamage();
                 }
-                else
-                {
-                    damageable.TakeDamage();
-                }
             }
         }
     }

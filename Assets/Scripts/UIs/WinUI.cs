@@ -1,6 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace UIs
 {
-    public class WinUI : MonoBehaviour { }
+    public class WinUI : MonoBehaviour
+    {
+        [SerializeField] private Button button;
+
+        private void Awake() => button.onClick.AddListener(Restart);
+
+        private void Restart() => SceneManager.LoadSceneAsync("Game");
+    }
 }
