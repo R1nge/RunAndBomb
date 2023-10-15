@@ -6,23 +6,24 @@ namespace Services.States
     public class WinGameState : IGameState
     {
         private readonly IPlayerDataProvider _dataProvider;
-        private readonly PlayerStatisticsModel _playerStatisticsModel;
+        private readonly PlayerDataHolder _playerDataHolder;
         private readonly UIService _uiService;
 
-        public WinGameState(IPlayerDataProvider dataProvider, PlayerStatisticsModel playerStatisticsModel, UIService uiService)
+        public WinGameState(IPlayerDataProvider dataProvider, PlayerDataHolder playerDataHolder, UIService uiService)
         {
             _dataProvider = dataProvider;
-            _playerStatisticsModel = playerStatisticsModel;
+            _playerDataHolder = playerDataHolder;
             _uiService = uiService;
         }
 
         public void Enter()
         {
             //TODO: Delete player controls
-            _playerStatisticsModel.Level++;
-            _dataProvider.Save(_playerStatisticsModel);
+            PlayerStatisticsModel model = _playerDataHolder.PlayerStatisticsModel;
+            model.Level++;
+            _dataProvider.Save(model);
             _uiService.ShowWinScreen();
-            Debug.Log($"[WIN] Level: {_playerStatisticsModel.Level}");
+            Debug.Log($"[WIN] Level: {model.Level}");
         }
 
         public void Exit() { }

@@ -37,7 +37,7 @@ namespace Services
             _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory, _uiService));
             _stateMachine.AddState(GameStateType.Game, new GameState(_enemyFactory, _uiService));
             _stateMachine.AddState(GameStateType.Lose, new LoseGameState(_uiService));
-            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerDataHolder.PlayerStatisticsModel, _uiService));
+            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerDataHolder, _uiService));
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Data
     {
         [SerializeField] private float walkRadius;
         [SerializeField] private float disableColliderDelay;
+        //TODO: move spawn positions to a services
         [SerializeField] private Vector3[] spawnPositions;
 
         public float WalkRadius => walkRadius;
