@@ -1,21 +1,20 @@
 ﻿using Services.Data;
 using UIs;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Services.Factories
 {
     public class WinScreenFactory : IUIFactory<WinUI>
     {
-        private readonly IObjectResolver _objectResolver;
+        private readonly DiContainer _container;
         private readonly ConfigProvider _configProvider;
 
-        private WinScreenFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
+        private WinScreenFactory(DiContainer container, ConfigProvider configProvider)
         {
-            _objectResolver = objectResolver;
+            _container = container;
             _configProvider = configProvider;
         }
 
-        public WinUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.Win);
+        public WinUI Create() => _container.InstantiatePrefabForComponent<WinUI>(_configProvider.UIConfig.Win);
     }
 }

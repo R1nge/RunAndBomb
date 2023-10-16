@@ -2,22 +2,21 @@
 using Services.Data;
 using UIs;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Services.Factories
 {
     public class EnemyFactory
     {
-        private readonly IObjectResolver _objectResolver;
+        private readonly DiContainer _container;
         private readonly EnemySkinService _enemySkinService;
         private readonly EnemyCounter _enemyCounter;
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
 
-        private EnemyFactory(IObjectResolver objectResolver, EnemySkinService enemySkinService,
+        private EnemyFactory(DiContainer container, EnemySkinService enemySkinService,
             EnemyCounter enemyCounter, SpawnPositionsProvider spawnPositionsProvider)
         {
-            _objectResolver = objectResolver;
+            _container = container;
             _enemySkinService = enemySkinService;
             _enemyCounter = enemyCounter;
             _spawnPositionsProvider = spawnPositionsProvider;
@@ -27,7 +26,7 @@ namespace Services.Factories
         {
             for (int i = 1; i < _spawnPositionsProvider.SpawnPositions.Length; i++)
             {
-                Enemy enemy = _objectResolver.Instantiate(_enemySkinService.GetRandomSkin(), _spawnPositionsProvider.SpawnPositions[i].position, Quaternion.identity);
+                var enemy = _container.InstantiatePrefabForComponent<Enemy>(_enemySkinService.GetRandomSkin(), _spawnPositionsProvider.SpawnPositions[i].position, Quaternion.identity, null);
                 enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
                 _enemyCounter.Increase();
             }

@@ -1,6 +1,6 @@
 ﻿using Services.States;
 using UnityEngine;
-using VContainer;
+using Zenject;
 
 namespace Services
 {
@@ -11,6 +11,12 @@ namespace Services
         [Inject]
         private void Inject(StateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private void Start() => _stateMachine.ChangeState(GameStateType.LoadData);
+        private void Start()
+        {
+            Application.targetFrameRate = 999999;
+            QualitySettings.vSyncCount = 0;
+            
+            _stateMachine.ChangeState(GameStateType.LoadData);
+        }
     }
 }

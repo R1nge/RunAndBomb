@@ -1,21 +1,20 @@
 ﻿using Services.Data;
 using UIs;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Services.Factories
 {
     public class GamePlayScreenFactory : IUIFactory<InGameUI>
     {
-        private readonly IObjectResolver _objectResolver;
+        private readonly DiContainer _container;
         private readonly ConfigProvider _configProvider;
 
-        private GamePlayScreenFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
+        private GamePlayScreenFactory(DiContainer container, ConfigProvider configProvider)
         {
-            _objectResolver = objectResolver;
+            _container = container;
             _configProvider = configProvider;
         }
 
-        public InGameUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.GamePlayScreen);
+        public InGameUI Create() => _container.InstantiatePrefabForComponent<InGameUI>(_configProvider.UIConfig.GamePlayScreen);
     }
 }

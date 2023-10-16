@@ -3,28 +3,34 @@ using Services.Data;
 using Services.Factories;
 using Services.States;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Installers
 {
-    public class GameInstaller : LifetimeScope
+    public class GameInstaller : MonoInstaller
     {
         [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
         //[SerializeField] private PlatformService platformService;
 
-        protected override void Configure(IContainerBuilder builder)
+        public override void InstallBindings()
         {
-            builder.RegisterComponent(spawnPositionsProvider);
+            Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
-            builder.Register<PlayerFactory>(Lifetime.Singleton);
+            
+            Container.Bind<StartScreenFactory>().AsSingle();
+            Container.Bind<GamePlayScreenFactory>().AsSingle();
+            Container.Bind<WinScreenFactory>().AsSingle();
+            Container.Bind<LoseScreenFactory>().AsSingle();
+            Container.Bind<UIService>().AsSingle();
+            
+            Container.Bind<PlayerFactory>().AsSingle();
 
-            builder.Register<BombFactory>(Lifetime.Singleton);
-            builder.Register<EnemySkinService>(Lifetime.Singleton);
-            builder.Register<EnemyCounter>(Lifetime.Singleton);
-            builder.Register<EnemyFactory>(Lifetime.Singleton);
+            Container.Bind<BombFactory>().AsSingle();
+            Container.Bind<EnemySkinService>().AsSingle();
+            Container.Bind<EnemyCounter>().AsSingle();
+            Container.Bind<EnemyFactory>().AsSingle();
 
-            builder.Register<StateMachine>(Lifetime.Singleton);
+            Container.Bind<StateMachine>().AsSingle();
         }
     }
 }

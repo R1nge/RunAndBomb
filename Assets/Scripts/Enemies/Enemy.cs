@@ -5,7 +5,7 @@ using Services;
 using Services.Data;
 using UnityEngine;
 using UnityEngine.AI;
-using VContainer;
+using Zenject;
 
 namespace Enemies
 {

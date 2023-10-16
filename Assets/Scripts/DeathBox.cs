@@ -1,7 +1,7 @@
 ﻿using Players;
 using Services.States;
 using UnityEngine;
-using VContainer;
+using Zenject;
 
 public class DeathBox : MonoBehaviour
 {

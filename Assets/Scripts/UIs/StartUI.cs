@@ -1,10 +1,9 @@
-﻿using Services;
-using Services.Data;
+﻿using Services.Data;
 using Services.States;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
+using Zenject;
 
 namespace UIs
 {

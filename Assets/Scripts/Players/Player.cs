@@ -1,7 +1,7 @@
 ﻿using Bombs;
 using Services.States;
 using UnityEngine;
-using VContainer;
+using Zenject;
 
 namespace Players
 {

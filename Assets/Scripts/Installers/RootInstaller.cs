@@ -1,39 +1,23 @@
 ﻿using Services;
 using Services.Data;
-using Services.Factories;
-using Services.States;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Installers
 {
-    public class RootInstaller : LifetimeScope
+    public class RootInstaller : MonoInstaller
     {
         [SerializeField] private CoroutineRunner coroutineRunner;
         [SerializeField] private ConfigProvider configProvider;
 
-        protected override void Configure(IContainerBuilder builder)
+        public override void InstallBindings()
         {
-            builder.RegisterComponent(coroutineRunner);
-            builder.RegisterComponent(configProvider);
-            
-            builder.Register<PlayerDataHolder>(Lifetime.Singleton);
-            builder.Register<PlayerPrefsPlayerDataProvider>(Lifetime.Singleton).As<IPlayerDataProvider>();
-            builder.Register<PlayerDataService>(Lifetime.Singleton).As<IPlayerDataService>();
+            Container.BindInstance(coroutineRunner);
+            Container.BindInstance(configProvider);
 
-            builder.Register<StartScreenFactory>(Lifetime.Singleton);
-            builder.Register<GamePlayScreenFactory>(Lifetime.Singleton);
-            builder.Register<WinScreenFactory>(Lifetime.Singleton);
-            builder.Register<LoseScreenFactory>(Lifetime.Singleton);
-            builder.Register<UIService>(Lifetime.Singleton);
-        }
-
-        private void Start()
-        {
-            Application.targetFrameRate = 999999;
-            QualitySettings.vSyncCount = 0;
+            Container.Bind<PlayerDataHolder>().AsSingle();
+            Container.BindInterfacesTo<PlayerPrefsPlayerDataProvider>().AsSingle();
+            Container.BindInterfacesTo<PlayerDataService>().AsSingle();
         }
     }
 }

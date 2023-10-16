@@ -1,25 +1,24 @@
 ﻿using Bombs;
 using Services.Data;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Services.Factories
 {
     public class BombFactory
     {
-        private readonly IObjectResolver _objectResolver;
+        private readonly DiContainer _container;
         private readonly ConfigProvider _configProvider;
 
         [Inject]
-        private BombFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
+        private BombFactory(DiContainer container, ConfigProvider configProvider)
         {
-            _objectResolver = objectResolver;
+            _container = container;
             _configProvider = configProvider;
         }
 
         public Bomb Create(int skinIndex)
         {
-            var bomb = _objectResolver.Instantiate(_configProvider.BombSkinsConfig.Bombs[skinIndex].gameObject);
+            var bomb = _container.InstantiatePrefabForComponent<Bomb>(_configProvider.BombSkinsConfig.Bombs[skinIndex].gameObject);
             return bomb.GetComponent<Bomb>();
         }
     }

@@ -1,21 +1,20 @@
 ﻿using Services.Data;
 using UIs;
-using VContainer;
-using VContainer.Unity;
+using Zenject;
 
 namespace Services.Factories
 {
     public class LoseScreenFactory : IUIFactory<LoseUI>
     {
-        private readonly IObjectResolver _objectResolver;
+        private readonly DiContainer _container;
         private readonly ConfigProvider _configProvider;
 
-        private LoseScreenFactory(IObjectResolver objectResolver, ConfigProvider configProvider)
+        private LoseScreenFactory(DiContainer container, ConfigProvider configProvider)
         {
-            _objectResolver = objectResolver;
+            _container = container;
             _configProvider = configProvider;
         }
 
-        public LoseUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.Lose);
+        public LoseUI Create() => _container.InstantiatePrefabForComponent<LoseUI>(_configProvider.UIConfig.Lose);
     }
 }
