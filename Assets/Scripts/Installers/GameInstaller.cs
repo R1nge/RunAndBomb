@@ -33,7 +33,7 @@ namespace Installers
             Container.Bind<StateMachine>().AsSingle();
 
             
-            Container.BindInterfacesTo<GameEnder>().AsSingle();
+            Container.BindInterfacesTo<WinService>().AsSingle();
         }
     }
 }

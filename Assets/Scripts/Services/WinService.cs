@@ -5,13 +5,12 @@ using Zenject;
 
 namespace Services
 {
-    //TODO: think of a better name
-    public class GameEnder : IInitializable, IDisposable
+    public class WinService : IInitializable, IDisposable
     {
         private readonly StateMachine _stateMachine;
         private readonly EnemyCounter _enemyCounter;
 
-        private GameEnder(StateMachine stateMachine, EnemyCounter enemyCounter)
+        private WinService(StateMachine stateMachine, EnemyCounter enemyCounter)
         {
             _stateMachine = stateMachine;
             _enemyCounter = enemyCounter;
