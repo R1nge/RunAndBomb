@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Services
+namespace Services.Data
 {
     public class PlayerPrefsPlayerDataProvider : IPlayerDataProvider
     {

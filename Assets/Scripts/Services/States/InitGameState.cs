@@ -1,4 +1,6 @@
-﻿namespace Services.States
+﻿using Services.Data;
+
+namespace Services.States
 {
     public class InitGameState : IGameState
     {

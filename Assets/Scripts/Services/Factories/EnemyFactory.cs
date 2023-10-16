@@ -1,4 +1,5 @@
 ﻿using Enemies;
+using Services.Data;
 using UIs;
 using UnityEngine;
 using VContainer;

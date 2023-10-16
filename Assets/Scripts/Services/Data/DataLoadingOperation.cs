@@ -1,4 +1,4 @@
-﻿namespace Services
+﻿namespace Services.Data
 {
     public class DataLoadingOperation : ILoadingOperation
     {

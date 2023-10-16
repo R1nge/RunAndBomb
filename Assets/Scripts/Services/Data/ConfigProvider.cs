@@ -1,7 +1,7 @@
 ﻿using Data;
 using UnityEngine;
 
-namespace Services
+namespace Services.Data
 {
     public class ConfigProvider : MonoBehaviour
     {

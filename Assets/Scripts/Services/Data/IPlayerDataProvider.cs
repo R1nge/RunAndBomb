@@ -1,6 +1,6 @@
 ﻿using Data;
 
-namespace Services
+namespace Services.Data
 {
     public interface IPlayerDataProvider
     {

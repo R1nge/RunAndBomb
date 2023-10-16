@@ -2,6 +2,7 @@
 using Common;
 using Enemies.States;
 using Services;
+using Services.Data;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
