@@ -31,6 +31,9 @@ namespace Installers
             Container.Bind<EnemyFactory>().AsSingle();
 
             Container.Bind<StateMachine>().AsSingle();
+
+            
+            Container.BindInterfacesTo<GameEnder>().AsSingle();
         }
     }
 }
