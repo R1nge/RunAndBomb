@@ -25,7 +25,6 @@ namespace Bombs
                 {
                     if (_owner == other.gameObject)
                     {
-                        print("The same object");
                         return;
                     }
 
