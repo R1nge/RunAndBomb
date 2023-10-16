@@ -1,24 +1,21 @@
-﻿using Services.Factories;
-
-namespace Services.States
+﻿namespace Services.States
 {
     public class InitGameState : IGameState
     {
-        private readonly PlayerFactory _playerFactory;
         private readonly UIService _uiService;
+        private readonly IPlayerDataService _playerDataService;
 
-        public InitGameState(PlayerFactory playerFactory, UIService uiService)
+        public InitGameState( UIService uiService, IPlayerDataService playerDataService)
         {
-            _playerFactory = playerFactory;
             _uiService = uiService;
+            _playerDataService = playerDataService;
         }
 
         public void Enter()
         {
             _uiService.ShowStartScreen();
-            _playerFactory.Create();
         }
 
-        public void Exit() { }
+        public void Exit() => _playerDataService.Save();
     }
 }

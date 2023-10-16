@@ -2,15 +2,10 @@
 {
     public class DataLoadingOperation : ILoadingOperation
     {
-        private readonly IPlayerDataProvider _playerDataProvider;
-        private readonly PlayerDataHolder _playerDataHolder;
+        private readonly IPlayerDataService _playerDataService;
         
-        public DataLoadingOperation(IPlayerDataProvider playerDataProvider, PlayerDataHolder playerDataHolder)
-        {
-            _playerDataProvider = playerDataProvider;
-            _playerDataHolder = playerDataHolder;
-        }
+        public DataLoadingOperation(IPlayerDataService playerDataService) => _playerDataService = playerDataService;
 
-        public void Load() => _playerDataHolder.PlayerStatisticsModel = _playerDataProvider.Load();
+        public void Load() => _playerDataService.Load();
     }
 }

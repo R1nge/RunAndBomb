@@ -14,13 +14,13 @@ namespace Services
         private UIService _uiService;
         private EnemyFactory _enemyFactory;
         private CoroutineRunner _coroutineRunner;
+        private IPlayerDataService _playerDataService;
         
         [Inject]
-        private void Inject(StateMachine stateMachine, PlayerPrefsPlayerDataProvider playerPrefsPlayerDataProvider, PlayerDataHolder playerDataHolder, PlayerFactory playerFactory, UIService uiService, EnemyFactory enemyFactory, CoroutineRunner coroutineRunner)
+        private void Inject(StateMachine stateMachine, IPlayerDataService playerDataService, PlayerFactory playerFactory, UIService uiService, EnemyFactory enemyFactory, CoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
-            _playerDataProvider = playerPrefsPlayerDataProvider;
-            _playerDataHolder = playerDataHolder;
+            _playerDataService = playerDataService;
             _playerFactory = playerFactory;
             _uiService = uiService;
             _enemyFactory = enemyFactory;
@@ -36,12 +36,12 @@ namespace Services
 
         private void InitStateMachine()
         {
-            _stateMachine.AddState(GameStateType.LoadData, new LoadDataState(_playerDataProvider, _playerDataHolder, _stateMachine));
+            _stateMachine.AddState(GameStateType.LoadData, new LoadDataState(_playerDataService, _stateMachine));
             _stateMachine.AddState(GameStateType.Reset, new ResetState(_stateMachine, _coroutineRunner));
-            _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory, _uiService));
-            _stateMachine.AddState(GameStateType.Game, new GameState(_enemyFactory, _uiService));
+            _stateMachine.AddState(GameStateType.Init, new InitGameState(_uiService, _playerDataService));
+            _stateMachine.AddState(GameStateType.Game, new GameState(_playerFactory, _enemyFactory, _uiService));
             _stateMachine.AddState(GameStateType.Lose, new LoseGameState(_uiService));
-            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataProvider, _playerDataHolder, _uiService));
+            _stateMachine.AddState(GameStateType.Win, new WinGameState(_playerDataService, _uiService));
         }
     }
 }

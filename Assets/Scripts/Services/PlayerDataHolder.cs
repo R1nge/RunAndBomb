@@ -4,6 +4,8 @@ namespace Services
 {
     public class PlayerDataHolder
     {
+        public PlayerDataHolder() => _playerStatisticsModel = new PlayerStatisticsModel("", 1);
+
         public PlayerStatisticsModel PlayerStatisticsModel
         {
             get => _playerStatisticsModel;

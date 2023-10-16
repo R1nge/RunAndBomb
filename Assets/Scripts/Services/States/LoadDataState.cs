@@ -4,14 +4,12 @@ namespace Services.States
 {
     public class LoadDataState : IGameState
     {
-        private readonly IPlayerDataProvider _playerDataProvider;
-        private readonly PlayerDataHolder _playerDataHolder;
+        private readonly IPlayerDataService _playerDataService;
         private readonly StateMachine _stateMachine;
 
-        public LoadDataState(IPlayerDataProvider playerDataProvider, PlayerDataHolder playerDataHolder, StateMachine stateMachine)
+        public LoadDataState(IPlayerDataService playerDataService, StateMachine stateMachine)
         {
-            _playerDataProvider = playerDataProvider;
-            _playerDataHolder = playerDataHolder;
+            _playerDataService = playerDataService;
             _stateMachine = stateMachine;
         }
 
@@ -19,7 +17,7 @@ namespace Services.States
         {
             var loadings = new List<ILoadingOperation>
             {
-                new DataLoadingOperation(_playerDataProvider, _playerDataHolder)
+                new DataLoadingOperation(_playerDataService)
             };
 
             for (int i = 0; i < loadings.Count; i++)

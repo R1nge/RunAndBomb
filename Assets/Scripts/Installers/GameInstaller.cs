@@ -9,10 +9,12 @@ namespace Installers
     public class GameInstaller : LifetimeScope
     {
         [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
+        [SerializeField] private PlatformService platformService;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(spawnPositionsProvider);
+            builder.RegisterComponent(platformService);
             builder.Register<PlayerFactory>(Lifetime.Singleton);
             builder.Register<EnemySkinService>(Lifetime.Singleton);
             builder.Register<EnemyCounter>(Lifetime.Singleton);

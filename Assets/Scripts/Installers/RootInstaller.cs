@@ -17,7 +17,8 @@ namespace Installers
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(configProvider);
             builder.Register<PlayerDataHolder>(Lifetime.Singleton);
-            builder.Register<PlayerPrefsPlayerDataProvider>(Lifetime.Singleton);
+            builder.Register<PlayerPrefsPlayerDataProvider>(Lifetime.Singleton).As<IPlayerDataProvider>();
+            builder.Register<PlayerDataService>(Lifetime.Singleton).As<IPlayerDataService>();
             builder.Register<StateMachine>(Lifetime.Singleton);
         }
 

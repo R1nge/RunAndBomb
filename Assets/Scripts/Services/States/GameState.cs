@@ -4,11 +4,13 @@ namespace Services.States
 {
     public class GameState : IGameState
     {
+        private readonly PlayerFactory _playerFactory;
         private readonly EnemyFactory _enemyFactory;
         private readonly UIService _uiService;
 
-        public GameState(EnemyFactory enemyFactory, UIService uiService)
+        public GameState(PlayerFactory playerFactory, EnemyFactory enemyFactory, UIService uiService)
         {
+            _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
             _uiService = uiService;
         }
@@ -16,6 +18,7 @@ namespace Services.States
         public void Enter()
         {
             //TODO: create player controls
+            _playerFactory.Create();
             _uiService.ShowGameScreen();
             _enemyFactory.Create();
         }
