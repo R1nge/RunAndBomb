@@ -1,5 +1,6 @@
 ﻿using Services;
 using Services.Data;
+using Services.Factories;
 using Services.States;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,18 +18,22 @@ namespace Installers
         {
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(configProvider);
+            
             builder.Register<PlayerDataHolder>(Lifetime.Singleton);
             builder.Register<PlayerPrefsPlayerDataProvider>(Lifetime.Singleton).As<IPlayerDataProvider>();
             builder.Register<PlayerDataService>(Lifetime.Singleton).As<IPlayerDataService>();
-            builder.Register<StateMachine>(Lifetime.Singleton);
+
+            builder.Register<StartScreenFactory>(Lifetime.Singleton);
+            builder.Register<GamePlayScreenFactory>(Lifetime.Singleton);
+            builder.Register<WinScreenFactory>(Lifetime.Singleton);
+            builder.Register<LoseScreenFactory>(Lifetime.Singleton);
+            builder.Register<UIService>(Lifetime.Singleton);
         }
 
         private void Start()
         {
             Application.targetFrameRate = 999999;
             QualitySettings.vSyncCount = 0;
-            DontDestroyOnLoad(gameObject);
-            SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
         }
     }
 }

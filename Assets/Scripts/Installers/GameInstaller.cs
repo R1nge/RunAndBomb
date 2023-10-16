@@ -1,6 +1,7 @@
 ﻿using Services;
 using Services.Data;
 using Services.Factories;
+using Services.States;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,23 +11,20 @@ namespace Installers
     public class GameInstaller : LifetimeScope
     {
         [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
-        [SerializeField] private PlatformService platformService;
+        //[SerializeField] private PlatformService platformService;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(spawnPositionsProvider);
-            builder.RegisterComponent(platformService);
+            //builder.RegisterComponent(platformService);
             builder.Register<PlayerFactory>(Lifetime.Singleton);
+
+            builder.Register<BombFactory>(Lifetime.Singleton);
             builder.Register<EnemySkinService>(Lifetime.Singleton);
             builder.Register<EnemyCounter>(Lifetime.Singleton);
             builder.Register<EnemyFactory>(Lifetime.Singleton);
-            builder.Register<BombFactory>(Lifetime.Singleton);
 
-            builder.Register<StartScreenFactory>(Lifetime.Singleton);
-            builder.Register<GamePlayScreenFactory>(Lifetime.Singleton);
-            builder.Register<WinScreenFactory>(Lifetime.Singleton);
-            builder.Register<LoseScreenFactory>(Lifetime.Singleton);
-            builder.Register<UIService>(Lifetime.Singleton);
+            builder.Register<StateMachine>(Lifetime.Singleton);
         }
     }
 }

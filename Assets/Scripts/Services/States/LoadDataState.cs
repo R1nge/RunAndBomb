@@ -8,7 +8,7 @@ namespace Services.States
         private readonly IPlayerDataService _playerDataService;
         private readonly StateMachine _stateMachine;
 
-        public LoadDataState(IPlayerDataService playerDataService, StateMachine stateMachine)
+        public LoadDataState(StateMachine stateMachine, IPlayerDataService playerDataService)
         {
             _playerDataService = playerDataService;
             _stateMachine = stateMachine;

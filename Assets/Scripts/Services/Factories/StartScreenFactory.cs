@@ -16,6 +16,7 @@ namespace Services.Factories
             _configProvider = configProvider;
         }
 
+        //For some reason VContainer put it in a DDOL
         public StartUI Create() => _objectResolver.Instantiate(_configProvider.UIConfig.StartScreen);
     }
 }

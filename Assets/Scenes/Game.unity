@@ -553,9 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22ca965773f4a64afe3cd4614a772a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platforms:
-  - {fileID: 919132149568398915}
-  - {fileID: 919132149557238082}
 --- !u!114 &497282192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,8 +983,8 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 800305524}
   - {fileID: 1973733871}
+  - {fileID: 800305524}
   spawnPositionsProvider: {fileID: 1928553135}
-  platformService: {fileID: 497282191}
 --- !u!4 &425519204702830314
 Transform:
   m_ObjectHideFlags: 0
