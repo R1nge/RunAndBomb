@@ -2,13 +2,13 @@
 
 namespace Services.States
 {
-    public class PreInit : IGameState
+    public class LoadData : IGameState
     {
         private readonly PlayerPrefsPlayerDataProvider _playerDataProvider;
         private readonly PlayerDataHolder _playerDataHolder;
         private readonly StateMachine _stateMachine;
 
-        public PreInit(PlayerPrefsPlayerDataProvider playerPrefsPlayerDataProvider, PlayerDataHolder playerDataHolder, StateMachine stateMachine)
+        public LoadData(PlayerPrefsPlayerDataProvider playerPrefsPlayerDataProvider, PlayerDataHolder playerDataHolder, StateMachine stateMachine)
         {
             _playerDataProvider = playerPrefsPlayerDataProvider;
             _playerDataHolder = playerDataHolder;
@@ -26,8 +26,8 @@ namespace Services.States
             {
                 loadings[i].Load();
             }
-            
-            _stateMachine.ChangeState(GameStateType.Init);
+
+            _stateMachine.ChangeState(GameStateType.Reset);
         }
 
         public void Exit() { }

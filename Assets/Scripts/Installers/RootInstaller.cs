@@ -23,6 +23,8 @@ namespace Installers
 
         private void Start()
         {
+            Application.targetFrameRate = 999999;
+            QualitySettings.vSyncCount = 0;
             DontDestroyOnLoad(gameObject);
             SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
         }

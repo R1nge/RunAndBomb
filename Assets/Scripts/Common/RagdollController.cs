@@ -6,7 +6,6 @@ namespace Common
     {
         [SerializeField] private Animator animator;
         [SerializeField] private Rigidbody[] rigidbodies;
-        [SerializeField] private Collider[] colliders;
 
         private void Awake() => DisableRagdoll();
 
@@ -15,11 +14,6 @@ namespace Common
             for (int i = 0; i < rigidbodies.Length; i++)
             {
                 rigidbodies[i].isKinematic = true;
-            }
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                colliders[i].enabled = false;
             }
 
             animator.enabled = true;
@@ -32,11 +26,6 @@ namespace Common
             for (int i = 0; i < rigidbodies.Length; i++)
             {
                 rigidbodies[i].isKinematic = false;
-            }
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                colliders[i].enabled = true;
             }
         }
     }
