@@ -36,7 +36,7 @@ namespace Services
 
         private void InitStateMachine()
         {
-            _stateMachine.AddState(GameStateType.LoadData, new LoadData(_playerDataProvider, _playerDataHolder, _stateMachine));
+            _stateMachine.AddState(GameStateType.LoadData, new LoadDataState(_playerDataProvider, _playerDataHolder, _stateMachine));
             _stateMachine.AddState(GameStateType.Reset, new ResetState(_stateMachine, _coroutineRunner));
             _stateMachine.AddState(GameStateType.Init, new InitGameState(_playerFactory, _uiService));
             _stateMachine.AddState(GameStateType.Game, new GameState(_enemyFactory, _uiService));
