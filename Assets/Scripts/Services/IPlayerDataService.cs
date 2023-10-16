@@ -5,7 +5,7 @@ namespace Services
     public interface IPlayerDataService
     {
         void Save();
-        PlayerStatisticsModel Load();
+        void Load();
         PlayerStatisticsModel Model { get; }
     }
 }

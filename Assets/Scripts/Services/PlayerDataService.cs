@@ -16,6 +16,6 @@ namespace Services
         public PlayerStatisticsModel Model => _playerDataHolder.PlayerStatisticsModel;
         
         public void Save() => _playerDataProvider.Save(_playerDataHolder.PlayerStatisticsModel);
-        public PlayerStatisticsModel Load() => _playerDataHolder.PlayerStatisticsModel = _playerDataProvider.Load();
+        public void Load() => _playerDataHolder.PlayerStatisticsModel = _playerDataProvider.Load();
     }
 }

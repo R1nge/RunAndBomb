@@ -5,7 +5,7 @@
         private readonly UIService _uiService;
         private readonly IPlayerDataService _playerDataService;
 
-        public InitGameState( UIService uiService, IPlayerDataService playerDataService)
+        public InitGameState(UIService uiService, IPlayerDataService playerDataService)
         {
             _uiService = uiService;
             _playerDataService = playerDataService;
