@@ -2,6 +2,7 @@
 using Common;
 using Services;
 using Services.Data;
+using UIs;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,8 +16,9 @@ namespace Enemies
         private readonly ColliderController _colliderController;
         private readonly CoroutineRunner _coroutineRunner;
         private readonly ConfigProvider _configProvider;
+        private readonly NicknameUI _nicknameUI;
 
-        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
+        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, ConfigProvider configProvider, NicknameUI nicknameUI)
         {
             _navMeshAgent = navMeshAgent;
             _enemyCounter = enemyCounter;
@@ -24,10 +26,12 @@ namespace Enemies
             _colliderController = colliderController;
             _coroutineRunner = coroutineRunner;
             _configProvider = configProvider;
+            _nicknameUI = nicknameUI;
         }
 
         public void Die()
         {
+            _nicknameUI.Hide();
             _colliderController.DisableCharacterColliders();
             _navMeshAgent.isStopped = true;
             _enemyCounter.Decrease();

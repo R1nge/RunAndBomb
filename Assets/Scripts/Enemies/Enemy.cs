@@ -3,6 +3,7 @@ using Common;
 using Enemies.States;
 using Services;
 using Services.Data;
+using UIs;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -23,6 +24,7 @@ namespace Enemies
         private CoroutineRunner _coroutineRunner;
         private EnemyDeathController _enemyDeathController;
         private ConfigProvider _configProvider;
+        private NicknameUI _nicknameUI;
 
         [Inject]
         private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
@@ -32,6 +34,8 @@ namespace Enemies
             _configProvider = configProvider;
         }
 
+        //TODO: sphere cast on a character layer, at radius and frequency of configProvider.EnemyConfig
+        
         public void OnTriggerEntered(Collider other)
         {
             bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
@@ -54,13 +58,14 @@ namespace Enemies
             _bombController = GetComponent<BombController>();
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
+            _nicknameUI = GetComponent<NicknameUI>();
         }
 
         private void Start()
         {
             _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
-            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider);
+            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI);
 
             _enemyStateMachine = new EnemyStateMachine();
 
