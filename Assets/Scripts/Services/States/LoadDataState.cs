@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Services.Data;
 
 namespace Services.States
@@ -18,26 +20,47 @@ namespace Services.States
             _uiService = uiService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
             _loadingScreen = _uiService.ShowLoadingScreen();
 
-            var loadings = new List<ILoadingOperation>
+            //Placeholder code for the demonstration purposes.
+            var asyncLoadings = new List<IAsyncLoadingOperation>
             {
-                new DataLoadingOperation(_playerDataService)
+                new AsyncPlaceHolderLoadingOperation()
             };
 
-            _loadingScreen.UpdatePercent(0, loadings.Count);
+            var loadings = new List<ILoadingOperation>
+            {
+                new DataLoadingOperation(_playerDataService),
+            };
+
+
+            int total = loadings.Count + asyncLoadings.Count;
+
+            _loadingScreen.UpdatePercent(0, total);
+
+            var current = 0;
+
+            for (int i = 0; i < asyncLoadings.Count; i++)
+            {
+                await asyncLoadings[i].Load();
+                current++;
+                _loadingScreen.UpdatePercent(current + 1, loadings.Count);
+            }
 
             for (int i = 0; i < loadings.Count; i++)
             {
                 loadings[i].Load();
-                _loadingScreen.UpdatePercent(i + 1, loadings.Count);
+                current++;
+                _loadingScreen.UpdatePercent(current + 1, loadings.Count);
             }
+
+            await Task.Delay(1000);
 
             _stateMachine.ChangeState(GameStateType.Reset);
         }
 
-        public void Exit() => _loadingScreen.Destroy();
+        public void Exit() { }
     }
 }
