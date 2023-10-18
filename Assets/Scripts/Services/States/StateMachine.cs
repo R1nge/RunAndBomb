@@ -13,7 +13,7 @@ namespace Services.States
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
-                { GameStateType.LoadData, new LoadDataState(this, playerDataService) },
+                { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
                 { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService) },

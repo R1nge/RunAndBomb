@@ -16,7 +16,8 @@ namespace Installers
         {
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
-            
+
+            Container.Bind<LoadingScreenFactory>().AsSingle();
             Container.Bind<StartScreenFactory>().AsSingle();
             Container.Bind<GamePlayScreenFactory>().AsSingle();
             Container.Bind<WinScreenFactory>().AsSingle();
