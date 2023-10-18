@@ -657,7 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 3220729824663287619}
   - component: {fileID: 8835010805989234052}
   - component: {fileID: 1950114032895962095}
-  - component: {fileID: 7087618256078551930}
+  - component: {fileID: 4616246707702941159}
   - component: {fileID: 4634488057581359143}
   m_Layer: 5
   m_Name: StartGameUI
@@ -931,7 +931,7 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &7087618256078551930
+--- !u!114 &4616246707702941159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
