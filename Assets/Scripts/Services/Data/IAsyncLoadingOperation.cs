@@ -2,8 +2,8 @@
 
 namespace Services.Data
 {
-    public interface IAsyncLoadingOperation : ILoadingOperation
+    public interface IAsyncLoadingOperation
     {
-        new Task Load();
+        Task Load();
     }
 }

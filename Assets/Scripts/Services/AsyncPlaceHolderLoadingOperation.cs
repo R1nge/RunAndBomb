@@ -6,10 +6,6 @@ namespace Services
 {
     public class AsyncPlaceHolderLoadingOperation : IAsyncLoadingOperation
     {
-        void ILoadingOperation.Load()
-        {
-        }
-
         Task IAsyncLoadingOperation.Load() => Task.Delay(TimeSpan.FromSeconds(2));
     }
 }
