@@ -1,4 +1,5 @@
 ﻿using Services.Factories;
+using UIs;
 using UnityEngine;
 
 namespace Services
@@ -13,7 +14,9 @@ namespace Services
 
         private GameObject _previousScreen;
 
-        private UIService(LoadingScreenFactory loadingScreenFactory, StartScreenFactory startScreenFactory, GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory, LoseScreenFactory loseScreenFactory)
+        private UIService(LoadingScreenFactory loadingScreenFactory, StartScreenFactory startScreenFactory,
+            GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory,
+            LoseScreenFactory loseScreenFactory)
         {
             _loadingScreenFactory = loadingScreenFactory;
             _startScreenFactory = startScreenFactory;
@@ -29,28 +32,44 @@ namespace Services
             return screen;
         }
 
-        public void ShowStartScreen()
+        public StartUI ShowStartScreen()
         {
             Object.Destroy(_previousScreen);
-            _previousScreen = _startScreenFactory.Create().gameObject;
+
+            StartUI screen = _startScreenFactory.Create();
+            _previousScreen = screen.gameObject;
+
+            return screen;
         }
 
-        public void ShowGameScreen()
+        public InGameUI ShowGameScreen()
         {
             Object.Destroy(_previousScreen);
-            _previousScreen = _gamePlayScreenFactory.Create().gameObject;
+
+            InGameUI screen = _gamePlayScreenFactory.Create();
+            _previousScreen = screen.gameObject;
+
+            return screen;
         }
 
-        public void ShowWinScreen()
+        public WinUI ShowWinScreen()
         {
             Object.Destroy(_previousScreen);
-            _previousScreen = _winScreenFactory.Create().gameObject;
+
+            WinUI screen = _winScreenFactory.Create();
+            _previousScreen = screen.gameObject;
+
+            return screen;
         }
 
-        public void ShowLoseScreen()
+        public LoseUI ShowLoseScreen()
         {
             Object.Destroy(_previousScreen);
-            _previousScreen = _loseScreenFactory.Create().gameObject;
+
+            LoseUI screen = _loseScreenFactory.Create();
+            _previousScreen = screen.gameObject;
+
+            return screen;
         }
     }
 }
