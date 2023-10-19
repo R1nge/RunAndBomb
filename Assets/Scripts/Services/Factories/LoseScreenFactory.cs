@@ -1,4 +1,5 @@
-﻿using Services.Data;
+﻿using System.Threading.Tasks;
+using Services.Assets;
 using UIs;
 using Zenject;
 
@@ -7,14 +8,19 @@ namespace Services.Factories
     public class LoseScreenFactory : IUIFactory<LoseUI>
     {
         private readonly DiContainer _container;
-        private readonly ConfigProvider _configProvider;
+        private readonly LoseScreenAssetProvider _loseScreenAssetProvider;
 
-        private LoseScreenFactory(DiContainer container, ConfigProvider configProvider)
+        private LoseScreenFactory(DiContainer container, LoseScreenAssetProvider loseScreenAssetProvider)
         {
             _container = container;
-            _configProvider = configProvider;
+            _loseScreenAssetProvider = loseScreenAssetProvider;
         }
 
-        public LoseUI Create() => _container.InstantiatePrefabForComponent<LoseUI>(_configProvider.UIConfig.Lose);
+        public async Task<LoseUI> Create()
+        {
+            Task<LoseUI> loseUIAsset = _loseScreenAssetProvider.LoadWinUIAsset();
+            await loseUIAsset;
+            return _container.InstantiatePrefabForComponent<LoseUI>(loseUIAsset.Result);
+        }
     }
 }

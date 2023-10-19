@@ -1,4 +1,5 @@
-﻿using Services.Data;
+﻿using System.Threading.Tasks;
+using Services.Assets;
 using Zenject;
 
 namespace Services.Factories
@@ -6,14 +7,19 @@ namespace Services.Factories
     public class LoadingScreenFactory : IUIFactory<LoadingScreen>
     {
         private readonly DiContainer _container;
-        private readonly ConfigProvider _configProvider;
+        private readonly LoadingScreenAssetProvider _loadingScreenAssetProvider;
 
-        private LoadingScreenFactory(DiContainer container, ConfigProvider configProvider)
+        private LoadingScreenFactory(DiContainer container, LoadingScreenAssetProvider loadingScreenAssetProvider)
         {
             _container = container;
-            _configProvider = configProvider;
+            _loadingScreenAssetProvider = loadingScreenAssetProvider;
         }
         
-        public LoadingScreen Create() => _container.InstantiatePrefabForComponent<LoadingScreen>(_configProvider.UIConfig.LoadingScreen);
+        public async Task<LoadingScreen> Create()
+        {
+            Task<LoadingScreen> screen = _loadingScreenAssetProvider.LoadLoadingScreenAsset();
+            await screen;
+            return _container.InstantiatePrefabForComponent<LoadingScreen>(screen.Result);
+        }
     }
 }

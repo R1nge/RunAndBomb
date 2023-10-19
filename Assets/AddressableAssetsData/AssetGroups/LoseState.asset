@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: LoseState
+  m_EditorClassIdentifier: 
+  m_GroupName: LoseState
+  m_Data:
+    m_SerializedData: []
+  m_GUID: aa571bae5943f014e8e5f74871fb4b47
+  m_SerializeEntries:
+  - m_GUID: f4a66ebe10f67e5408dd9a72ecbbe644
+    m_Address: Assets/Prefabs/UI/LoseGameUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3052a5b142301d843b61f5391397255a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0ba9a29f269cefc46a19e003aba314bc, type: 2}
+    - {fileID: 11400000, guid: 2abd9cbf03f618045b2d6dbd6417a8ae, type: 2}

@@ -15,10 +15,10 @@ namespace Services.States
             _uiService = uiService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
             //TODO: create player controls
-            _playerFactory.Create();
+            await _playerFactory.Create();
             _uiService.ShowGameScreen();
             _enemyFactory.Create();
         }

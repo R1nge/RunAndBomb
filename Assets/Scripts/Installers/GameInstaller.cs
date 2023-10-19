@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.Assets;
 using Services.Data;
 using Services.Factories;
 using Services.States;
@@ -17,13 +18,20 @@ namespace Installers
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
 
+            Container.Bind<LoadingScreenAssetProvider>().AsSingle();
+            Container.Bind<StartScreenAssetProvider>().AsSingle();
+            Container.Bind<InGameUIAssetProvider>().AsSingle();
+            Container.Bind<WinUIAssetProvider>().AsSingle();
+            Container.Bind<LoseScreenAssetProvider>().AsSingle();
+            
             Container.Bind<LoadingScreenFactory>().AsSingle();
             Container.Bind<StartScreenFactory>().AsSingle();
             Container.Bind<GamePlayScreenFactory>().AsSingle();
             Container.Bind<WinScreenFactory>().AsSingle();
             Container.Bind<LoseScreenFactory>().AsSingle();
             Container.Bind<UIService>().AsSingle();
-            
+
+            Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
 
             Container.Bind<BombFactory>().AsSingle();

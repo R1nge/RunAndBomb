@@ -22,7 +22,7 @@ namespace Services.States
 
         public async void Enter()
         {
-            _loadingScreen = _uiService.ShowLoadingScreen();
+            _loadingScreen = await _uiService.ShowLoadingScreen();
 
             //Placeholder code for the demonstration purposes.
             var asyncLoadings = new List<IAsyncLoadingOperation>

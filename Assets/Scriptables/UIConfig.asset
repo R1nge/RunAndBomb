@@ -12,8 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de57f6b760394acba3b1f69e03100260, type: 3}
   m_Name: UIConfig
   m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 6358214913123259201, guid: e820745a816f70543add94f63ec9cfcb, type: 3}
-  startScreen: {fileID: 4634488057581359143, guid: a09f566c8a52bb24ab7d3cf707ba8d7b, type: 3}
-  gamePlayScreen: {fileID: 1385722223825770846, guid: 142edf50aebb99b4383a0aadd1461d3b, type: 3}
-  win: {fileID: 9030254264123082883, guid: 1a35546c6731f20479ca0fb51483dd02, type: 3}
-  lose: {fileID: 9085062016789927975, guid: f4a66ebe10f67e5408dd9a72ecbbe644, type: 3}
+  loadingScreen:
+    m_AssetGUID: e820745a816f70543add94f63ec9cfcb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  startScreen:
+    m_AssetGUID: a09f566c8a52bb24ab7d3cf707ba8d7b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  gamePlayScreen:
+    m_AssetGUID: 142edf50aebb99b4383a0aadd1461d3b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  win:
+    m_AssetGUID: 1a35546c6731f20479ca0fb51483dd02
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  lose:
+    m_AssetGUID: f4a66ebe10f67e5408dd9a72ecbbe644
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

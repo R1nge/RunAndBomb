@@ -1,7 +1,9 @@
-﻿namespace Services.Factories
+﻿using System.Threading.Tasks;
+
+namespace Services.Factories
 {
     public interface IUIFactory<T>
     {
-        T Create();
+        Task<T> Create();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Services.Data;
+﻿using System.Threading.Tasks;
+using Services.Assets;
 using UIs;
 using Zenject;
 
@@ -7,14 +8,19 @@ namespace Services.Factories
     public class WinScreenFactory : IUIFactory<WinUI>
     {
         private readonly DiContainer _container;
-        private readonly ConfigProvider _configProvider;
+        private readonly WinUIAssetProvider _winUIAssetProvider;
 
-        private WinScreenFactory(DiContainer container, ConfigProvider configProvider)
+        private WinScreenFactory(DiContainer container, WinUIAssetProvider winUIAssetProvider)
         {
             _container = container;
-            _configProvider = configProvider;
+            _winUIAssetProvider = winUIAssetProvider;
         }
 
-        public WinUI Create() => _container.InstantiatePrefabForComponent<WinUI>(_configProvider.UIConfig.Win);
+        public async Task<WinUI> Create()
+        {
+            Task<WinUI> winUIAsset = _winUIAssetProvider.LoadWinUIAsset();
+            await winUIAsset;
+            return _container.InstantiatePrefabForComponent<WinUI>(winUIAsset.Result);
+        }
     }
 }

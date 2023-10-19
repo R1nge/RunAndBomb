@@ -1,21 +1,21 @@
-﻿using UIs;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Data
 {
     [CreateAssetMenu(fileName = "UIConfig", menuName = "UI Config")]
     public class UIConfig : ScriptableObject
     {
-        [SerializeField] private LoadingScreen loadingScreen;
-        [SerializeField] private StartUI startScreen;
-        [SerializeField] private InGameUI gamePlayScreen;
-        [SerializeField] private WinUI win;
-        [SerializeField] private LoseUI lose;
+        [SerializeField] private AssetReferenceGameObject loadingScreen;
+        [SerializeField] private AssetReferenceGameObject startScreen;
+        [SerializeField] private AssetReferenceGameObject gamePlayScreen;
+        [SerializeField] private AssetReferenceGameObject win;
+        [SerializeField] private AssetReferenceGameObject lose;
 
-        public LoadingScreen LoadingScreen => loadingScreen;
-        public StartUI StartScreen => startScreen;
-        public InGameUI GamePlayScreen => gamePlayScreen;
-        public WinUI Win => win;
-        public LoseUI Lose => lose;
+        public AssetReferenceGameObject LoadingScreen => loadingScreen;
+        public AssetReferenceGameObject StartScreen => startScreen;
+        public AssetReferenceGameObject GamePlayScreen => gamePlayScreen;
+        public AssetReferenceGameObject Win => win;
+        public AssetReferenceGameObject Lose => lose;
     }
 }

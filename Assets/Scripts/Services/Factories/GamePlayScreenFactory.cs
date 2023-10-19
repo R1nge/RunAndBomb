@@ -1,4 +1,5 @@
-﻿using Services.Data;
+﻿using System.Threading.Tasks;
+using Services.Assets;
 using UIs;
 using Zenject;
 
@@ -7,14 +8,19 @@ namespace Services.Factories
     public class GamePlayScreenFactory : IUIFactory<InGameUI>
     {
         private readonly DiContainer _container;
-        private readonly ConfigProvider _configProvider;
+        private readonly InGameUIAssetProvider _inGameUIAssetProvider;
 
-        private GamePlayScreenFactory(DiContainer container, ConfigProvider configProvider)
+        private GamePlayScreenFactory(DiContainer container, InGameUIAssetProvider inGameUIAssetProvider)
         {
             _container = container;
-            _configProvider = configProvider;
+            _inGameUIAssetProvider = inGameUIAssetProvider;
         }
 
-        public InGameUI Create() => _container.InstantiatePrefabForComponent<InGameUI>(_configProvider.UIConfig.GamePlayScreen);
+        public async Task<InGameUI> Create()
+        {
+            Task<InGameUI> inGameUIAsset = _inGameUIAssetProvider.LoadInGameUIAsset();
+            await inGameUIAsset;
+            return _container.InstantiatePrefabForComponent<InGameUI>(inGameUIAsset.Result);
+        }
     }
 }

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0033fd0aade40f9843e88a591976a1a, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: -4720092114169730536, guid: d79a53eddeaef9845870fd12d6b84bad, type: 3}
-  spawnPosition: {x: 3.95, y: 1.55, z: 0}
+  playerPrefab:
+    m_AssetGUID: d79a53eddeaef9845870fd12d6b84bad
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
   speed: 5
   gravity: 2

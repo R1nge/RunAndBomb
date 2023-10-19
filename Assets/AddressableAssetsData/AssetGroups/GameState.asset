@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GameState
+  m_EditorClassIdentifier: 
+  m_GroupName: GameState
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f668141ff5796874e999a9ff2418c7a1
+  m_SerializeEntries:
+  - m_GUID: 142edf50aebb99b4383a0aadd1461d3b
+    m_Address: Assets/Prefabs/UI/InGameUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d79a53eddeaef9845870fd12d6b84bad
+    m_Address: Assets/Prefabs/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 798b4c29093e0b34fb9dd0c1bacfa0fb
+    m_Address: Assets/Prefabs/Enemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 406c550722373f0458f52803e6503020
+    m_Address: Assets/Prefabs/Bomb.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f4d4c923485d624b8b14782ae311a6a
+    m_Address: Assets/Prefabs/Platform.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3052a5b142301d843b61f5391397255a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 19225039aba2cb34daab27ad4c53c770, type: 2}
+    - {fileID: 11400000, guid: 6a44f6812053d7f40910ac3198301196, type: 2}

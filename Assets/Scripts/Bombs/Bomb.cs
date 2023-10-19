@@ -12,9 +12,9 @@ namespace Bombs
 
         public void SetOwner(GameObject owner) => _owner = owner;
 
-        public void Throw(Vector3 direction, float force)
+        public void Throw(Vector3 force)
         {
-            _rigidbody.AddForce(direction * force);
+            _rigidbody.AddForce(force);
         }
 
         private void OnTriggerEnter(Collider other)
