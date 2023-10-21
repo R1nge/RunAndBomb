@@ -2,6 +2,8 @@
 using Services.Data;
 using UIs;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Services.Assets
 {
@@ -18,9 +20,10 @@ namespace Services.Assets
             {
                 return _cached;
             }
-
-            GameObject startUI = await LoadAsset(_configProvider.UIConfig.StartScreen);
-            _cached = startUI.GetComponent<StartUI>();
+            
+            AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(_configProvider.UIConfig.StartScreen);
+            await handle.Task;
+            _cached = handle.Result.GetComponent<StartUI>();
             return _cached;
         }
 

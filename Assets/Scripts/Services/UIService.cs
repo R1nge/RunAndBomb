@@ -2,6 +2,7 @@
 using Services.Factories;
 using UIs;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Services
 {
@@ -35,9 +36,10 @@ namespace Services
 
         public async Task<StartUI> ShowStartScreen()
         {
-            Object.Destroy(_previousScreen);
-
+            _loadingScreenFactory.Release();
+            
             StartUI screen = await _startScreenFactory.Create();
+            screen.Init();
             _previousScreen = screen.gameObject;
 
             return screen;
@@ -46,7 +48,7 @@ namespace Services
         public async Task<InGameUI> ShowGameScreen()
         {
             Object.Destroy(_previousScreen);
-
+            
             InGameUI screen = await _gamePlayScreenFactory.Create();
             _previousScreen = screen.gameObject;
 

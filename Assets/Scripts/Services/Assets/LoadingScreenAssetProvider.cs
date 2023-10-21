@@ -1,32 +1,28 @@
 ﻿using System.Threading.Tasks;
 using Services.Data;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Services.Assets
 {
     public class LoadingScreenAssetProvider : LocalAssetProvider
     {
         private readonly ConfigProvider _configProvider;
-        private LoadingScreen _cached;
+        private AsyncOperationHandle<GameObject> _cached;
 
         private LoadingScreenAssetProvider(ConfigProvider configProvider) => _configProvider = configProvider;
 
         public async Task<LoadingScreen> LoadLoadingScreenAsset()
         {
-            if (_cached != null)
-            {
-                return _cached;
-            }
-
-            GameObject loadingScreen = await LoadAsset(_configProvider.UIConfig.LoadingScreen);
-            _cached = loadingScreen.GetComponent<LoadingScreen>();
-            return _cached;
+            _cached = Addressables.InstantiateAsync(_configProvider.UIConfig.LoadingScreen);
+            await _cached.Task;
+            return _cached.Result.GetComponent<LoadingScreen>();;
         }
 
         public void Unload()
         {
-            Unload(_cached.gameObject);
-            _cached = null;
+            Unload(_cached);
         }
     }
 }

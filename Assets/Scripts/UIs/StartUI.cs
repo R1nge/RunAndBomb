@@ -19,9 +19,10 @@ namespace UIs
         {
             _stateMachine = stateMachine;
             _playerDataHolder = playerDataHolder;
+            print("INJECTED");
         }
 
-        private void Start()
+        public void Init()
         {
             SetLoadedNickname();
             nameInputField.onEndEdit.AddListener(SaveNickname);

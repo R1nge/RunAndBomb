@@ -16,12 +16,12 @@ namespace Services.Factories
             _startScreenAssetProvider = startScreenAssetProvider;
         }
 
-        //For some reason VContainer put it in a DDOL
         public async Task<StartUI> Create()
         {
-            Task<StartUI> startUIAsset = _startScreenAssetProvider.LoadStartUIAsset();
-            await startUIAsset;
-            return _container.InstantiatePrefabForComponent<StartUI>(startUIAsset.Result);
+            Task<StartUI> screen = _startScreenAssetProvider.LoadStartUIAsset();
+            await screen;
+            _container.Inject(screen.Result);
+            return screen.Result;
         }
     }
 }

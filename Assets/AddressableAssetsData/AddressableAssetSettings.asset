@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 58eee6b56742ff24f9425efae541f555
+  m_DefaultGroup: 80809228c1388fa4b90c29c9ee1d20d9
   m_currentHash:
     serializedVersion: 2
-    Hash: 93dd2eb8ee59abb2e70357860fb4b0ce
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
-  m_BundleLocalCatalog: 0
+  m_BundleLocalCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_IgnoreUnsupportedFilesInBuild: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_CCDEnabled: 0
   m_maxConcurrentWebRequests: 3
   m_ContiguousBundles: 1
-  m_StripUnityVersionFromBundleBuild: 0
+  m_StripUnityVersionFromBundleBuild: 1
   m_DisableVisibleSubAssetRepresentations: 0
   m_ShaderBundleNaming: 0
   m_ShaderBundleCustomNaming: 
@@ -46,11 +46,8 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: b9d845a7c1bffd443ae09faa54387af9, type: 2}
   - {fileID: 11400000, guid: 19c40c7378871fd47998a2f8de5d5663, type: 2}
-  - {fileID: 11400000, guid: d06848530fd736c44a5148ca9cb7d87e, type: 2}
-  - {fileID: 11400000, guid: a9bf8848d3a47914080c8da67867200f, type: 2}
   - {fileID: 11400000, guid: 657a52691570e214f9047919ed55362a, type: 2}
-  - {fileID: 11400000, guid: 86d29748fc83faa4097c696d39f07944, type: 2}
-  - {fileID: 11400000, guid: a47f55931bcb3ff438cf7cc09580f525, type: 2}
+  - {fileID: 11400000, guid: b41d023d4e6e3db409cd5dfe1468ae0e, type: 2}
   - {fileID: 11400000, guid: c865946fe35fd464ba93b55a0af9f970, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0

@@ -13,9 +13,10 @@ namespace Services.States
             _playerDataService = playerDataService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _uiService.ShowStartScreen();
+            //Unload loading screen
+            await _uiService.ShowStartScreen();
         }
 
         public void Exit() => _playerDataService.Save();

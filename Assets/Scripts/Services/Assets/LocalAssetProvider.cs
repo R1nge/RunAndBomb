@@ -22,9 +22,15 @@ namespace Services.Assets
             return handle.Result;
         }
 
+        protected void Unload(AsyncOperationHandle<GameObject> operationHandle)
+        {
+            Debug.LogError("UNLOAD");
+            Addressables.Release(operationHandle);
+        }
+
         protected void Unload(GameObject gameObject)
         {
-            Addressables.ReleaseInstance(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

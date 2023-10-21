@@ -1,5 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Services.Assets;
+using UIs;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
 
 namespace Services.Factories
@@ -19,7 +23,13 @@ namespace Services.Factories
         {
             Task<LoadingScreen> screen = _loadingScreenAssetProvider.LoadLoadingScreenAsset();
             await screen;
-            return _container.InstantiatePrefabForComponent<LoadingScreen>(screen.Result);
+            _container.Inject(screen.Result.gameObject);
+            return screen.Result;
+        }
+
+        public void Release()
+        {
+            _loadingScreenAssetProvider.Unload();
         }
     }
 }
