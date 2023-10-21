@@ -23,7 +23,6 @@ namespace Services.Factories
         {
             Task<LoadingScreen> screen = _loadingScreenAssetProvider.LoadLoadingScreenAsset();
             await screen;
-            _container.Inject(screen.Result.gameObject);
             return screen.Result;
         }
 

@@ -17,12 +17,15 @@ namespace Services.Assets
         {
             _cached = Addressables.InstantiateAsync(_configProvider.UIConfig.LoadingScreen);
             await _cached.Task;
-            return _cached.Result.GetComponent<LoadingScreen>();;
+            return _cached.Result.GetComponent<LoadingScreen>();
         }
 
         public void Unload()
         {
-            Unload(_cached);
+            if (_cached.IsValid())
+            {
+                Unload(_cached);
+            }
         }
     }
 }

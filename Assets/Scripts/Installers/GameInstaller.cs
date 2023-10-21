@@ -2,6 +2,7 @@
 using Services.Assets;
 using Services.Data;
 using Services.Factories;
+using Services.Maps;
 using Services.States;
 using UnityEngine;
 using Zenject;
@@ -17,6 +18,9 @@ namespace Installers
         {
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
+
+            Container.Bind<PlatformFactory>().AsSingle();
+            Container.Bind<MapGenerator>().AsSingle();
 
             Container.Bind<LoadingScreenAssetProvider>().AsSingle();
             Container.Bind<StartScreenAssetProvider>().AsSingle();

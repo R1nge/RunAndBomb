@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Services.Data;
 using Services.Factories;
+using Services.Maps;
 
 namespace Services.States
 {
@@ -9,14 +10,14 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
-                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService) },
+                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };
