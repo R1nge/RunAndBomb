@@ -20,8 +20,7 @@ namespace Services.Factories
         {
             Task<StartUI> screen = _startScreenAssetProvider.LoadStartUIAsset();
             await screen;
-            _container.Inject(screen.Result);
-            return screen.Result;
+            return _container.InstantiatePrefabForComponent<StartUI>(screen.Result);
         }
     }
 }

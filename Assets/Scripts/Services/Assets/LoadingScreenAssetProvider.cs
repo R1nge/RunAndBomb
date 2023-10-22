@@ -15,7 +15,12 @@ namespace Services.Assets
 
         public async Task<LoadingScreen> LoadLoadingScreenAsset()
         {
-            _cached = Addressables.InstantiateAsync(_configProvider.UIConfig.LoadingScreen);
+            if (_cached.IsValid())
+            {
+                return _cached.Result.GetComponent<LoadingScreen>();
+            }
+            
+            _cached = Addressables.LoadAssetAsync<GameObject>(_configProvider.UIConfig.LoadingScreen);
             await _cached.Task;
             return _cached.Result.GetComponent<LoadingScreen>();
         }

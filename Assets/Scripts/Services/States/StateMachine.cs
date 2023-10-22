@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Services.Assets;
 using Services.Data;
 using Services.Factories;
 using Services.Maps;
@@ -10,10 +11,11 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
+                { GameStateType.PreWarm, new PreWarmState(this, loadingScreenAssetProvider, startScreenAssetProvider) },
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },

@@ -35,7 +35,6 @@ namespace Services.States
                 new DataLoadingOperation(_playerDataService),
             };
 
-
             int total = loadings.Count + asyncLoadings.Count;
 
             _loadingScreen.UpdatePercent(0, total);
@@ -56,7 +55,7 @@ namespace Services.States
                 _loadingScreen.UpdatePercent(current + 1, loadings.Count);
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
             _stateMachine.ChangeState(GameStateType.Reset);
         }

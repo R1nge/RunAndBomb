@@ -1,5 +1,4 @@
 ﻿using Services;
-using Services.Assets;
 using Services.Data;
 using UnityEngine;
 using Zenject;
@@ -19,8 +18,6 @@ namespace Installers
             Container.Bind<PlayerDataHolder>().AsSingle();
             Container.BindInterfacesTo<PlayerPrefsPlayerDataProvider>().AsSingle();
             Container.BindInterfacesTo<PlayerDataService>().AsSingle();
-
-            Container.Bind<LocalAssetProvider>().AsSingle();
         }
     }
 }

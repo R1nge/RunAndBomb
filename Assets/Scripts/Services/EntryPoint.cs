@@ -16,7 +16,7 @@ namespace Services
             Application.targetFrameRate = 999999;
             QualitySettings.vSyncCount = 0;
             
-            _stateMachine.ChangeState(GameStateType.LoadData);
+            _stateMachine.ChangeState(GameStateType.PreWarm);
         }
     }
 }

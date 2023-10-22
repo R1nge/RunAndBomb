@@ -2,11 +2,12 @@
 {
     public enum GameStateType
     {
-        LoadData = 0,
-        Reset = 1,
-        Init = 2,
-        Game = 3,
-        Lose = 4,
-        Win = 5
+        PreWarm = 0,
+        LoadData = 1,
+        Reset = 2,
+        Init = 3,
+        Game = 4,
+        Lose = 5,
+        Win = 6
     }
 }

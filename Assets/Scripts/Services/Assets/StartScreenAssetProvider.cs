@@ -10,27 +10,25 @@ namespace Services.Assets
     public class StartScreenAssetProvider : LocalAssetProvider
     {
         private readonly ConfigProvider _configProvider;
-        private StartUI _cached;
+        private AsyncOperationHandle<GameObject> _cached;
 
         private StartScreenAssetProvider(ConfigProvider configProvider) => _configProvider = configProvider;
 
         public async Task<StartUI> LoadStartUIAsset()
         {
-            if (_cached != null)
+            if (_cached.IsValid())
             {
-                return _cached;
+                return _cached.Result.GetComponent<StartUI>();
             }
             
-            AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(_configProvider.UIConfig.StartScreen);
-            await handle.Task;
-            _cached = handle.Result.GetComponent<StartUI>();
-            return _cached;
+            _cached = Addressables.LoadAssetAsync<GameObject>(_configProvider.UIConfig.StartScreen);
+            await _cached.Task;
+            return _cached.Result.GetComponent<StartUI>();
         }
 
         public void Unload()
         {
-            Unload(_cached.gameObject);
-            _cached = null;
+            Unload(_cached);
         }
     }
 }
