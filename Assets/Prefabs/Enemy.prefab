@@ -265,18 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8869538822448266037}
-  rigidbodies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  rigidbodies: []
 --- !u!114 &7100470752367414429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,18 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509217b70f6f42a79ee7b9ff7daaff4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollColliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ragdollColliders: []
   characterColliders:
   - {fileID: 5058070068849434298}
   - {fileID: 2999321931404853141}

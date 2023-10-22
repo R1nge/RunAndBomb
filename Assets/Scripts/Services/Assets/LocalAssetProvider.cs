@@ -24,7 +24,6 @@ namespace Services.Assets
 
         protected void Unload(AsyncOperationHandle<GameObject> operationHandle)
         {
-            Debug.LogError("UNLOAD");
             Addressables.Release(operationHandle);
         }
 

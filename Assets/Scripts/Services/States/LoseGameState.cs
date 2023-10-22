@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Services.States
+﻿namespace Services.States
 {
     public class LoseGameState : IGameState
     {
@@ -12,7 +10,6 @@ namespace Services.States
         {
             //TODO: Delete player controls
             _uiService.ShowLoseScreen();
-            Debug.Log("Player has lost");
         }
 
         public void Exit() { }

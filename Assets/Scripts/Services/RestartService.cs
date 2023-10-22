@@ -14,6 +14,9 @@ namespace Services
         private readonly List<Bomb> _bombs = new();
         private Player _player;
         //TODO: camera service
+        private readonly EnemyCounter _enemyCounter;
+
+        private RestartService(EnemyCounter enemyCounter) => _enemyCounter = enemyCounter;
 
         public void Restart()
         {
@@ -29,7 +32,7 @@ namespace Services
         public void AddEnemy(Enemy enemy) => _enemies.Add(enemy);
 
         public void AddBomb(Bomb bomb) => _bombs.Add(bomb);
-        
+
         public void SetPlayer(Player player) => _player = player;
 
         private void DestroyMap()
@@ -38,7 +41,7 @@ namespace Services
             {
                 Object.Destroy(_platforms[i].gameObject);
             }
-            
+
             _platforms.Clear();
         }
 
@@ -48,7 +51,8 @@ namespace Services
             {
                 Object.Destroy(_enemies[i].gameObject);
             }
-            
+
+            _enemyCounter.Reset();
             _enemies.Clear();
         }
 
@@ -58,7 +62,7 @@ namespace Services
             {
                 Object.Destroy(_bombs[i].gameObject);
             }
-            
+
             _bombs.Clear();
         }
 

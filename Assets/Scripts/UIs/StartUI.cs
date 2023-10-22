@@ -19,7 +19,6 @@ namespace UIs
         {
             _stateMachine = stateMachine;
             _playerDataHolder = playerDataHolder;
-            print("INJECTED");
         }
 
         public void Init()

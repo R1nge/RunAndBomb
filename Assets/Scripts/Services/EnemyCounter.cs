@@ -20,5 +20,7 @@ namespace Services
             _enemyCount--;
             OnEnemyCountChanged?.Invoke(_enemyCount);
         }
+
+        public void Reset() => _enemyCount = 0;
     }
 }
