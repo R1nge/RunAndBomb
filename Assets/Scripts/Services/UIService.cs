@@ -38,6 +38,8 @@ namespace Services
         {
             _loadingScreenFactory.Release();
             
+            Object.Destroy(_previousScreen);
+            
             StartUI screen = await _startScreenFactory.Create();
             screen.Init();
             _previousScreen = screen.gameObject;

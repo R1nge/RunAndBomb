@@ -19,6 +19,8 @@ namespace Installers
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
 
+            Container.Bind<RestartService>().AsSingle();
+
             Container.Bind<PlatformFactory>().AsSingle();
             Container.Bind<MapGenerator>().AsSingle();
 

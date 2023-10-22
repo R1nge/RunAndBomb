@@ -10,12 +10,12 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
-                { GameStateType.Reset, new ResetState(this, coroutineRunner) },
+                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
                 { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService) },
