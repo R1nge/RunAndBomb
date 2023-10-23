@@ -26,8 +26,6 @@ namespace Players
             _bombController = GetComponent<BombController>();
         }
 
-        //TODO: create a state machine???
-        
         private void Update()
         {
             if (_isDead)

@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Players;
+using Services;
 using Services.Assets;
 using Services.Data;
 using Services.Factories;
@@ -18,6 +19,8 @@ namespace Installers
         {
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
+
+            Container.Bind<InputService>().AsSingle();
 
             Container.Bind<PlatformDataHolder>().AsSingle();
             Container.Bind<PlatformFactory>().AsSingle();

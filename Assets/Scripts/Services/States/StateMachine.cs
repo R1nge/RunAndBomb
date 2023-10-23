@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Players;
 using Services.Assets;
 using Services.Data;
 using Services.Factories;
@@ -11,7 +12,7 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, MapDestructor mapDestructor)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, MapDestructor mapDestructor, InputService inputService)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
@@ -19,7 +20,7 @@ namespace Services.States
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
-                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator, mapDestructor,  coroutineRunner) },
+                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator, mapDestructor,  coroutineRunner, inputService) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };

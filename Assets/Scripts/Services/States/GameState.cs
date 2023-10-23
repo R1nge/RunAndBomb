@@ -1,4 +1,5 @@
-﻿using Services.Factories;
+﻿using Players;
+using Services.Factories;
 using Services.Maps;
 
 namespace Services.States
@@ -11,8 +12,9 @@ namespace Services.States
         private readonly MapGenerator _mapGenerator;
         private readonly MapDestructor _mapDestructor;
         private readonly CoroutineRunner _coroutineRunner;
+        private readonly InputService _inputService;
 
-        public GameState(PlayerFactory playerFactory, EnemyFactory enemyFactory, UIService uiService, MapGenerator mapGenerator, MapDestructor mapDestructor, CoroutineRunner coroutineRunner)
+        public GameState(PlayerFactory playerFactory, EnemyFactory enemyFactory, UIService uiService, MapGenerator mapGenerator, MapDestructor mapDestructor, CoroutineRunner coroutineRunner, InputService inputService)
         {
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
@@ -20,6 +22,7 @@ namespace Services.States
             _mapGenerator = mapGenerator;
             _mapDestructor = mapDestructor;
             _coroutineRunner = coroutineRunner;
+            _inputService = inputService;
         }
 
         public async void Enter()
@@ -28,12 +31,15 @@ namespace Services.States
             _mapGenerator.Generate();
             await _playerFactory.Create();
             await _uiService.ShowGameScreen();
-            
+            _inputService.Enable();
             _enemyFactory.Create();
 
             _coroutineRunner.StartCoroutine(_mapDestructor.Destroy());
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+            _inputService.Disable();
+        }
     }
 }
