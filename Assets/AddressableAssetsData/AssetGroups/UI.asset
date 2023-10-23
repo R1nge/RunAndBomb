@@ -18,27 +18,32 @@ MonoBehaviour:
   m_GUID: 5bd027aec6d004141ae10d6b3631e703
   m_SerializeEntries:
   - m_GUID: f4a66ebe10f67e5408dd9a72ecbbe644
-    m_Address: Assets/Prefabs/UI/LoseGameUI.prefab
+    m_Address: LoseGameUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1a35546c6731f20479ca0fb51483dd02
-    m_Address: Assets/Prefabs/UI/WinGameUI.prefab
+    m_Address: WinGameUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 142edf50aebb99b4383a0aadd1461d3b
-    m_Address: Assets/Prefabs/UI/InGameUI.prefab
+    m_Address: InGameUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a09f566c8a52bb24ab7d3cf707ba8d7b
-    m_Address: Assets/Prefabs/UI/StartGameUI.prefab
+    m_Address: StartGameUI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e820745a816f70543add94f63ec9cfcb
-    m_Address: Assets/Prefabs/UI/LoadingScreen.prefab
+    m_Address: LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b919b5edef59ce49871853bb89caa80
+    m_Address: UIClickSound
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

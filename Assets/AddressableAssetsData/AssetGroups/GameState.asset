@@ -18,22 +18,22 @@ MonoBehaviour:
   m_GUID: f668141ff5796874e999a9ff2418c7a1
   m_SerializeEntries:
   - m_GUID: d79a53eddeaef9845870fd12d6b84bad
-    m_Address: Assets/Prefabs/Player.prefab
+    m_Address: Player
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 798b4c29093e0b34fb9dd0c1bacfa0fb
-    m_Address: Assets/Prefabs/Enemy.prefab
+    m_Address: Enemy
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 406c550722373f0458f52803e6503020
-    m_Address: Assets/Prefabs/Bomb.prefab
+    m_Address: Bomb
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f4d4c923485d624b8b14782ae311a6a
-    m_Address: Assets/Prefabs/Platform.prefab
+    m_Address: Platform
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

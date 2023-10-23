@@ -27,13 +27,11 @@ namespace Services.States
 
         public async void Enter()
         {
-            //TODO: create player controls
             _mapGenerator.Generate();
             await _playerFactory.Create();
             await _uiService.ShowGameScreen();
             _inputService.Enable();
             _enemyFactory.Create();
-
             _coroutineRunner.StartCoroutine(_mapDestructor.Destroy());
         }
 
