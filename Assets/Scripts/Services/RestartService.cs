@@ -9,14 +9,19 @@ namespace Services
 {
     public class RestartService
     {
-        private readonly List<Platform> _platforms = new();
+        
         private readonly List<Enemy> _enemies = new();
         private readonly List<Bomb> _bombs = new();
         private Player _player;
         //TODO: camera service
         private readonly EnemyCounter _enemyCounter;
+        private readonly PlatformDataHolder _platformDataHolder;
 
-        private RestartService(EnemyCounter enemyCounter) => _enemyCounter = enemyCounter;
+        private RestartService(EnemyCounter enemyCounter, PlatformDataHolder platformDataHolder)
+        {
+            _enemyCounter = enemyCounter;
+            _platformDataHolder = platformDataHolder;
+        }
 
         public void Restart()
         {
@@ -27,8 +32,6 @@ namespace Services
             ResetCamera();
         }
 
-        public void AddPlatform(Platform platform) => _platforms.Add(platform);
-
         public void AddEnemy(Enemy enemy) => _enemies.Add(enemy);
 
         public void AddBomb(Bomb bomb) => _bombs.Add(bomb);
@@ -37,12 +40,11 @@ namespace Services
 
         private void DestroyMap()
         {
-            for (int i = _platforms.Count - 1; i >= 0; i--)
+            for (int i = _platformDataHolder.Platforms.Count - 1; i >= 0; i--)
             {
-                Object.Destroy(_platforms[i].gameObject);
+                Object.Destroy(_platformDataHolder.Platforms[i].gameObject);
+                _platformDataHolder.Remove(_platformDataHolder.Platforms[i]);
             }
-
-            _platforms.Clear();
         }
 
         private void DestroyEnemies()

@@ -10,11 +10,13 @@ namespace Services.Maps
     {
         private readonly ConfigProvider _configProvider;
         private readonly PlatformFactory _factory;
+        private readonly PlatformDataHolder _platformDataHolder;
 
-        private MapGenerator(ConfigProvider configProvider, PlatformFactory platformFactory)
+        private MapGenerator(ConfigProvider configProvider, PlatformFactory platformFactory, PlatformDataHolder platformDataHolder)
         {
             _configProvider = configProvider;
             _factory = platformFactory;
+            _platformDataHolder = platformDataHolder;
         }
 
         public void Generate()
@@ -22,6 +24,7 @@ namespace Services.Maps
             MapConfig config = _configProvider.MapConfig;
 
             Platform basePlatform = _factory.CreateBase();
+            _platformDataHolder.Add(basePlatform);
 
             Vector3 position = Vector3.zero;
 
@@ -36,11 +39,12 @@ namespace Services.Maps
                 for (int j = 0; j < spawnAmount; j++)
                 {
                     Platform platform = _factory.CreateCircle(i);
+                    _platformDataHolder.Add(platform);
                     platform.transform.position = offset;
                     platform.transform.RotateAround(position, Vector3.up, angleStep * j);
                 }
             }
-            
+
             basePlatform.GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
         }
     }

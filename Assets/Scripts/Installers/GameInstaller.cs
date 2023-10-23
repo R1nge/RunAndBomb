@@ -18,17 +18,18 @@ namespace Installers
         {
             Container.BindInstance(spawnPositionsProvider);
             //builder.RegisterComponent(platformService);
-            
 
+            Container.Bind<PlatformDataHolder>().AsSingle();
             Container.Bind<PlatformFactory>().AsSingle();
             Container.Bind<MapGenerator>().AsSingle();
+            Container.Bind<MapDestructor>().AsSingle();
 
             Container.Bind<LoadingScreenAssetProvider>().AsSingle();
             Container.Bind<StartScreenAssetProvider>().AsSingle();
             Container.Bind<InGameUIAssetProvider>().AsSingle();
             Container.Bind<WinUIAssetProvider>().AsSingle();
             Container.Bind<LoseScreenAssetProvider>().AsSingle();
-            
+
             Container.Bind<LoadingScreenFactory>().AsSingle();
             Container.Bind<StartScreenFactory>().AsSingle();
             Container.Bind<GamePlayScreenFactory>().AsSingle();
