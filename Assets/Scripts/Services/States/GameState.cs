@@ -40,6 +40,7 @@ namespace Services.States
         public void Exit()
         {
             _inputService.Disable();
+            _coroutineRunner.StopCoroutines();
         }
     }
 }
