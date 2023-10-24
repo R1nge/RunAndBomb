@@ -10,38 +10,52 @@ namespace Services
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AssetReferenceT<AudioClip> clickSound;
         [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
-        private Dictionary<SoundType, AsyncOperationHandle> _handles;
+        private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
 
         private void Awake()
         {
-            _handles = new Dictionary<SoundType, AsyncOperationHandle>
+            _handles = new Dictionary<SoundType, List<AsyncOperationHandle>>();
+            
+            var clickSounds = new List<AsyncOperationHandle>
             {
-                { SoundType.Click, clickSound.LoadAssetAsync() },
-                { SoundType.Death, deathSounds[0].LoadAssetAsync() }
+                clickSound.LoadAssetAsync()
             };
+            
+            _handles.Add(SoundType.Click, clickSounds);
+
+            var deathSoundsHandles = new List<AsyncOperationHandle>();
+            
+            for (int i = 0; i < deathSounds.Count; i++)
+            {
+                deathSoundsHandles.Add(deathSounds[i].LoadAssetAsync());
+            }
+            
+            _handles.Add(SoundType.Death, deathSoundsHandles);
         }
 
-        public async void PlayClickSound()
+        public void PlayClickSound()
         {
-            if (_handles[SoundType.Click].IsValid() && audioSource.clip)
+            if (_handles[SoundType.Click][0].IsValid() && audioSource.clip)
             {
                 audioSource.Play();
                 return;
             }
-            
-            audioSource.clip = _handles[SoundType.Click].Result as AudioClip;
+
+            audioSource.clip = _handles[SoundType.Click][0].Result as AudioClip;
             audioSource.Play();
         }
 
-        public async void PlayDeathSound(AudioSource source)
+        public void PlayDeathSound(AudioSource source)
         {
-            if (_handles[SoundType.Death].IsValid() && source.clip)
+            int index = Random.Range(0, deathSounds.Count);
+
+            if (_handles[SoundType.Death][index].IsValid() && source.clip)
             {
                 source.Play();
                 return;
             }
-            
-            source.clip = _handles[SoundType.Death].Result as AudioClip;
+
+            source.clip = _handles[SoundType.Death][index].Result as AudioClip;
             source.Play();
         }
 
