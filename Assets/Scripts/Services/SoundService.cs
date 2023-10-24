@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -8,22 +9,46 @@ namespace Services
     {
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AssetReferenceT<AudioClip> clickSound;
+        [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
+        private Dictionary<SoundType, AsyncOperationHandle> _handles;
 
-        private AsyncOperationHandle<AudioClip> _clickSoundHandle;
+        private void Awake()
+        {
+            _handles = new Dictionary<SoundType, AsyncOperationHandle>
+            {
+                { SoundType.Click, clickSound.LoadAssetAsync() },
+                { SoundType.Death, deathSounds[0].LoadAssetAsync() }
+            };
+        }
 
         public async void PlayClickSound()
         {
-            if (_clickSoundHandle.IsValid() && audioSource.clip)
+            if (_handles[SoundType.Click].IsValid() && audioSource.clip)
             {
                 audioSource.Play();
                 return;
             }
             
-            _clickSoundHandle = clickSound.LoadAssetAsync();
-
-            await _clickSoundHandle.Task;
-            audioSource.clip = _clickSoundHandle.Result;
+            audioSource.clip = _handles[SoundType.Click].Result as AudioClip;
             audioSource.Play();
+        }
+
+        public async void PlayDeathSound(AudioSource source)
+        {
+            if (_handles[SoundType.Death].IsValid() && source.clip)
+            {
+                source.Play();
+                return;
+            }
+            
+            source.clip = _handles[SoundType.Death].Result as AudioClip;
+            source.Play();
+        }
+
+        private enum SoundType
+        {
+            Click,
+            Death
         }
     }
 }

@@ -17,8 +17,9 @@ namespace Enemies
         private readonly CoroutineRunner _coroutineRunner;
         private readonly ConfigProvider _configProvider;
         private readonly NicknameUI _nicknameUI;
+        private readonly DeathSound _deathSound;
 
-        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, ConfigProvider configProvider, NicknameUI nicknameUI)
+        public EnemyDeathController(NavMeshAgent navMeshAgent, EnemyCounter enemyCounter, RagdollController ragdollController, ColliderController colliderController, CoroutineRunner coroutineRunner, ConfigProvider configProvider, NicknameUI nicknameUI, DeathSound deathSound)
         {
             _navMeshAgent = navMeshAgent;
             _enemyCounter = enemyCounter;
@@ -27,6 +28,7 @@ namespace Enemies
             _coroutineRunner = coroutineRunner;
             _configProvider = configProvider;
             _nicknameUI = nicknameUI;
+            _deathSound = deathSound;
         }
 
         public void Die()
@@ -36,6 +38,7 @@ namespace Enemies
             _navMeshAgent.isStopped = true;
             _enemyCounter.Decrease();
             //_ragdollController.EnableRagdoll();
+            _deathSound.PlayDeathSound();
             _coroutineRunner.StartCoroutine(FallThroughFloor());
         }
         

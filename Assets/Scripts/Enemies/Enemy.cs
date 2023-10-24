@@ -25,6 +25,7 @@ namespace Enemies
         private EnemyDeathController _enemyDeathController;
         private ConfigProvider _configProvider;
         private NicknameUI _nicknameUI;
+        private DeathSound _deathSound;
 
         [Inject]
         private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
@@ -59,13 +60,14 @@ namespace Enemies
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
             _nicknameUI = GetComponent<NicknameUI>();
+            _deathSound = GetComponent<DeathSound>();
         }
 
         private void Start()
         {
             _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator);
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
-            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI);
+            _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI, _deathSound);
 
             _enemyStateMachine = new EnemyStateMachine();
 
