@@ -1,8 +1,10 @@
-﻿using Bombs;
+﻿using System;
+using Bombs;
 using Common;
 using Enemies.States;
 using Services;
 using Services.Data;
+using Services.Maps;
 using UIs;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,13 +28,15 @@ namespace Enemies
         private ConfigProvider _configProvider;
         private NicknameUI _nicknameUI;
         private DeathSound _deathSound;
+        private MapDestructor _mapDestructor;
 
         [Inject]
-        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider)
+        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider, MapDestructor mapDestructor)
         {
             _enemyCounter = enemyCounter;
             _coroutineRunner = coroutineRunner;
             _configProvider = configProvider;
+            _mapDestructor = mapDestructor;
         }
 
         //TODO: sphere cast on a character layer, at radius and frequency of configProvider.EnemyConfig
@@ -65,7 +69,9 @@ namespace Enemies
 
         private void Start()
         {
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator);
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator, _mapDestructor);
+            _enemyMovement.Init();
+            
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
             _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI, _deathSound);
 
@@ -80,5 +86,7 @@ namespace Enemies
         }
 
         private void Update() => _enemyStateMachine.Update();
+
+        private void OnDestroy() => _enemyMovement.Destroy();
     }
 }

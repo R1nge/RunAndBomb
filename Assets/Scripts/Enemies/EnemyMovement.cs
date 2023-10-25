@@ -1,5 +1,5 @@
-﻿using Services;
-using Services.Data;
+﻿using Services.Data;
+using Services.Maps;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,17 +11,22 @@ namespace Enemies
         private readonly NavMeshAgent _navMeshAgent;
         private readonly ConfigProvider _configProvider;
         private readonly EnemyAnimator _enemyAnimator;
+        private readonly MapDestructor _mapDestructor;
         private Transform _target;
         private Vector3 _destination;
         private bool _inProgress;
+        private float _currentIntervalTimeLeft;
 
-        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, ConfigProvider configProvider, EnemyAnimator enemyAnimator)
+        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, ConfigProvider configProvider, EnemyAnimator enemyAnimator, MapDestructor mapDestructor)
         {
             _transform = transform;
             _navMeshAgent = navMeshAgent;
             _configProvider = configProvider;
             _enemyAnimator = enemyAnimator;
+            _mapDestructor = mapDestructor;
         }
+
+        public void Init() => _mapDestructor.OnTileDestroyed += PickPosition;
 
         public void SetTarget(Transform target) => _target = target;
 
@@ -38,14 +43,21 @@ namespace Enemies
             }
             else
             {
-                Vector3 randomDirection = Random.insideUnitSphere * _configProvider.EnemyConfig.WalkRadius;
-                randomDirection += _transform.position;
-                NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _configProvider.EnemyConfig.WalkRadius, 1);
-                _destination = hit.position;
-                _navMeshAgent.destination = _destination;
+                PickPosition();
 
                 _inProgress = true;
             }
+        }
+
+        private void PickPosition()
+        {
+            if (!_inProgress) return;
+
+            Vector3 randomDirection = Random.insideUnitSphere * _configProvider.EnemyConfig.WalkRadius;
+            randomDirection += _transform.position;
+            NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _configProvider.EnemyConfig.WalkRadius, 1);
+            _destination = hit.position;
+            _navMeshAgent.destination = _destination;
         }
 
         public void Chase()
@@ -59,5 +71,7 @@ namespace Enemies
         {
             return Vector3.Distance(_transform.position, _target.position) <= _navMeshAgent.stoppingDistance;
         }
+
+        public void Destroy() => _mapDestructor.OnTileDestroyed -= PickPosition;
     }
 }
