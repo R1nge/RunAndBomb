@@ -7,9 +7,10 @@ namespace Services
 {
     public class SoundService : MonoBehaviour
     {
-        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioSource clickSource;
         [SerializeField] private AssetReferenceT<AudioClip> clickSound;
         [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
+        [SerializeField] private List<AssetReferenceT<AudioClip>> explosionSounds;
         private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
 
         private void Awake()
@@ -31,18 +32,27 @@ namespace Services
             }
             
             _handles.Add(SoundType.Death, deathSoundsHandles);
+
+            var explosionSoundsHandle = new List<AsyncOperationHandle>();
+
+            for (int i = 0; i < explosionSounds.Count; i++)
+            {
+                explosionSoundsHandle.Add(explosionSounds[i].LoadAssetAsync());
+            }
+
+            _handles.Add(SoundType.Explosion, explosionSoundsHandle);
         }
 
         public void PlayClickSound()
         {
-            if (_handles[SoundType.Click][0].IsValid() && audioSource.clip)
+            if (_handles[SoundType.Click][0].IsValid() && clickSource.clip)
             {
-                audioSource.Play();
+                clickSource.Play();
                 return;
             }
 
-            audioSource.clip = _handles[SoundType.Click][0].Result as AudioClip;
-            audioSource.Play();
+            clickSource.clip = _handles[SoundType.Click][0].Result as AudioClip;
+            clickSource.Play();
         }
 
         public void PlayDeathSound(AudioSource source)
@@ -59,10 +69,25 @@ namespace Services
             source.Play();
         }
 
+        public void PlayExplosionSound(AudioSource source)
+        {
+            int index = Random.Range(0, explosionSounds.Count);
+            
+            if (_handles[SoundType.Explosion][index].IsValid() && source.clip)
+            {
+                source.Play();
+                return;
+            }
+
+            source.clip = _handles[SoundType.Explosion][index].Result as AudioClip;
+            source.Play();
+        }
+
         private enum SoundType
         {
             Click,
-            Death
+            Death,
+            Explosion
         }
     }
 }
