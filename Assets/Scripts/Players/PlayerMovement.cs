@@ -11,7 +11,7 @@ namespace Players
         private CharacterController _characterController;
         private Vector3 _moveDirection;
 
-        public float CurrentSpeed => (Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.z)) *_configProvider.PlayerConfig.Speed;
+        public float CurrentSpeed => _moveDirection.magnitude * _configProvider.PlayerConfig.Speed;
 
         [Inject]
         private void Inject(ConfigProvider configProvider) => _configProvider = configProvider;
@@ -27,8 +27,8 @@ namespace Players
 
         public void SendInput(Vector2 input)
         {
-            var forward = transform.TransformDirection(Vector3.forward);
-            var right = transform.TransformDirection(Vector3.right);
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
             _moveDirection = input.x * right + input.y * forward;
         }
 
@@ -42,7 +42,7 @@ namespace Players
 
         private void Move()
         {
-            var motion = _moveDirection * (_configProvider.PlayerConfig.Speed * Time.deltaTime);
+            Vector3 motion = _moveDirection * (_configProvider.PlayerConfig.Speed * Time.deltaTime);
             _characterController.Move(motion);
         }
     }

@@ -35,13 +35,16 @@ namespace Players
 
             _playerMovement.SendInput(_playerInputs.MovementDirection);
             _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
+            _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
+            
+            print(_playerMovement.CurrentSpeed);
         }
 
-        private void JoystickReleased(Vector2 input) => ThrowBomb(input.magnitude);
+        private void JoystickReleased(Vector2 input) => ThrowBomb();
 
-        private void ThrowBomb(float multiplier)
+        private void ThrowBomb()
         {
-            if (_bombController.TryThrow(multiplier))
+            if (_bombController.TryThrow())
             {
                 _playerAnimator.PlayThrowBombAnimation();
             }

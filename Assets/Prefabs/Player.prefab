@@ -588,7 +588,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6235348082282741838}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4086467, y: -0, z: -0, w: 0.91269267}
+  m_LocalRotation: {x: 0.40864667, y: -0, z: -0, w: 0.91269267}
   m_LocalPosition: {x: 0, y: 14, z: -12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2175,7 +2175,6 @@ GameObject:
   - component: {fileID: 1814756657922317764}
   - component: {fileID: 8909818798931814078}
   - component: {fileID: 3950977061838002944}
-  - component: {fileID: 2283619307646150398}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2292,9 +2291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af21903ba67b4dbba85f611a381cd2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombSpawnPoint: {fileID: 4088614787244640658}
+  objectToThrow: {fileID: 4192862786137859501, guid: 406c550722373f0458f52803e6503020, type: 3}
   throwInterval: 5
-  model: {fileID: 7111986113395120569}
-  maxThrowForce: 420
+  force: 2
 --- !u!114 &-6604846308212314379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,21 +2466,6 @@ MonoBehaviour:
   maxPoints: 100
   increment: 0.099
   rayOverlap: 1.1
---- !u!114 &2283619307646150398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8814835284728001307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2c2607770941a29190aac3c815d7cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombSpawnPoint: {fileID: 4088614787244640658}
-  objectToThrow: {fileID: 4192862786137859501, guid: 406c550722373f0458f52803e6503020, type: 3}
-  force: 10.7
 --- !u!1001 &8499612344221856184
 PrefabInstance:
   m_ObjectHideFlags: 0

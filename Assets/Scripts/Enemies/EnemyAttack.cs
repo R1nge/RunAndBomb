@@ -15,7 +15,7 @@ namespace Enemies
 
         public void Attack()
         {
-            if (_bombController.TryThrow(1))
+            if (_bombController.TryThrow())
             {
                 _enemyAnimator.PlayThrowBombAnimation();
             }

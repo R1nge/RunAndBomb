@@ -58,7 +58,7 @@ namespace Bombs
         /// Allows us to set line count and an individual position at the same time
         /// </summary>
         /// <param name="count">Number of points in our line</param>
-        /// <param name="pointPos">The position of an induvidual point</param>
+        /// <param name="pointPos">The position of an individual point</param>
         private void UpdateLineRender(int count, (int point, Vector3 pos) pointPos)
         {
             _trajectoryLine.positionCount = count;
@@ -77,12 +77,12 @@ namespace Bombs
             hitMarker.gameObject.SetActive(true);
 
             // Offset marker from surface
-            float offset = 0.025f;
+            const float offset = 0.025f;
             hitMarker.position = hit.point + hit.normal * offset;
             hitMarker.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
         }
 
-        public void SetTrajectoryVisible(bool visible)
+        private void SetTrajectoryVisible(bool visible)
         {
             _trajectoryLine.enabled = visible;
             hitMarker.gameObject.SetActive(visible);
