@@ -21,6 +21,8 @@ namespace Bombs
         private float _multiplier;
         private bool _hasTrajectoryPredictor;
 
+        public bool CanThrow => _canThrow;
+
         [Inject]
         private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
 

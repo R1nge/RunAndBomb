@@ -12,6 +12,7 @@ namespace Players
         private PlayerMovement _playerMovement;
         private PlayerAnimator _playerAnimator;
         private BombController _bombController;
+        private TrajectoryPredictor _trajectoryPredictor;
         private bool _isDead;
 
         [Inject]
@@ -24,6 +25,7 @@ namespace Players
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAnimator = GetComponent<PlayerAnimator>();
             _bombController = GetComponent<BombController>();
+            _trajectoryPredictor = GetComponent<TrajectoryPredictor>();
         }
 
         private void Update()
@@ -37,7 +39,7 @@ namespace Players
             _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
             _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
             
-            print(_playerMovement.CurrentSpeed);
+            _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
         }
 
         private void JoystickReleased(Vector2 input) => ThrowBomb();
@@ -58,7 +60,7 @@ namespace Players
             }
 
             _isDead = true;
-
+            _trajectoryPredictor.SetTrajectoryVisible(false);
             _stateMachine.ChangeState(GameStateType.Lose);
         }
 

@@ -82,8 +82,9 @@ namespace Bombs
             hitMarker.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
         }
 
-        private void SetTrajectoryVisible(bool visible)
+        public void SetTrajectoryVisible(bool visible)
         {
+            if(_trajectoryLine.enabled == visible || hitMarker.gameObject.activeInHierarchy == visible) return;
             _trajectoryLine.enabled = visible;
             hitMarker.gameObject.SetActive(visible);
         }
