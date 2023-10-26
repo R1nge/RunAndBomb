@@ -74,7 +74,7 @@ namespace Enemies
             
             _bombController.SetMultiplier(_navMeshAgent.speed);
             
-            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
+            _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator, _navMeshAgent);
             _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI, _deathSound);
 
             _enemyStateMachine = new EnemyStateMachine();

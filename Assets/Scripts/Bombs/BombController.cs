@@ -31,7 +31,7 @@ namespace Bombs
         private void Awake()
         {
             _bombProperties = new BombProperties();
-            
+
             _currentTime = throwInterval;
 
             _hasTrajectoryPredictor = TryGetComponent(out TrajectoryPredictor trajectoryPredictor);
@@ -61,9 +61,11 @@ namespace Bombs
             }
             else
             {
+                Predict();
+                
                 if (_hasTrajectoryPredictor)
                 {
-                    Predict();
+                    Draw();
                 }
             }
         }
@@ -77,7 +79,10 @@ namespace Bombs
             _bombProperties.Direction = bombSpawnPoint.transform.forward;
             _bombProperties.InitialPosition = bombSpawnPoint.transform.position;
             _bombProperties.Gravity = Physics.gravity * _bombProperties.Mass;
-            
+        }
+
+        private void Draw()
+        {
             _trajectoryPredictor.PredictTrajectory(_bombProperties);
         }
 
