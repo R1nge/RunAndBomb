@@ -1,4 +1,6 @@
 ﻿using System;
+using Common;
+using Data;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
@@ -10,9 +12,9 @@ namespace Bombs
         public event Action OnTimerStarted, OnTimerEnded;
         public event Action<float, float> OnTimerChanged;
         [SerializeField] private Transform bombSpawnPoint;
-        [SerializeField] private Rigidbody objectToThrow;
         [SerializeField] private float throwInterval;
-        [SerializeField, Range(0.001f, 10f)] private float force;
+        [SerializeField] private float force;
+        [SerializeField] private BombConfig bombConfig;
         private TrajectoryPredictor _trajectoryPredictor;
         private BombProperties _bombProperties;
         private BombFactory _bombFactory;
@@ -28,6 +30,8 @@ namespace Bombs
 
         private void Awake()
         {
+            _bombProperties = new BombProperties();
+            
             _currentTime = throwInterval;
 
             _hasTrajectoryPredictor = TryGetComponent(out TrajectoryPredictor trajectoryPredictor);
@@ -36,14 +40,6 @@ namespace Bombs
             {
                 _trajectoryPredictor = trajectoryPredictor;
             }
-
-            var rigidbody = objectToThrow.GetComponent<Rigidbody>();
-
-            _bombProperties = new BombProperties
-            {
-                Mass = rigidbody.mass,
-                Drag = rigidbody.drag
-            };
         }
 
         private void Update()
@@ -76,8 +72,12 @@ namespace Bombs
 
         private void Predict()
         {
+            _bombProperties.Mass = bombConfig.Mass;
+            _bombProperties.Drag = bombConfig.Drag;
             _bombProperties.Direction = bombSpawnPoint.transform.forward;
             _bombProperties.InitialPosition = bombSpawnPoint.transform.position;
+            _bombProperties.Gravity = Physics.gravity * _bombProperties.Mass;
+            
             _trajectoryPredictor.PredictTrajectory(_bombProperties);
         }
 
@@ -93,8 +93,9 @@ namespace Bombs
             Bomb bomb = _bombFactory.Create(0);
             bomb.transform.position = bombSpawnPoint.position;
             bomb.SetOwner(gameObject);
+            bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
 
-            Vector3 force = bombSpawnPoint.forward * _bombProperties.InitialSpeed;
+            Vector3 force = _bombProperties.Direction * (_bombProperties.InitialSpeed / _bombProperties.Mass);
 
             bomb.Throw(force);
 

@@ -33,7 +33,7 @@ namespace Bombs
             for (int i = 1; i < maxPoints; i++)
             {
                 // Estimate velocity and update next predicted position
-                velocity = CalculateNewVelocity(velocity, projectile.Drag, increment);
+                velocity = CalculateNewVelocity(velocity, projectile.Drag, increment, projectile.Gravity);
                 Vector3 nextPosition = position + velocity * increment;
 
                 // Overlap our rays by small margin to ensure we never miss a surface
@@ -65,9 +65,9 @@ namespace Bombs
             _trajectoryLine.SetPosition(pointPos.point, pointPos.pos);
         }
 
-        private Vector3 CalculateNewVelocity(Vector3 velocity, float drag, float increment)
+        private Vector3 CalculateNewVelocity(Vector3 velocity, float drag, float increment, Vector3 gravity)
         {
-            velocity += Physics.gravity * increment;
+            velocity += gravity * increment;
             velocity *= Mathf.Clamp01(1f - drag * increment);
             return velocity;
         }

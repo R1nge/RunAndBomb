@@ -37,7 +37,7 @@ namespace Enemies
             _colliderController.DisableCharacterColliders();
             _navMeshAgent.isStopped = true;
             _enemyCounter.Decrease();
-            //_ragdollController.EnableRagdoll();
+            _ragdollController.EnableRagdoll();
             _deathSound.PlayDeathSound();
             _coroutineRunner.StartCoroutine(FallThroughFloor());
         }

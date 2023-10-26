@@ -9,5 +9,6 @@ namespace Bombs
         public float InitialSpeed;
         public float Mass;
         public float Drag;
+        public Vector3 Gravity;
     }
 }

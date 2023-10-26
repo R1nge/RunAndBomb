@@ -230,7 +230,9 @@ MonoBehaviour:
   bombSpawnPoint: {fileID: 8627021192071738832}
   objectToThrow: {fileID: 4192862786137859501, guid: 406c550722373f0458f52803e6503020, type: 3}
   throwInterval: 4
+  bombMass: 3
   force: 3
+  bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
 --- !u!114 &2405671927389759639
 MonoBehaviour:
   m_ObjectHideFlags: 0
