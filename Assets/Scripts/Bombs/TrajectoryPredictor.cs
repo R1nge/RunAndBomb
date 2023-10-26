@@ -7,6 +7,8 @@ namespace Bombs
     {
         private LineRenderer _trajectoryLine;
 
+        [SerializeField] private LayerMask ignore;
+
         [SerializeField, Tooltip("The marker will show where the projectile will hit")]
         private Transform hitMarker;
 
@@ -16,7 +18,9 @@ namespace Bombs
         [SerializeField, Range(0.01f, 0.5f), Tooltip("The time increment used to calculate the trajectory")]
         private float increment = 0.025f;
 
-        [SerializeField, Range(1.05f, 2f), Tooltip("The raycast overlap between points in the trajectory, this is a multiplier of the length between points. 2 = twice as long")]
+        [SerializeField, Range(1.05f, 2f),
+         Tooltip(
+             "The raycast overlap between points in the trajectory, this is a multiplier of the length between points. 2 = twice as long")]
         private float rayOverlap = 1.1f;
 
         private void Awake() => _trajectoryLine = GetComponent<LineRenderer>();
@@ -40,7 +44,7 @@ namespace Bombs
                 float overlap = Vector3.Distance(position, nextPosition) * rayOverlap;
 
                 //When hitting a surface show the surface marker and stop updating our line
-                if (Physics.Raycast(position, velocity.normalized, out RaycastHit hit, overlap))
+                if (Physics.Raycast(position, velocity.normalized, out RaycastHit hit, overlap, ~ignore, QueryTriggerInteraction.Ignore))
                 {
                     UpdateLineRender(i, (i - 1, hit.point));
                     MoveHitMarker(hit);
@@ -80,12 +84,11 @@ namespace Bombs
             const float offset = 0.15f;
             hitMarker.position = hit.point + hit.normal * offset;
             hitMarker.LookAt(hit.normal);
-            //hitMarker.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
         }
 
         public void SetTrajectoryVisible(bool visible)
         {
-            if(_trajectoryLine.enabled == visible || hitMarker.gameObject.activeInHierarchy == visible) return;
+            if (_trajectoryLine.enabled == visible || hitMarker.gameObject.activeInHierarchy == visible) return;
             _trajectoryLine.enabled = visible;
             hitMarker.gameObject.SetActive(visible);
         }

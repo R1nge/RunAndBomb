@@ -9,10 +9,11 @@ namespace Services
 {
     public class RestartService
     {
-        
         private readonly List<Enemy> _enemies = new();
         private readonly List<Bomb> _bombs = new();
+
         private Player _player;
+
         //TODO: camera service
         private readonly EnemyCounter _enemyCounter;
         private readonly PlatformDataHolder _platformDataHolder;
@@ -42,6 +43,7 @@ namespace Services
         {
             for (int i = _platformDataHolder.Platforms.Count - 1; i >= 0; i--)
             {
+                if (_platformDataHolder.Platforms[i].gameObject == null) continue;
                 Object.Destroy(_platformDataHolder.Platforms[i].gameObject);
                 _platformDataHolder.Remove(_platformDataHolder.Platforms[i]);
             }
