@@ -12,13 +12,14 @@ namespace Bombs
         [SerializeField] private Transform bombSpawnPoint;
         [SerializeField] private Rigidbody objectToThrow;
         [SerializeField] private float throwInterval;
-        [SerializeField, Range(0.001f, 3f)] private float force;
+        [SerializeField, Range(0.001f, 10f)] private float force;
         private TrajectoryPredictor _trajectoryPredictor;
         private BombProperties _bombProperties;
         private BombFactory _bombFactory;
         private float _currentTime;
         private bool _canThrow = true;
         private float _multiplier;
+        private bool _hasTrajectoryPredictor;
 
         [Inject]
         private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
@@ -27,7 +28,12 @@ namespace Bombs
         {
             _currentTime = throwInterval;
 
-            _trajectoryPredictor = GetComponent<TrajectoryPredictor>();
+            _hasTrajectoryPredictor = TryGetComponent(out TrajectoryPredictor trajectoryPredictor);
+
+            if (_hasTrajectoryPredictor)
+            {
+                _trajectoryPredictor = trajectoryPredictor;
+            }
 
             var rigidbody = objectToThrow.GetComponent<Rigidbody>();
 
@@ -57,7 +63,10 @@ namespace Bombs
             }
             else
             {
-                Predict();
+                if (_hasTrajectoryPredictor)
+                {
+                    Predict();
+                }
             }
         }
 

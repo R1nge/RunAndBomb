@@ -72,6 +72,8 @@ namespace Enemies
             _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator, _mapDestructor);
             _enemyMovement.Init();
             
+            _bombController.SetMultiplier(_navMeshAgent.speed);
+            
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator);
             _enemyDeathController = new EnemyDeathController(_navMeshAgent, _enemyCounter, _ragdollController, _colliderController, _coroutineRunner, _configProvider, _nicknameUI, _deathSound);
 
