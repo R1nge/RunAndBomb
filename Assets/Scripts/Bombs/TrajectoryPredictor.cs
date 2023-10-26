@@ -77,9 +77,10 @@ namespace Bombs
             hitMarker.gameObject.SetActive(true);
 
             // Offset marker from surface
-            const float offset = 0.025f;
+            const float offset = 0.15f;
             hitMarker.position = hit.point + hit.normal * offset;
-            hitMarker.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
+            hitMarker.LookAt(hit.normal);
+            //hitMarker.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
         }
 
         public void SetTrajectoryVisible(bool visible)
