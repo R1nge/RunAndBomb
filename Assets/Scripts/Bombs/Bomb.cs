@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using Services;
+using UnityEngine;
+using Zenject;
 
 namespace Bombs
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Bomb : MonoBehaviour
     {
+        [SerializeField] private AudioSource explosionSource;
+        [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private LayerMask ignore;
         [SerializeField] private float radius;
         private int _owner;
@@ -12,6 +16,11 @@ namespace Bombs
         private Collider[] _colliders;
 
         private float _startTime, _endTime;
+
+        private SoundService _soundService;
+        
+        [Inject]
+        private void Inject(SoundService soundService) => _soundService = soundService;
 
         private void Awake()
         {
@@ -50,7 +59,11 @@ namespace Bombs
                 }
             }
             
-            Destroy(gameObject);
+            _soundService.PlayExplosionSound(explosionSource);
+
+            meshRenderer.enabled = false;
+            
+            Destroy(gameObject, explosionSource.clip.length);
         }
 
         private void OnDrawGizmos()
