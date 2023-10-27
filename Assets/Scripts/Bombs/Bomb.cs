@@ -7,7 +7,7 @@ namespace Bombs
     {
         [SerializeField] private LayerMask ignore;
         [SerializeField] private float radius;
-        private GameObject _owner;
+        private int _owner;
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
 
@@ -17,13 +17,13 @@ namespace Bombs
             _colliders = new Collider[6];
         }
 
-        public void SetOwner(GameObject owner) => _owner = owner;
+        public void SetOwner(int owner) => _owner = owner;
 
         public void Throw(Vector3 force) => _rigidbody.AddForce(force, ForceMode.Impulse);
 
-        private void OnTriggerEnter(Collider other) => Explode(other.gameObject);
+        private void OnTriggerEnter(Collider other) => Explode();
 
-        private void Explode(GameObject other)
+        private void Explode()
         {
             int hits = Physics.OverlapSphereNonAlloc(transform.position, radius, _colliders, layerMask: ~ignore);
 
@@ -33,15 +33,20 @@ namespace Bombs
                 {
                     if (_colliders[i].TryGetComponent(out BombController bombController))
                     {
-                        if (_owner == other)
+                        if (_owner == _colliders[i].transform.root.gameObject.GetInstanceID())
                         {
-                            return;
+                            continue;
                         }
 
                         damageable.TakeDamage();
                     }
                 }
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(transform.position, radius);
         }
     }
 }

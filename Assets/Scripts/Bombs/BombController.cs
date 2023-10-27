@@ -97,7 +97,7 @@ namespace Bombs
 
             Bomb bomb = _bombFactory.Create(0);
             bomb.transform.position = bombSpawnPoint.position;
-            bomb.SetOwner(gameObject);
+            bomb.SetOwner(gameObject.GetInstanceID());
             bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
 
             Vector3 force = _bombProperties.Direction * (_bombProperties.InitialSpeed / _bombProperties.Mass);

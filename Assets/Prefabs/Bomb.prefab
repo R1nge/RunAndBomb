@@ -182,7 +182,7 @@ MonoBehaviour:
   ignore:
     serializedVersion: 2
     m_Bits: 375
-  radius: 5
+  radius: 1
 --- !u!114 &4494061066083935520
 MonoBehaviour:
   m_ObjectHideFlags: 0

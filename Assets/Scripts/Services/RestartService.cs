@@ -43,6 +43,8 @@ namespace Services
         {
             for (int i = _platformDataHolder.Platforms.Count - 1; i >= 0; i--)
             {
+                //TODO: fix null
+                if (_platformDataHolder.Platforms[i] == null) return;
                 if (_platformDataHolder.Platforms[i].gameObject == null) continue;
                 Object.Destroy(_platformDataHolder.Platforms[i].gameObject);
                 _platformDataHolder.Remove(_platformDataHolder.Platforms[i]);

@@ -1,5 +1,4 @@
-﻿using System;
-using Bombs;
+﻿using Bombs;
 using Common;
 using Enemies.States;
 using Services;
@@ -14,6 +13,7 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
+        [SerializeField] private LayerMask ignore;
         private EnemyStateMachine _enemyStateMachine;
         private EnemyCounter _enemyCounter;
         private EnemyMovement _enemyMovement;
@@ -29,6 +29,7 @@ namespace Enemies
         private NicknameUI _nicknameUI;
         private DeathSound _deathSound;
         private MapDestructor _mapDestructor;
+        private Collider[] _colliders;
 
         [Inject]
         private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider, MapDestructor mapDestructor)
@@ -40,20 +41,6 @@ namespace Enemies
         }
 
         //TODO: sphere cast on a character layer, at radius and frequency of configProvider.EnemyConfig
-        
-        public void OnTriggerEntered(Collider other)
-        {
-            bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
-
-            if (isChasing)
-            {
-                return;
-            }
-
-            _enemyMovement.SetTarget(other.transform);
-            _enemyStateMachine.ChangeState(EnemyStateType.Chase);
-        }
-
         public void TakeDamage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
 
         private void Awake()
@@ -65,6 +52,8 @@ namespace Enemies
             _colliderController = GetComponent<ColliderController>();
             _nicknameUI = GetComponent<NicknameUI>();
             _deathSound = GetComponent<DeathSound>();
+
+            _colliders = new Collider[6];
         }
 
         private void Start()
@@ -85,6 +74,37 @@ namespace Enemies
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_enemyDeathController));
 
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
+            
+            InvokeRepeating(nameof(CharacterDetect), _configProvider.EnemyConfig.DelayBeforeNextScan, _configProvider.EnemyConfig.DelayBeforeNextScan);
+        }
+        
+        private void CharacterDetect()
+        {
+            bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
+
+            if (isChasing)
+            {
+                return;
+            }
+            
+            int hits = Physics.OverlapSphereNonAlloc(transform.position, _configProvider.EnemyConfig.ScanRadius, _colliders, layerMask: ~ignore);
+
+            Transform target = null;
+            
+            for (int i = 0; i < hits; i++)
+            {
+                if (_colliders[i].TryGetComponent(out IDamageable damageable))
+                {
+                    if (_colliders[i].TryGetComponent(out BombController bombController))
+                    {
+                        target = bombController.transform;
+                        break;
+                    }
+                }
+            }
+
+            _enemyMovement.SetTarget(target);
+            _enemyStateMachine.ChangeState(EnemyStateType.Chase);
         }
 
         private void Update() => _enemyStateMachine.Update();
