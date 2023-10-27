@@ -18,7 +18,7 @@ namespace Services.States
             {
                 { GameStateType.PreWarm, new PreWarmState(this, loadingScreenAssetProvider, startScreenAssetProvider) },
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
-                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService) },
+                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapDestructor) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
                 { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator, mapDestructor,  coroutineRunner, inputService) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService) },

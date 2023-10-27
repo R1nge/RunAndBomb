@@ -11,5 +11,7 @@ namespace Services.Maps
         public void Add(Platform platform) => _platforms.Add(platform);
 
         public void Remove(Platform platform) => _platforms.Remove(platform);
+
+        public void Clear() => _platforms.Clear();
     }
 }

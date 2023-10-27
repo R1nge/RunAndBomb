@@ -101,6 +101,20 @@ namespace Bombs
             bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
 
             Vector3 force = _bombProperties.Direction * (_bombProperties.InitialSpeed / _bombProperties.Mass);
+            
+            //Velocity , Angle , Initial Position
+            //force, angle, InitialPosition
+            
+            //Time = 2 * force * sin(angle) / gravity
+
+            // print($"Angle {(360 - bombSpawnPoint.rotation.eulerAngles.x) % 360}");
+            //
+            // float sinus = Mathf.Sin((360 - bombSpawnPoint.rotation.eulerAngles.x) % 360);
+            // float time = force.magnitude * (2 * sinus / _bombProperties.Gravity.y);
+            //
+            // //time *= 2.57085f;
+            //
+            // print(time);
 
             bomb.Throw(force);
 

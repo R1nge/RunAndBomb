@@ -11,10 +11,13 @@ namespace Bombs
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
 
+        private float _startTime, _endTime;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _colliders = new Collider[6];
+            _startTime = Time.time;
         }
 
         public void SetOwner(int owner) => _owner = owner;
@@ -25,6 +28,10 @@ namespace Bombs
 
         private void Explode()
         {
+            _endTime = Time.time;
+            
+            //print($"Total time {_endTime - _startTime}");
+            
             int hits = Physics.OverlapSphereNonAlloc(transform.position, radius, _colliders, layerMask: ~ignore);
 
             for (int i = 0; i < hits; i++)
@@ -42,6 +49,8 @@ namespace Bombs
                     }
                 }
             }
+            
+            Destroy(gameObject);
         }
 
         private void OnDrawGizmos()
