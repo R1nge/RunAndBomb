@@ -106,7 +106,11 @@ namespace Enemies
             _enemyStateMachine.ChangeState(EnemyStateType.Chase);
         }
 
-        private void Update() => _enemyStateMachine.Update();
+        private void Update()
+        {
+            _enemyStateMachine.Update();
+            _bombController.Process();
+        }
 
         private void OnDestroy() => _enemyMovement.Destroy();
     }

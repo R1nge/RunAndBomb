@@ -45,7 +45,7 @@ namespace Bombs
             }
         }
 
-        private void Update()
+        public void Process()
         {
             if (!_canThrow)
             {

@@ -13,7 +13,6 @@ namespace Services
         public void SetPlayerCamera(CinemachineVirtualCamera virtualCamera) => _player = virtualCamera;
         public void SetWinCamera(CinemachineVirtualCamera virtualCamera) => _win = virtualCamera;
 
-
         public void SwitchToMain() => mainMenu.Priority = 10;
 
         public void SwitchToPlayer()

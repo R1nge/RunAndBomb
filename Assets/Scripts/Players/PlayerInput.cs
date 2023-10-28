@@ -18,7 +18,11 @@ namespace Players
             joystick.OnJoystickReleased += JoystickReleased;
         }
 
-        private void InputStateChanged(bool isEnabled) => joystick.enabled = isEnabled;
+        private void InputStateChanged(bool isEnabled)
+        {
+            joystick.enabled = isEnabled;
+            joystick.gameObject.SetActive(isEnabled);
+        }
 
         private void JoystickReleased(Vector2 direction)
         {
