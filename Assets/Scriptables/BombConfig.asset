@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 2
   drag: 0
+  gravity: {x: 0, y: 0, z: 0}
+  explosionVFX:
+    m_AssetGUID: 3ef3ae421f71c5c4e97fe12dc2fc6312
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

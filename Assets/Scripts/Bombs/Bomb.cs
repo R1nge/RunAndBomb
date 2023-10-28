@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.Factories;
 using UnityEngine;
 using Zenject;
 
@@ -14,19 +15,21 @@ namespace Bombs
         private int _owner;
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
-
-        private float _startTime, _endTime;
-
+        private bool _exploded;
         private SoundService _soundService;
-        
+        private ExplosionVFXFactory _explosionVFXFactory;
+
         [Inject]
-        private void Inject(SoundService soundService) => _soundService = soundService;
+        private void Inject(SoundService soundService, ExplosionVFXFactory explosionVFXFactory)
+        {
+            _soundService = soundService;
+            _explosionVFXFactory = explosionVFXFactory;
+        }
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _colliders = new Collider[6];
-            _startTime = Time.time;
         }
 
         public void SetOwner(int owner) => _owner = owner;
@@ -35,12 +38,11 @@ namespace Bombs
 
         private void OnTriggerEnter(Collider other) => Explode();
 
-        private void Explode()
+        private async void Explode()
         {
-            _endTime = Time.time;
-            
-            //print($"Total time {_endTime - _startTime}");
-            
+            if (_exploded) return;
+            _exploded = true;
+
             int hits = Physics.OverlapSphereNonAlloc(transform.position, radius, _colliders, layerMask: ~ignore);
 
             for (int i = 0; i < hits; i++)
@@ -58,17 +60,16 @@ namespace Bombs
                     }
                 }
             }
-            
+
             _soundService.PlayExplosionSound(explosionSource);
 
+            GameObject explosionVFX = await _explosionVFXFactory.Create();
+
+            explosionVFX.transform.position = transform.position;
+            
             meshRenderer.enabled = false;
             
             Destroy(gameObject, explosionSource.clip.length);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawSphere(transform.position, radius);
         }
     }
 }
