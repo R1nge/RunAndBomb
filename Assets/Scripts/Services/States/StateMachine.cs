@@ -12,15 +12,15 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapGenerator mapGenerator, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, MapDestructor mapDestructor, InputService inputService)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
                 { GameStateType.PreWarm, new PreWarmState(this, loadingScreenAssetProvider, startScreenAssetProvider) },
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
-                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapDestructor) },
+                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService) },
-                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapGenerator, mapDestructor,  coroutineRunner, inputService) },
+                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapService, coroutineRunner, inputService) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };

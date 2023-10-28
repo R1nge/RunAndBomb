@@ -7,19 +7,19 @@ namespace Services.States
         private readonly StateMachine _stateMachine;
         private readonly CoroutineRunner _coroutineRunner;
         private readonly RestartService _restartService;
-        private readonly MapDestructor _mapDestructor;
+        private readonly MapService _mapService;
 
-        public ResetState(StateMachine stateMachine, CoroutineRunner coroutineRunner, RestartService restartService, MapDestructor mapDestructor)
+        public ResetState(StateMachine stateMachine, CoroutineRunner coroutineRunner, RestartService restartService, MapService mapService)
         {
             _stateMachine = stateMachine;
             _coroutineRunner = coroutineRunner;
             _restartService = restartService;
-            _mapDestructor = mapDestructor;
+            _mapService = mapService;
         }
 
         public void Enter()
         {
-            _mapDestructor.DestroyMap();
+            _mapService.DestroyMap();
             _restartService.Restart();
             _coroutineRunner.StopCoroutines();
             _stateMachine.ChangeState(GameStateType.Init);

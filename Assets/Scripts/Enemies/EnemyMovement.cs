@@ -11,22 +11,22 @@ namespace Enemies
         private readonly NavMeshAgent _navMeshAgent;
         private readonly ConfigProvider _configProvider;
         private readonly EnemyAnimator _enemyAnimator;
-        private readonly MapDestructor _mapDestructor;
+        private readonly MapService _mapService;
         private Transform _target;
         private Vector3 _destination;
         private bool _inProgress;
         private float _currentIntervalTimeLeft;
 
-        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, ConfigProvider configProvider, EnemyAnimator enemyAnimator, MapDestructor mapDestructor)
+        public EnemyMovement(Transform transform, NavMeshAgent navMeshAgent, ConfigProvider configProvider, EnemyAnimator enemyAnimator, MapService mapService)
         {
             _transform = transform;
             _navMeshAgent = navMeshAgent;
             _configProvider = configProvider;
             _enemyAnimator = enemyAnimator;
-            _mapDestructor = mapDestructor;
+            _mapService = mapService;
         }
 
-        public void Init() => _mapDestructor.OnTileDestroyed += PickPosition;
+        public void Init() => _mapService.OnTileDestroyed += PickPosition;
 
         public void SetTarget(Transform target) => _target = target;
 
@@ -72,6 +72,6 @@ namespace Enemies
             return Vector3.Distance(_transform.position, _target.position) <= _navMeshAgent.stoppingDistance;
         }
 
-        public void Destroy() => _mapDestructor.OnTileDestroyed -= PickPosition;
+        public void Destroy() => _mapService.OnTileDestroyed -= PickPosition;
     }
 }

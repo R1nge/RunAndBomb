@@ -22,10 +22,8 @@ namespace Installers
 
             Container.Bind<InputService>().AsSingle();
 
-            Container.Bind<PlatformDataHolder>().AsSingle();
             Container.Bind<PlatformFactory>().AsSingle();
-            Container.Bind<MapGenerator>().AsSingle();
-            Container.Bind<MapDestructor>().AsSingle();
+            Container.Bind<MapService>().AsSingle();
 
             Container.Bind<InGameUIAssetProvider>().AsSingle();
             Container.Bind<WinUIAssetProvider>().AsSingle();

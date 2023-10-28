@@ -28,16 +28,16 @@ namespace Enemies
         private ConfigProvider _configProvider;
         private NicknameUI _nicknameUI;
         private DeathSound _deathSound;
-        private MapDestructor _mapDestructor;
+        private MapService _mapService;
         private Collider[] _colliders;
 
         [Inject]
-        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider, MapDestructor mapDestructor)
+        private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider, MapService mapService)
         {
             _enemyCounter = enemyCounter;
             _coroutineRunner = coroutineRunner;
             _configProvider = configProvider;
-            _mapDestructor = mapDestructor;
+            _mapService = mapService;
         }
 
         //TODO: sphere cast on a character layer, at radius and frequency of configProvider.EnemyConfig
@@ -58,7 +58,7 @@ namespace Enemies
 
         private void Start()
         {
-            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator, _mapDestructor);
+            _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator, _mapService);
             _enemyMovement.Init();
             
             _bombController.SetMultiplier(_navMeshAgent.speed);
