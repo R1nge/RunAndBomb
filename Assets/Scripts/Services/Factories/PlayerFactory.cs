@@ -31,9 +31,9 @@ namespace Services.Factories
 
         public async Task Create()
         {
-            Object.Destroy(_model);
             Task<Player> playerAsset = _playerAssetProvider.LoadPlayerAsset();
             await playerAsset;
+            Object.Destroy(_model);
             var player = _container.InstantiatePrefabForComponent<Player>(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0].position, Quaternion.identity, null);
             _restartService.SetPlayer(player);
             player.GetComponent<NicknameUI>().SetNickname(_playerDataHolder.PlayerStatisticsModel.Name);

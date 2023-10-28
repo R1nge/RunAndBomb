@@ -40,8 +40,6 @@ namespace Common
             }
 
             transform.localScale = startScale * endValue;
-
-            print($"CurrentSize: {CurrentSize}");
         }
     }
 }
