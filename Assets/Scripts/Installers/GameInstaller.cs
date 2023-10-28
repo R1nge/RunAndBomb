@@ -38,6 +38,7 @@ namespace Installers
             Container.Bind<LoseScreenFactory>().AsSingle();
             Container.Bind<UIService>().AsSingle();
 
+            Container.Bind<PlayerModelAssetProvider>().AsSingle();
             Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
 

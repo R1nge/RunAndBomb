@@ -12,8 +12,9 @@ namespace Services.States
         private readonly CoroutineRunner _coroutineRunner;
         private readonly InputService _inputService;
         private readonly CameraService _cameraService;
+        private readonly PlayerFactory _playerFactory;
 
-        public GameState(EnemyFactory enemyFactory, UIService uiService, MapService mapService, CoroutineRunner coroutineRunner, InputService inputService, CameraService cameraService)
+        public GameState(EnemyFactory enemyFactory, UIService uiService, MapService mapService, CoroutineRunner coroutineRunner, InputService inputService, CameraService cameraService, PlayerFactory playerFactory)
         {
             _enemyFactory = enemyFactory;
             _uiService = uiService;
@@ -21,10 +22,12 @@ namespace Services.States
             _coroutineRunner = coroutineRunner;
             _inputService = inputService;
             _cameraService = cameraService;
+            _playerFactory = playerFactory;
         }
 
         public async void Enter()
         {
+            await _playerFactory.Create();
             _cameraService.SwitchToPlayer();
             await _uiService.ShowGameScreen();
             _inputService.Enable();

@@ -23,7 +23,7 @@ namespace Services.States
 
         public async void Enter()
         {
-            await _playerFactory.Create();
+            await _playerFactory.CreateModel();
             _cameraService.SwitchToMain();
             _mapService.Generate();
             await _uiService.ShowStartScreen();

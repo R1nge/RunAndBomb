@@ -21,7 +21,7 @@ namespace Services.States
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService, cameraService, mapService, playerFactory) },
-                { GameStateType.Game, new GameState(enemyFactory, uiService, mapService, coroutineRunner, inputService, cameraService) },
+                { GameStateType.Game, new GameState(enemyFactory, uiService, mapService, coroutineRunner, inputService, cameraService, playerFactory) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService, cameraService) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };
