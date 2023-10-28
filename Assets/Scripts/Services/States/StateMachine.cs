@@ -4,6 +4,7 @@ using Services.Assets;
 using Services.Data;
 using Services.Factories;
 using Services.Maps;
+using UnityEngine;
 
 namespace Services.States
 {
@@ -28,6 +29,15 @@ namespace Services.States
 
         public void ChangeState(GameStateType gameStateType)
         {
+            if (gameStateType is GameStateType.Win or GameStateType.Lose)
+            {
+                if (_currentGameState == _states[GameStateType.Win] || _currentGameState == _states[GameStateType.Lose])
+                {
+                    Debug.LogError($"Trying to switch to {gameStateType} while already in {_currentGameState}");
+                    return;
+                }
+            }
+            
             _currentGameState?.Exit();
             _currentGameState = _states[gameStateType];
             _currentGameState.Enter();
