@@ -1,5 +1,4 @@
-﻿using Players;
-using Services.Data;
+﻿using Services.Data;
 
 namespace Services.States
 {
@@ -7,16 +6,18 @@ namespace Services.States
     {
         private readonly IPlayerDataService _playerDataService;
         private readonly UIService _uiService;
+        private readonly CameraService _cameraService;
 
-        public WinGameState(IPlayerDataService playerDataService, UIService uiService)
+        public WinGameState(IPlayerDataService playerDataService, UIService uiService, CameraService cameraService)
         {
             _playerDataService = playerDataService;
             _uiService = uiService;
+            _cameraService = cameraService;
         }
 
         public void Enter()
         {
-            //TODO: Delete player controls
+            _cameraService.SwitchToWin();
             _playerDataService.Model.Level++;
             _playerDataService.Save();
             _uiService.ShowWinScreen();

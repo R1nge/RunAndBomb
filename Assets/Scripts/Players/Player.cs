@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using Bombs;
+﻿using Bombs;
+using Cinemachine;
 using Common;
+using Services;
 using Services.States;
 using UIs;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Players
 {
     public class Player : MonoBehaviour, IDamageable
     {
+        [SerializeField] private CinemachineVirtualCamera player, win;
         private StateMachine _stateMachine;
         private PlayerInputs _playerInputs;
         private PlayerMovement _playerMovement;
@@ -20,13 +22,23 @@ namespace Players
         private ColliderController _colliderController;
         private NicknameUI _nicknameUI;
         private DeathSound _deathSound;
-        private bool _isDead;
+        private CameraService _cameraService;
+
+        private PlayerState _currentState;
+
+        private enum PlayerState
+        {
+            Alive,
+            Dead
+        }
 
         [Inject]
-        private void Inject(StateMachine stateMachine) => _stateMachine = stateMachine;
+        private void Inject(StateMachine stateMachine, CameraService cameraService)
+        {
+            _stateMachine = stateMachine;
+            _cameraService = cameraService;
+        }
 
-        //TODO: create a state machine
-        
         private void Awake()
         {
             _playerInputs = GetComponent<PlayerInputs>();
@@ -35,26 +47,29 @@ namespace Players
             _playerAnimator = GetComponent<PlayerAnimator>();
             _bombController = GetComponent<BombController>();
             _trajectoryPredictor = GetComponent<TrajectoryPredictor>();
-            
+
             _ragdollController = GetComponent<RagdollController>();
             _colliderController = GetComponent<ColliderController>();
             _nicknameUI = GetComponent<NicknameUI>();
             _deathSound = GetComponent<DeathSound>();
+            
+            
+            _cameraService.SetPlayerCamera(player);
+            _cameraService.SetWinCamera(win);
         }
 
         private void Update()
         {
-            if (_isDead)
+            switch (_currentState)
             {
-                return;
+                case PlayerState.Alive:
+                    _playerMovement.SendInput(_playerInputs.MovementDirection);
+                    _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
+                    _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
+                    _playerMovement.ProcessMovement();
+                    _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
+                    break;
             }
-
-            _playerMovement.SendInput(_playerInputs.MovementDirection);
-            _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
-            _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
-            _playerMovement.ProcessMovement();
-
-            _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
         }
 
         private void JoystickReleased(Vector2 input) => ThrowBomb();
@@ -69,12 +84,10 @@ namespace Players
 
         public void TakeDamage()
         {
-            if (_isDead)
-            {
-                return;
-            }
+            if (_currentState == PlayerState.Dead) return;
 
-            _isDead = true;
+            _currentState = PlayerState.Dead;
+            
             _trajectoryPredictor.SetTrajectoryVisible(false);
             _nicknameUI.Hide();
             _colliderController.DisableCharacterColliders();

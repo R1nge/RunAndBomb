@@ -6,16 +6,18 @@ namespace Services.States
     {
         private readonly UIService _uiService;
         private readonly IPlayerDataService _playerDataService;
+        private readonly CameraService _cameraService;
 
-        public InitGameState(UIService uiService, IPlayerDataService playerDataService)
+        public InitGameState(UIService uiService, IPlayerDataService playerDataService, CameraService cameraService)
         {
             _uiService = uiService;
             _playerDataService = playerDataService;
+            _cameraService = cameraService;
         }
 
         public async void Enter()
         {
-            //Unload loading screen
+            _cameraService.SwitchToMain();
             await _uiService.ShowStartScreen();
         }
 

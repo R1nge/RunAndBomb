@@ -14,11 +14,13 @@ namespace Installers
     {
         [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
         [SerializeField] private SoundService soundService;
+        [SerializeField] private CameraService cameraService;
 
         public override void InstallBindings()
         {
             Container.BindInstance(spawnPositionsProvider);
             Container.BindInstance(soundService);
+            Container.BindInstance(cameraService);
 
             Container.Bind<InputService>().AsSingle();
 

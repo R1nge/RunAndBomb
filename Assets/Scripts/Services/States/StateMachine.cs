@@ -13,16 +13,16 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
                 { GameStateType.PreWarm, new PreWarmState(this, loadingScreenAssetProvider, startScreenAssetProvider) },
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapService) },
-                { GameStateType.Init, new InitGameState(uiService, playerDataService) },
-                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapService, coroutineRunner, inputService) },
-                { GameStateType.Win, new WinGameState(playerDataService, uiService) },
+                { GameStateType.Init, new InitGameState(uiService, playerDataService, cameraService) },
+                { GameStateType.Game, new GameState(playerFactory, enemyFactory, uiService, mapService, coroutineRunner, inputService, cameraService) },
+                { GameStateType.Win, new WinGameState(playerDataService, uiService, cameraService) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };
         }
