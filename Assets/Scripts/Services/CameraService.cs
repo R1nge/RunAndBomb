@@ -19,8 +19,8 @@ namespace Services
         public void SwitchToPlayer()
         {
             mainMenu.Priority = 0;
-            _player.Priority = 1;
             _win.Priority = 0;
+            _player.Priority = 1;
         }
 
         public void SwitchToWin()
