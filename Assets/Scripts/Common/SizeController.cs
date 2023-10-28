@@ -23,7 +23,6 @@ namespace Common
         public void IncreaseSize()
         {
             CurrentSize += sizeModifier;
-            print($"CurrentSize: {CurrentSize}");
             StartCoroutine(LerpFunction(CurrentSize, 2));
         }
 

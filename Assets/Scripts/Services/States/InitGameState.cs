@@ -1,4 +1,6 @@
 ﻿using Services.Data;
+using Services.Factories;
+using Services.Maps;
 
 namespace Services.States
 {
@@ -7,17 +9,23 @@ namespace Services.States
         private readonly UIService _uiService;
         private readonly IPlayerDataService _playerDataService;
         private readonly CameraService _cameraService;
+        private readonly MapService _mapService;
+        private readonly PlayerFactory _playerFactory;
 
-        public InitGameState(UIService uiService, IPlayerDataService playerDataService, CameraService cameraService)
+        public InitGameState(UIService uiService, IPlayerDataService playerDataService, CameraService cameraService, MapService mapService, PlayerFactory playerFactory)
         {
             _uiService = uiService;
             _playerDataService = playerDataService;
             _cameraService = cameraService;
+            _mapService = mapService;
+            _playerFactory = playerFactory;
         }
 
         public async void Enter()
         {
+            await _playerFactory.Create();
             _cameraService.SwitchToMain();
+            _mapService.Generate();
             await _uiService.ShowStartScreen();
         }
 

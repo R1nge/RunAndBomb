@@ -23,6 +23,7 @@ namespace Players
         private NicknameUI _nicknameUI;
         private DeathSound _deathSound;
         private CameraService _cameraService;
+        private InputService _inputService;
 
         private PlayerState _currentState;
 
@@ -33,10 +34,11 @@ namespace Players
         }
 
         [Inject]
-        private void Inject(StateMachine stateMachine, CameraService cameraService)
+        private void Inject(StateMachine stateMachine, CameraService cameraService, InputService inputService)
         {
             _stateMachine = stateMachine;
             _cameraService = cameraService;
+            _inputService = inputService;
         }
 
         private void Awake()
@@ -52,8 +54,8 @@ namespace Players
             _colliderController = GetComponent<ColliderController>();
             _nicknameUI = GetComponent<NicknameUI>();
             _deathSound = GetComponent<DeathSound>();
-            
-            
+
+
             _cameraService.SetPlayerCamera(player);
             _cameraService.SetWinCamera(win);
         }
@@ -63,12 +65,17 @@ namespace Players
             switch (_currentState)
             {
                 case PlayerState.Alive:
-                    _playerMovement.SendInput(_playerInputs.MovementDirection);
-                    _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
-                    _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
-                    _playerMovement.ProcessMovement();
-                    _bombController.Process();
-                    _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
+
+                    if (_inputService.InputEnabled)
+                    {
+                        _playerMovement.SendInput(_playerInputs.MovementDirection);
+                        _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
+                        _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
+                        _playerMovement.ProcessMovement();
+                        _bombController.Process();
+                        _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
+                    }
+
                     break;
             }
         }
@@ -88,7 +95,7 @@ namespace Players
             if (_currentState == PlayerState.Dead) return;
 
             _currentState = PlayerState.Dead;
-            
+
             _trajectoryPredictor.SetTrajectoryVisible(false);
             _nicknameUI.Hide();
             _colliderController.DisableCharacterColliders();

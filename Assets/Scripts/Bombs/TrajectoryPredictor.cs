@@ -25,7 +25,7 @@ namespace Bombs
 
         private void Awake() => _trajectoryLine = GetComponent<LineRenderer>();
 
-        private void Start() => SetTrajectoryVisible(true);
+        private void Start() => SetTrajectoryVisible(false);
 
         public void PredictTrajectory(BombProperties projectile)
         {
@@ -88,7 +88,7 @@ namespace Bombs
 
         public void SetTrajectoryVisible(bool visible)
         {
-            if (_trajectoryLine.enabled == visible || hitMarker.gameObject.activeInHierarchy == visible) return;
+            if (_trajectoryLine.enabled == visible && hitMarker.gameObject.activeInHierarchy == visible) return;
             _trajectoryLine.enabled = visible;
             hitMarker.gameObject.SetActive(visible);
         }
