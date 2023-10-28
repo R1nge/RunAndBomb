@@ -19,8 +19,8 @@ namespace Services.States
 
         public void Enter()
         {
-            _mapService.DestroyMap();
             _restartService.Restart();
+            _mapService.DestroyMap();
             _coroutineRunner.StopCoroutines();
             _stateMachine.ChangeState(GameStateType.Init);
         }

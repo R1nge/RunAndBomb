@@ -57,7 +57,7 @@ namespace Services.Maps
         
         public void DestroyMap()
         {
-            for (int i = 0; i < Platforms.Count ; i++)
+            for (int i = Platforms.Count - 1; i >= 0; i--)
             {
                 Object.Destroy(Platforms[i].gameObject);
             }
@@ -72,10 +72,10 @@ namespace Services.Maps
             {
                 yield return new WaitForSeconds(_configProvider.MapConfig.DestroyInterval);
                 Platforms[i].Drop();
-                yield return new WaitForSeconds(.1f);
-                _navMeshSurface.BuildNavMesh();
                 Remove(Platforms[i]);
                 OnTileDestroyed?.Invoke();
+                yield return new WaitForSeconds(.1f);
+                _navMeshSurface.BuildNavMesh();
             }
 
             yield return new WaitForSeconds(.1f);
