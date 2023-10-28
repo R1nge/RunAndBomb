@@ -1,5 +1,8 @@
-﻿using Bombs;
+﻿using System.Collections;
+using Bombs;
+using Common;
 using Services.States;
+using UIs;
 using UnityEngine;
 using Zenject;
 
@@ -13,11 +16,17 @@ namespace Players
         private PlayerAnimator _playerAnimator;
         private BombController _bombController;
         private TrajectoryPredictor _trajectoryPredictor;
+        private RagdollController _ragdollController;
+        private ColliderController _colliderController;
+        private NicknameUI _nicknameUI;
+        private DeathSound _deathSound;
         private bool _isDead;
 
         [Inject]
         private void Inject(StateMachine stateMachine) => _stateMachine = stateMachine;
 
+        //TODO: create a state machine
+        
         private void Awake()
         {
             _playerInputs = GetComponent<PlayerInputs>();
@@ -26,6 +35,11 @@ namespace Players
             _playerAnimator = GetComponent<PlayerAnimator>();
             _bombController = GetComponent<BombController>();
             _trajectoryPredictor = GetComponent<TrajectoryPredictor>();
+            
+            _ragdollController = GetComponent<RagdollController>();
+            _colliderController = GetComponent<ColliderController>();
+            _nicknameUI = GetComponent<NicknameUI>();
+            _deathSound = GetComponent<DeathSound>();
         }
 
         private void Update()
@@ -61,6 +75,10 @@ namespace Players
 
             _isDead = true;
             _trajectoryPredictor.SetTrajectoryVisible(false);
+            _nicknameUI.Hide();
+            _colliderController.DisableCharacterColliders();
+            _ragdollController.EnableRagdoll();
+            _deathSound.PlayDeathSound();
             _stateMachine.ChangeState(GameStateType.Lose);
         }
 
