@@ -2226,6 +2226,7 @@ GameObject:
   - component: {fileID: 6408800370970924310}
   - component: {fileID: 8909818798931814078}
   - component: {fileID: 3950977061838002944}
+  - component: {fileID: 1311847988323671778}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2506,6 +2507,19 @@ MonoBehaviour:
   maxPoints: 25
   increment: 0.1
   rayOverlap: 1.1
+--- !u!114 &1311847988323671778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814835284728001307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53a872ccebe491aad80cc7c7f74cd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeModifier: 1.25
 --- !u!1001 &8499612344221856184
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace Bombs
         [SerializeField] private LayerMask ignore;
         [SerializeField] private float radius;
         private int _owner;
+        private float _size;
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
         private bool _exploded;
@@ -32,9 +33,12 @@ namespace Bombs
             _colliders = new Collider[6];
         }
 
-        public void SetOwner(int owner) => _owner = owner;
-
-        public void Throw(Vector3 force) => _rigidbody.AddForce(force, ForceMode.Impulse);
+        public void Throw(Vector3 force, int owner, float size)
+        {
+            _owner = owner;
+            _size = size;
+            _rigidbody.AddForce(force, ForceMode.Impulse);
+        }
 
         private void OnTriggerEnter(Collider other) => Explode();
 
@@ -64,6 +68,8 @@ namespace Bombs
             _soundService.PlayExplosionSound(explosionSource);
 
             GameObject explosionVFX = await _explosionVFXFactory.Create();
+
+            explosionVFX.transform.localScale = new Vector3(_size,_size,_size);
 
             explosionVFX.transform.position = transform.position;
             

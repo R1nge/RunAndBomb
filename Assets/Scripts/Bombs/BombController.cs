@@ -15,6 +15,7 @@ namespace Bombs
         [SerializeField] private float throwInterval;
         [SerializeField] private float force;
         [SerializeField] private BombConfig bombConfig;
+        private SizeController _sizeController;
         private TrajectoryPredictor _trajectoryPredictor;
         private BombProperties _bombProperties;
         private BombFactory _bombFactory;
@@ -30,6 +31,8 @@ namespace Bombs
 
         private void Awake()
         {
+            _sizeController = GetComponent<SizeController>();
+            
             _bombProperties = new BombProperties();
 
             _currentTime = throwInterval;
@@ -97,7 +100,6 @@ namespace Bombs
 
             Bomb bomb = _bombFactory.Create(0);
             bomb.transform.position = bombSpawnPoint.position;
-            bomb.SetOwner(gameObject.GetInstanceID());
             bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
 
             Vector3 force = _bombProperties.Direction * (_bombProperties.InitialSpeed / _bombProperties.Mass);
@@ -115,8 +117,9 @@ namespace Bombs
             // //time *= 2.57085f;
             //
             // print(time);
-
-            bomb.Throw(force);
+            
+            print($"SIZE {_sizeController.CurrentSize}");
+            bomb.Throw(force, gameObject.GetInstanceID(), _sizeController.CurrentSize);
 
             return true;
         }

@@ -40,7 +40,6 @@ namespace Enemies
             _mapService = mapService;
         }
 
-        //TODO: sphere cast on a character layer, at radius and frequency of configProvider.EnemyConfig
         public void TakeDamage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
 
         private void Awake()
@@ -75,10 +74,10 @@ namespace Enemies
 
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
             
-            InvokeRepeating(nameof(CharacterDetect), _configProvider.EnemyConfig.DelayBeforeNextScan, _configProvider.EnemyConfig.DelayBeforeNextScan);
+            InvokeRepeating(nameof(DetectCharacter), _configProvider.EnemyConfig.DelayBeforeNextScan, _configProvider.EnemyConfig.DelayBeforeNextScan);
         }
-        
-        private void CharacterDetect()
+
+        private void DetectCharacter()
         {
             bool isChasing = _enemyStateMachine.CurrentEnemyStateType != EnemyStateType.Patrol;
 
