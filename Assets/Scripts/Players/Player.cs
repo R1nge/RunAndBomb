@@ -52,7 +52,8 @@ namespace Players
             _playerMovement.SendInput(_playerInputs.MovementDirection);
             _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
             _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
-            
+            _playerMovement.ProcessMovement();
+
             _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
         }
 

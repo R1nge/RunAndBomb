@@ -18,7 +18,7 @@ namespace Players
 
         private void Awake() => _characterController = GetComponent<CharacterController>();
 
-        private void Update()
+        public void ProcessMovement()
         {
             Rotate();
             Gravity();
