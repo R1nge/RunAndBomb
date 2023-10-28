@@ -12,7 +12,7 @@ namespace Common
         public float CurrentSize
         {
             get => _currentSize;
-            set
+            private set
             {
                 _currentSize = value;
                 OnSizeChanged?.Invoke(_currentSize);
