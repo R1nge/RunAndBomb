@@ -47,7 +47,7 @@ namespace Bombs
             if (_exploded) return;
             _exploded = true;
 
-            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius, _colliders, layerMask: ~ignore);
+            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius * _size, _colliders, layerMask: ~ignore);
 
             for (int i = 0; i < hits; i++)
             {
