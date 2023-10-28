@@ -7,7 +7,7 @@ namespace Common
     public class SizeController : MonoBehaviour
     {
         public event Action<float> OnSizeChanged;
-        [SerializeField, Range(0f, 2f)] private float sizeModifier;
+        [SerializeField, Range(0f, .5f)] private float sizeModifier;
         private float _currentSize = 1;
 
         public float CurrentSize
@@ -18,11 +18,6 @@ namespace Common
                 _currentSize = value;
                 OnSizeChanged?.Invoke(_currentSize);
             }
-        }
-
-        private void Start()
-        {
-            IncreaseSize();
         }
 
         public void IncreaseSize()
@@ -37,18 +32,16 @@ namespace Common
             float time = 0;
             const float startValue = 1;
             Vector3 startScale = transform.localScale;
-            float size = 0;
             while (time < duration)
             {
-                size = Mathf.Lerp(startValue, endValue, time / duration);
+                float size = Mathf.Lerp(startValue, endValue, time / duration);
                 transform.localScale = startScale * size;
                 time += Time.deltaTime;
                 yield return null;
             }
 
             transform.localScale = startScale * endValue;
-            size = endValue;
-            
+
             print($"CurrentSize: {CurrentSize}");
         }
     }

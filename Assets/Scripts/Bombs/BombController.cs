@@ -118,7 +118,7 @@ namespace Bombs
             //
             // print(time);
             
-            bomb.Throw(force, gameObject.GetInstanceID(), _sizeController.CurrentSize);
+            bomb.Throw(force, _sizeController);
 
             return true;
         }

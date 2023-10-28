@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Common;
+using Services;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
@@ -12,8 +13,7 @@ namespace Bombs
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private LayerMask ignore;
         [SerializeField] private float radius;
-        private int _owner;
-        private float _size;
+        private SizeController _owner;
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
         private bool _exploded;
@@ -33,10 +33,9 @@ namespace Bombs
             _colliders = new Collider[6];
         }
 
-        public void Throw(Vector3 force, int owner, float size)
+        public void Throw(Vector3 force, SizeController owner)
         {
             _owner = owner;
-            _size = size;
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
 
@@ -47,7 +46,7 @@ namespace Bombs
             if (_exploded) return;
             _exploded = true;
 
-            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius * _size, _colliders, layerMask: ~ignore);
+            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius * _owner.CurrentSize, _colliders, layerMask: ~ignore);
 
             for (int i = 0; i < hits; i++)
             {
@@ -55,12 +54,14 @@ namespace Bombs
                 {
                     if (_colliders[i].TryGetComponent(out BombController bombController))
                     {
-                        if (_owner == _colliders[i].transform.root.gameObject.GetInstanceID())
+                        if (_owner.gameObject == _colliders[i].transform.root.gameObject)
                         {
                             continue;
                         }
 
                         damageable.TakeDamage();
+                        
+                        _owner.GetComponent<SizeController>().IncreaseSize();
                     }
                 }
             }
@@ -69,7 +70,7 @@ namespace Bombs
 
             GameObject explosionVFX = await _explosionVFXFactory.Create();
 
-            explosionVFX.transform.localScale = new Vector3(_size,_size,_size);
+            explosionVFX.transform.localScale = new Vector3(_owner.CurrentSize,_owner.CurrentSize,_owner.CurrentSize);
 
             explosionVFX.transform.position = transform.position;
             
