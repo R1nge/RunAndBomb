@@ -7,8 +7,6 @@ namespace Services
     public class RestartService
     {
         private readonly List<Enemy> _enemies = new();
-        
-        //TODO: camera service
         private readonly PlayerReferenceHolder _playerReferenceHolder;
         private readonly EnemyCounter _enemyCounter;
 

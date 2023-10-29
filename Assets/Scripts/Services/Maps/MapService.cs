@@ -7,6 +7,7 @@ using Services.Factories;
 using Unity.AI.Navigation;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Services.Maps
 {
@@ -70,9 +71,10 @@ namespace Services.Maps
             _navMeshSurface = Platforms[0].GetComponentInChildren<NavMeshSurface>();
             for (int i = Platforms.Count - 1; i > 0; i--)
             {
+                var index = Random.Range(1, Platforms.Count);
                 yield return new WaitForSeconds(_configProvider.MapConfig.DestroyInterval);
-                Platforms[i].Drop();
-                Remove(Platforms[i]);
+                Platforms[index].Drop();
+                Remove(Platforms[index]);
                 OnTileDestroyed?.Invoke();
                 yield return new WaitForSeconds(.1f);
                 _navMeshSurface.BuildNavMesh();
