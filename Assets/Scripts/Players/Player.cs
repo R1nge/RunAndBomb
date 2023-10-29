@@ -25,6 +25,8 @@ namespace Players
         private CameraService _cameraService;
         private InputService _inputService;
 
+        public PlayerAnimator PlayerAnimator => _playerAnimator;
+
         private PlayerState _currentState;
 
         private enum PlayerState

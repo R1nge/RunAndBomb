@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using Bombs;
 using Enemies;
-using Players;
-using Services.Maps;
 using UnityEngine;
 
 namespace Services
@@ -10,13 +7,15 @@ namespace Services
     public class RestartService
     {
         private readonly List<Enemy> _enemies = new();
-        private Player _player;
+        
         //TODO: camera service
+        private readonly PlayerReferenceHolder _playerReferenceHolder;
         private readonly EnemyCounter _enemyCounter;
 
-        private RestartService(EnemyCounter enemyCounter)
+        private RestartService(EnemyCounter enemyCounter, PlayerReferenceHolder playerReferenceHolder)
         {
             _enemyCounter = enemyCounter;
+            _playerReferenceHolder = playerReferenceHolder;
         }
 
         public void Restart()
@@ -27,8 +26,6 @@ namespace Services
         }
 
         public void AddEnemy(Enemy enemy) => _enemies.Add(enemy);
-
-        public void SetPlayer(Player player) => _player = player;
 
         private void DestroyEnemies()
         {
@@ -43,9 +40,10 @@ namespace Services
 
         private void DestroyPlayer()
         {
-            if (_player != null)
+            if (_playerReferenceHolder.Player != null)
             {
-                Object.Destroy(_player.gameObject);
+                Object.Destroy(_playerReferenceHolder.Player.gameObject);
+                _playerReferenceHolder.SetPlayer(null);
             }
         }
 

@@ -14,19 +14,19 @@ namespace Services.Factories
         private readonly PlayerAssetProvider _playerAssetProvider;
         private readonly PlayerDataHolder _playerDataHolder;
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
-        private readonly RestartService _restartService;
         private readonly PlayerModelAssetProvider _playerModelAssetProvider;
+        private readonly PlayerReferenceHolder _playerReferenceHolder;
 
         private GameObject _model;
 
-        private PlayerFactory(DiContainer container, PlayerAssetProvider playerAssetProvider, PlayerDataHolder playerDataHolder, SpawnPositionsProvider spawnPositionsProvider, RestartService restartService, PlayerModelAssetProvider playerModelAssetProvider)
+        private PlayerFactory(DiContainer container, PlayerAssetProvider playerAssetProvider, PlayerDataHolder playerDataHolder, SpawnPositionsProvider spawnPositionsProvider,PlayerModelAssetProvider playerModelAssetProvider, PlayerReferenceHolder playerReferenceHolder)
         {
             _container = container;
             _playerAssetProvider = playerAssetProvider;
             _playerDataHolder = playerDataHolder;
             _spawnPositionsProvider = spawnPositionsProvider;
-            _restartService = restartService;
             _playerModelAssetProvider = playerModelAssetProvider;
+            _playerReferenceHolder = playerReferenceHolder;
         }
 
         public async Task Create()
@@ -35,7 +35,7 @@ namespace Services.Factories
             await playerAsset;
             Object.Destroy(_model);
             var player = _container.InstantiatePrefabForComponent<Player>(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0].position, Quaternion.identity, null);
-            _restartService.SetPlayer(player);
+            _playerReferenceHolder.SetPlayer(player);
             player.GetComponent<NicknameUI>().SetNickname(_playerDataHolder.PlayerStatisticsModel.Name);
         }
 
