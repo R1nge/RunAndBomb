@@ -7,20 +7,20 @@ namespace Services.States
         private readonly IPlayerDataService _playerDataService;
         private readonly UIService _uiService;
         private readonly CameraService _cameraService;
-        private readonly PlayerAnimatorService _playerAnimatorService;
-
-        public WinGameState(IPlayerDataService playerDataService, UIService uiService, CameraService cameraService, PlayerAnimatorService playerAnimatorService)
+        private readonly PlayerReferenceHolder _playerReferenceHolder;
+        
+        public WinGameState(IPlayerDataService playerDataService, UIService uiService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder)
         {
             _playerDataService = playerDataService;
             _uiService = uiService;
             _cameraService = cameraService;
-            _playerAnimatorService = playerAnimatorService;
+            _playerReferenceHolder = playerReferenceHolder;
         }
 
         public void Enter()
         {
             _cameraService.SwitchToWin();
-            _playerAnimatorService.PlayDanceAnimation();
+            _playerReferenceHolder.Player.Win();
             _playerDataService.Model.Level++;
             _playerDataService.Save();
             _uiService.ShowWinScreen();

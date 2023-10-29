@@ -42,7 +42,6 @@ namespace Installers
             Container.Bind<PlayerModelAssetProvider>().AsSingle();
             Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
-            Container.Bind<PlayerAnimatorService>().AsSingle();
 
             Container.Bind<ExplosionVFXAssetProvider>().AsSingle();
             Container.Bind<ExplosionVFXFactory>().AsSingle();

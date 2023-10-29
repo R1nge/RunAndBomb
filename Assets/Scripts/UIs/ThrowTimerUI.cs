@@ -22,7 +22,7 @@ namespace UIs
 
         private void UpdateSlider(float time, float totalTime) => timerRadial.fillAmount = time / totalTime;
 
-        private void Hide() => timerParent.SetActive(false);
+        public void Hide() => timerParent.SetActive(false);
 
         private void Show() => timerParent.SetActive(true);
 

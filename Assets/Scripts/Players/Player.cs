@@ -24,6 +24,7 @@ namespace Players
         private DeathSound _deathSound;
         private CameraService _cameraService;
         private InputService _inputService;
+        private ThrowTimerUI _throwTimerUI;
 
         public PlayerAnimator PlayerAnimator => _playerAnimator;
 
@@ -32,7 +33,8 @@ namespace Players
         private enum PlayerState
         {
             Alive,
-            Dead
+            Dead,
+            Win
         }
 
         [Inject]
@@ -56,6 +58,7 @@ namespace Players
             _colliderController = GetComponent<ColliderController>();
             _nicknameUI = GetComponent<NicknameUI>();
             _deathSound = GetComponent<DeathSound>();
+            _throwTimerUI = GetComponent<ThrowTimerUI>();
 
 
             _cameraService.SetPlayerCamera(player);
@@ -94,7 +97,7 @@ namespace Players
 
         public void TakeDamage()
         {
-            if (_currentState == PlayerState.Dead) return;
+            if (_currentState is PlayerState.Dead or PlayerState.Win) return;
 
             _currentState = PlayerState.Dead;
 
@@ -104,6 +107,16 @@ namespace Players
             _ragdollController.EnableRagdoll();
             _deathSound.PlayDeathSound();
             _stateMachine.ChangeState(GameStateType.Lose);
+        }
+
+        public void Win()
+        {
+            _currentState = PlayerState.Win;
+
+            _playerAnimator.PlayDanceAnimation();
+            _trajectoryPredictor.SetTrajectoryVisible(false);
+            _nicknameUI.Hide();
+            _throwTimerUI.Hide();
         }
 
         private void OnDestroy() => _playerInputs.OnJoystickReleased -= JoystickReleased;
