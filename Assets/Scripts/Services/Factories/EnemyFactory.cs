@@ -30,7 +30,7 @@ namespace Services.Factories
             {
                 var enemy = _container.InstantiatePrefabForComponent<Enemy>(_enemySkinService.GetRandomSkin(), _spawnPositionsProvider.SpawnPositions[i].position, Quaternion.identity, null);
                 _restartService.AddEnemy(enemy);
-                enemy.GetComponent<NicknameUI>().SetNickname(i.ToString());
+                enemy.GetComponent<NicknameUI>().SetNickname(NameGenerator.GenerateName());
                 _enemyCounter.Increase();
             }
         }
