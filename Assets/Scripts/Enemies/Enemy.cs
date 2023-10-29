@@ -14,6 +14,7 @@ namespace Enemies
     public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private LayerMask ignore;
+        [SerializeField] private Rigidbody rigidbody;
         private EnemyStateMachine _enemyStateMachine;
         private EnemyCounter _enemyCounter;
         private EnemyMovement _enemyMovement;
@@ -41,6 +42,14 @@ namespace Enemies
         }
 
         public void TakeDamage() => _enemyStateMachine.ChangeState(EnemyStateType.Death);
+
+        public void Fall()
+        {
+            _navMeshAgent.updatePosition = false;
+            _navMeshAgent.updateRotation = false;
+            _enemyStateMachine.ChangeState(EnemyStateType.Death);
+            rigidbody.isKinematic = false;
+        }
 
         private void Awake()
         {

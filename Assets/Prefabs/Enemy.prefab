@@ -218,6 +218,7 @@ MonoBehaviour:
   ignore:
     serializedVersion: 2
     m_Bits: 375
+  rigidbody: {fileID: 4854117451325844591}
 --- !u!114 &1784915821087518288
 MonoBehaviour:
   m_ObjectHideFlags: 0
