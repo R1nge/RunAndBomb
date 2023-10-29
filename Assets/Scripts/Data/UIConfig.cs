@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "UIConfig", menuName = "UI Config")]
+    [CreateAssetMenu(fileName = "UIConfig", menuName = "Configs/UI Config")]
     public class UIConfig : ScriptableObject
     {
         [SerializeField] private AssetReferenceGameObject loadingScreen;

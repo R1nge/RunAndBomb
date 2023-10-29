@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Services;
 using Services.Factories;
 using UnityEngine;
@@ -77,6 +78,11 @@ namespace Bombs
             meshRenderer.enabled = false;
             
             Destroy(gameObject, explosionSource.clip.length);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(transform.position, _owner.CurrentSize * radius);
         }
     }
 }

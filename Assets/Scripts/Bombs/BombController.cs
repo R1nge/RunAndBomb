@@ -1,9 +1,11 @@
 ﻿using System;
 using Common;
 using Data;
+using Services.Data;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Bombs
 {
@@ -19,15 +21,21 @@ namespace Bombs
         private TrajectoryPredictor _trajectoryPredictor;
         private BombProperties _bombProperties;
         private BombFactory _bombFactory;
+        private ConfigProvider _configProvider;
         private float _currentTime;
         private bool _canThrow = true;
         private float _multiplier;
         private bool _hasTrajectoryPredictor;
+        private int _bombSkinIndex;
 
         public bool CanThrow => _canThrow;
 
         [Inject]
-        private void Inject(BombFactory bombFactory) => _bombFactory = bombFactory;
+        private void Inject(BombFactory bombFactory, ConfigProvider configProvider)
+        {
+            _bombFactory = bombFactory;
+            _configProvider = configProvider;
+        }
 
         private void Awake()
         {
@@ -43,6 +51,8 @@ namespace Bombs
             {
                 _trajectoryPredictor = trajectoryPredictor;
             }
+
+            _bombSkinIndex = Random.Range(0, _configProvider.BombSkinsConfig.Bombs.Length);
         }
 
         public void Process()
@@ -98,7 +108,7 @@ namespace Bombs
 
             _canThrow = false;
 
-            Bomb bomb = _bombFactory.Create(0);
+            Bomb bomb = _bombFactory.Create(_bombSkinIndex);
             bomb.transform.position = bombSpawnPoint.position;
             bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
 

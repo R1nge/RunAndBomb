@@ -8,6 +8,7 @@ namespace Common
     {
         public event Action<float> OnSizeChanged;
         [SerializeField, Range(0f, .5f)] private float sizeModifier;
+        [SerializeField] private Transform hitMarker;
         private float _currentSize = 1;
 
         public float CurrentSize
@@ -23,10 +24,11 @@ namespace Common
         public void IncreaseSize()
         {
             CurrentSize += sizeModifier;
-            StartCoroutine(LerpFunction(CurrentSize, 2));
+            StartCoroutine(LerpFunction(transform, CurrentSize, 2));
+            StartCoroutine(LerpFunction(hitMarker, CurrentSize, 2));
         }
 
-        private IEnumerator LerpFunction(float endValue, float duration)
+        private IEnumerator LerpFunction(Transform transform, float endValue, float duration)
         {
             float time = 0;
             const float startValue = 1;

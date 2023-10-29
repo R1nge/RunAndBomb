@@ -2,7 +2,7 @@
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "EnemyConfig", menuName = "EnemyConfig")]
+    [CreateAssetMenu(fileName = "EnemyConfig", menuName = "Configs/EnemyConfig")]
     public class EnemyConfig : ScriptableObject
     {
         [SerializeField] private float walkRadius;

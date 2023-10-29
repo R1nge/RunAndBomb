@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "EnemySkins", menuName = "EnemySkins")]
+    [CreateAssetMenu(fileName = "EnemySkins", menuName = "Configs/EnemySkins")]
     public class EnemySkinsConfig : ScriptableObject
     {
         [SerializeField] private Enemy[] skins;

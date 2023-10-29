@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "BombConfig", menuName = "Bomb Config")]
+    [CreateAssetMenu(fileName = "BombConfig", menuName = "Configs/Bomb Config")]
     public class BombConfig : ScriptableObject
     {
         [SerializeField] private float mass;

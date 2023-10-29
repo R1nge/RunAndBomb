@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "MapConfig", menuName = "Map Config")]
+    [CreateAssetMenu(fileName = "MapConfig", menuName = "Configs/Map Config")]
     public class MapConfig : ScriptableObject
     {
         [SerializeField] private Platform basePlatform;
