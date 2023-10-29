@@ -30,11 +30,11 @@ namespace Services.States
 
         public async void Enter()
         {
+            _mapService.Generate();
             _spawnPositionsProvider.CreateSpawnPoints(_configProvider.MapConfig.SpawnPositionsAmount, new Vector3(0,2,0), _configProvider.MapConfig.SpawnRadius);
             await _playerFactory.Create();
             _playerReferenceHolder.Player.Idle();
             _cameraService.SwitchToMain();
-            _mapService.Generate();
             await _uiService.ShowStartScreen();
         }
 

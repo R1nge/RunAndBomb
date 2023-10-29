@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Services.Data
 {
@@ -12,11 +13,19 @@ namespace Services.Data
 
         public void CreateSpawnPoints(int num, Vector3 point, float radius)
         {
+            if (_spawnPositions != null)
+            {
+                for (int i = _spawnPositions.Length - 1; i >= 0; i--)
+                {
+                    Destroy(_spawnPositions[i].gameObject);  
+                }
+            }
+            
             _spawnPositions = new Transform[num];
             
             for (int i = num - 1; i >= 0; i--)
             {
-                var radians = 2 * Mathf.PI / num * i;
+                float radians = 2 * Mathf.PI / num * i;
 
                 float vertical = Mathf.Sin(radians);
                 float horizontal = Mathf.Cos(radians);

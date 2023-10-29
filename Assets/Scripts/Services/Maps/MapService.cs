@@ -25,8 +25,6 @@ namespace Services.Maps
             _configProvider = configProvider;
             _platformFactory = platformFactory;
         }
-        
-        public IReadOnlyList<Platform> Platforms => _platforms;
 
         public void Generate()
         {
@@ -54,14 +52,15 @@ namespace Services.Maps
                 }
             }
 
-            basePlatform.GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
+            _navMeshSurface = basePlatform.GetComponentInChildren<NavMeshSurface>();
+            _navMeshSurface.BuildNavMesh();
         }
         
         public void DestroyMap()
         {
-            for (int i = Platforms.Count - 1; i >= 0; i--)
+            for (int i = _platforms.Count - 1; i >= 0; i--)
             {
-                Object.Destroy(Platforms[i].gameObject);
+                Object.Destroy(_platforms[i].gameObject);
             }
 
             Clear();
@@ -69,13 +68,12 @@ namespace Services.Maps
         
         public IEnumerator DestroyPlatforms()
         {
-            _navMeshSurface = Platforms[0].GetComponentInChildren<NavMeshSurface>();
-            for (int i = Platforms.Count - 1; i > 0; i--)
+            for (int i = _platforms.Count - 1; i > 0; i--)
             {
-                var index = Random.Range(1, Platforms.Count);
+                var index = Random.Range(1, _platforms.Count);
                 yield return new WaitForSeconds(_configProvider.MapConfig.DestroyInterval);
-                Platforms[index].Drop();
-                Remove(Platforms[index]);
+                _platforms[index].Drop();
+                Remove(_platforms[index]);
                 OnTileDestroyed?.Invoke();
                 yield return new WaitForSeconds(.1f);
                 _navMeshSurface.BuildNavMesh();
