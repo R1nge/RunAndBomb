@@ -17,6 +17,7 @@ namespace Services.Maps
         private readonly ConfigProvider _configProvider;
         private readonly PlatformFactory _platformFactory;
         private readonly List<Platform> _platforms = new();
+        private readonly SpawnPositionsProvider _spawnPositionsProvider;
         private NavMeshSurface _navMeshSurface;
 
         private MapService(ConfigProvider configProvider, PlatformFactory platformFactory)

@@ -5,28 +5,18 @@ namespace Services
 {
     public class CameraService : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera mainMenu;
-
+        private CinemachineVirtualCamera _main;
         private CinemachineVirtualCamera _player;
-        private CinemachineVirtualCamera _win;
 
+        public void SetMainCamera(CinemachineVirtualCamera virtualCamera) => _main = virtualCamera;
         public void SetPlayerCamera(CinemachineVirtualCamera virtualCamera) => _player = virtualCamera;
-        public void SetWinCamera(CinemachineVirtualCamera virtualCamera) => _win = virtualCamera;
 
-        public void SwitchToMain() => mainMenu.Priority = 10;
+        public void SwitchToMain() => _main.Priority = 1;
 
         public void SwitchToPlayer()
         {
-            mainMenu.Priority = 0;
-            _win.Priority = 0;
+            _main.Priority = 0;
             _player.Priority = 1;
-        }
-
-        public void SwitchToWin()
-        {
-            mainMenu.Priority = 0;
-            _player.Priority = 0;
-            _win.Priority = 1;
         }
     }
 }

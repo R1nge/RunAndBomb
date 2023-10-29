@@ -14,18 +14,16 @@ namespace Services.Factories
         private readonly PlayerAssetProvider _playerAssetProvider;
         private readonly PlayerDataHolder _playerDataHolder;
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
-        private readonly PlayerModelAssetProvider _playerModelAssetProvider;
         private readonly PlayerReferenceHolder _playerReferenceHolder;
 
         private GameObject _model;
 
-        private PlayerFactory(DiContainer container, PlayerAssetProvider playerAssetProvider, PlayerDataHolder playerDataHolder, SpawnPositionsProvider spawnPositionsProvider,PlayerModelAssetProvider playerModelAssetProvider, PlayerReferenceHolder playerReferenceHolder)
+        private PlayerFactory(DiContainer container, PlayerAssetProvider playerAssetProvider, PlayerDataHolder playerDataHolder, SpawnPositionsProvider spawnPositionsProvider, PlayerReferenceHolder playerReferenceHolder)
         {
             _container = container;
             _playerAssetProvider = playerAssetProvider;
             _playerDataHolder = playerDataHolder;
             _spawnPositionsProvider = spawnPositionsProvider;
-            _playerModelAssetProvider = playerModelAssetProvider;
             _playerReferenceHolder = playerReferenceHolder;
         }
 
@@ -33,17 +31,9 @@ namespace Services.Factories
         {
             Task<Player> playerAsset = _playerAssetProvider.LoadPlayerAsset();
             await playerAsset;
-            Object.Destroy(_model);
             var player = _container.InstantiatePrefabForComponent<Player>(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0].position, Quaternion.identity, null);
             _playerReferenceHolder.SetPlayer(player);
-            player.GetComponent<NicknameUI>().SetNickname(_playerDataHolder.PlayerStatisticsModel.Name);
-        }
-
-        public async Task CreateModel()
-        {
-            Task<GameObject> playerAsset = _playerModelAssetProvider.LoadPlayerAsset();
-            await playerAsset;
-            _model = _container.InstantiatePrefab(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0].position, Quaternion.identity, null);
+            player.SetNickName(_playerDataHolder.PlayerStatisticsModel.Name);
         }
     }
 }

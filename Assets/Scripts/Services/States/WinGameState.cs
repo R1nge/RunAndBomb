@@ -19,7 +19,7 @@ namespace Services.States
 
         public void Enter()
         {
-            _cameraService.SwitchToWin();
+            _cameraService.SwitchToMain();
             _playerReferenceHolder.Player.Win();
             _playerDataService.Model.Level++;
             _playerDataService.Save();

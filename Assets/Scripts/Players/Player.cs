@@ -26,16 +26,17 @@ namespace Players
         private InputService _inputService;
         private ThrowTimerUI _throwTimerUI;
 
-        public PlayerAnimator PlayerAnimator => _playerAnimator;
-
         private PlayerState _currentState;
 
         private enum PlayerState
         {
+            Idle,
             Alive,
             Dead,
             Win
         }
+
+        public void SetNickName(string name) => _nicknameUI.SetNickname(name);
 
         [Inject]
         private void Inject(StateMachine stateMachine, CameraService cameraService, InputService inputService)
@@ -60,9 +61,10 @@ namespace Players
             _deathSound = GetComponent<DeathSound>();
             _throwTimerUI = GetComponent<ThrowTimerUI>();
 
+            Idle();
 
+            _cameraService.SetMainCamera(win);
             _cameraService.SetPlayerCamera(player);
-            _cameraService.SetWinCamera(win);
         }
 
         private void Update()
@@ -107,6 +109,21 @@ namespace Players
             _ragdollController.EnableRagdoll();
             _deathSound.PlayDeathSound();
             _stateMachine.ChangeState(GameStateType.Lose);
+        }
+
+        public void Idle()
+        {
+            _currentState = PlayerState.Idle;
+            
+            _nicknameUI.Hide();
+            _throwTimerUI.Hide();
+        }
+
+        public void Alive()
+        {
+            _currentState = PlayerState.Alive;
+            
+            _nicknameUI.Show();
         }
 
         public void Win()

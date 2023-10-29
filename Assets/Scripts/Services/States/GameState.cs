@@ -1,6 +1,8 @@
 ﻿using Players;
+using Services.Data;
 using Services.Factories;
 using Services.Maps;
+using UnityEngine;
 
 namespace Services.States
 {
@@ -13,8 +15,9 @@ namespace Services.States
         private readonly InputService _inputService;
         private readonly CameraService _cameraService;
         private readonly PlayerFactory _playerFactory;
+        private readonly PlayerReferenceHolder _playerReferenceHolder;
 
-        public GameState(EnemyFactory enemyFactory, UIService uiService, MapService mapService, CoroutineRunner coroutineRunner, InputService inputService, CameraService cameraService, PlayerFactory playerFactory)
+        public GameState(EnemyFactory enemyFactory, UIService uiService, MapService mapService, CoroutineRunner coroutineRunner, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder)
         {
             _enemyFactory = enemyFactory;
             _uiService = uiService;
@@ -22,12 +25,12 @@ namespace Services.States
             _coroutineRunner = coroutineRunner;
             _inputService = inputService;
             _cameraService = cameraService;
-            _playerFactory = playerFactory;
+            _playerReferenceHolder = playerReferenceHolder;
         }
 
         public async void Enter()
         {
-            await _playerFactory.Create();
+            _playerReferenceHolder.Player.Alive();
             _cameraService.SwitchToPlayer();
             await _uiService.ShowGameScreen();
             _inputService.Enable();

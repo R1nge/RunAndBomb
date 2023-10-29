@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: MainMenuCamera
+  - m_From: WinCamera
     m_To: Camera
     m_Blend:
       m_Style: 1
-      m_Time: 0.25
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -26,17 +26,6 @@ MonoBehaviour:
         m_RotationOrder: 0
   - m_From: Camera
     m_To: WinCamera
-    m_Blend:
-      m_Style: 4
-      m_Time: 0.3
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: WinCamera
-    m_To: MainMenuCamera
     m_Blend:
       m_Style: 1
       m_Time: 0.5

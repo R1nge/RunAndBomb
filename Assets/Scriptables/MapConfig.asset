@@ -23,3 +23,5 @@ MonoBehaviour:
   - {x: 1.9, y: 0, z: 9.4}
   - {x: 2.6, y: 0, z: 13}
   destroyInterval: 0.5
+  spawnPositionsAmount: 6
+  spawnRadius: 10

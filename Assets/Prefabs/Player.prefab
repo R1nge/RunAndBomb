@@ -673,7 +673,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 0
+  m_Priority: 1
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 3623515262679191907}
   m_Follow: {fileID: 3623515262679191907}
@@ -3551,7 +3551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignore:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 452
   hitMarker: {fileID: 5448852737118480283}
   maxPoints: 25
   increment: 0.1
