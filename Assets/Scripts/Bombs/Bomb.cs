@@ -14,6 +14,7 @@ namespace Bombs
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private LayerMask ignore;
         [SerializeField] private float radius;
+        private Collider _bombCollider;
         private SizeController _owner;
         private Rigidbody _rigidbody;
         private Collider[] _colliders;
@@ -30,6 +31,7 @@ namespace Bombs
 
         private void Awake()
         {
+            _bombCollider = GetComponent<Collider>();
             _rigidbody = GetComponent<Rigidbody>();
             _colliders = new Collider[6];
         }
@@ -42,10 +44,12 @@ namespace Bombs
 
         private void OnTriggerEnter(Collider other) => Explode();
 
-        private async void Explode()
+        private void Explode()
         {
             if (_exploded) return;
             _exploded = true;
+
+            _bombCollider.enabled = false;
 
             int hits = Physics.OverlapSphereNonAlloc(transform.position, radius * _owner.CurrentSize, _colliders, layerMask: ~ignore);
 
@@ -69,7 +73,7 @@ namespace Bombs
 
             _soundService.PlayExplosionSound(explosionSource);
 
-            GameObject explosionVFX = await _explosionVFXFactory.Create();
+            GameObject explosionVFX = _explosionVFXFactory.Create();
 
             explosionVFX.transform.localScale = new Vector3(_owner.CurrentSize,_owner.CurrentSize,_owner.CurrentSize);
 

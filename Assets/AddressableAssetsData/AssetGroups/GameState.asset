@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 406c550722373f0458f52803e6503020
-    m_Address: Bomb
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e87fbcb00bcb19d42894ab8b88720016
     m_Address: DeathSound
     m_ReadOnly: 0
@@ -74,11 +69,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98c664c7067752a49a90771881d2cd83
     m_Address: Target
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3ef3ae421f71c5c4e97fe12dc2fc6312
-    m_Address: ExplosionVFX
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

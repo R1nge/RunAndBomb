@@ -1,23 +1,20 @@
-﻿using System.Threading.Tasks;
-using Services.Assets;
+﻿using Services.Data;
 using UnityEngine;
 
 namespace Services.Factories
 {
     public class ExplosionVFXFactory
     {
-        private readonly ExplosionVFXAssetProvider _explosionVFXAssetProvider;
+        private readonly ConfigProvider _configProvider;
 
-        private ExplosionVFXFactory(ExplosionVFXAssetProvider explosionVFXAssetProvider)
+        private ExplosionVFXFactory(ConfigProvider configProvider)
         {
-            _explosionVFXAssetProvider = explosionVFXAssetProvider;
+            _configProvider = configProvider;
         }
         
-        public async Task<GameObject> Create()
+        public GameObject Create()
         {
-            Task<GameObject> screen = _explosionVFXAssetProvider.LoadExplosionAsset();
-            await screen;
-            return Object.Instantiate(screen.Result);
+            return Object.Instantiate(_configProvider.BombConfig.ExplosionVFX);
         }
     }
 }

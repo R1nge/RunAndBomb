@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Data
 {
@@ -9,11 +8,11 @@ namespace Data
         [SerializeField] private float mass;
         [SerializeField] private float drag;
         [SerializeField] private Vector3 gravity;
-        [SerializeField] private AssetReferenceGameObject explosionVFX;
+        [SerializeField] private GameObject explosionVFX;
 
         public float Mass => mass;
         public float Drag => drag;
         public Vector3 Gravity => gravity;
-        public AssetReferenceGameObject ExplosionVFX => explosionVFX;
+        public GameObject ExplosionVFX => explosionVFX;
     }
 }

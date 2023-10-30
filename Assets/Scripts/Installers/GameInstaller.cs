@@ -16,7 +16,6 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            
             Container.BindInstance(soundService);
 
             Container.Bind<SpawnPositionsProvider>().AsSingle();
@@ -38,11 +37,9 @@ namespace Installers
             Container.Bind<UIService>().AsSingle();
 
             Container.Bind<PlayerReferenceHolder>().AsSingle();
-            Container.Bind<PlayerModelAssetProvider>().AsSingle();
             Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
-
-            Container.Bind<ExplosionVFXAssetProvider>().AsSingle();
+            
             Container.Bind<ExplosionVFXFactory>().AsSingle();
 
             Container.Bind<BombFactory>().AsSingle();
