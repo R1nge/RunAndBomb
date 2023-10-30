@@ -1,7 +1,5 @@
-﻿using System;
-using Common;
+﻿using Common;
 using Services;
-using Services.Factories;
 using UnityEngine;
 using Zenject;
 
@@ -20,13 +18,13 @@ namespace Bombs
         private Collider[] _colliders;
         private bool _exploded;
         private SoundService _soundService;
-        private ExplosionVFXFactory _explosionVFXFactory;
+        private ExplosionVFXPool _explosionVFXPool;
 
         [Inject]
-        private void Inject(SoundService soundService, ExplosionVFXFactory explosionVFXFactory)
+        private void Inject(SoundService soundService, ExplosionVFXPool explosionVFXPool)
         {
             _soundService = soundService;
-            _explosionVFXFactory = explosionVFXFactory;
+            _explosionVFXPool = explosionVFXPool;
         }
 
         private void Awake()
@@ -73,7 +71,7 @@ namespace Bombs
 
             _soundService.PlayExplosionSound(explosionSource);
 
-            GameObject explosionVFX = _explosionVFXFactory.Create();
+            GameObject explosionVFX = _explosionVFXPool.Get();
 
             explosionVFX.transform.localScale = new Vector3(_owner.CurrentSize,_owner.CurrentSize,_owner.CurrentSize);
 

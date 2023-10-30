@@ -41,6 +41,7 @@ namespace Installers
             Container.Bind<PlayerFactory>().AsSingle();
             
             Container.Bind<ExplosionVFXFactory>().AsSingle();
+            Container.Bind<ExplosionVFXPool>().AsSingle();
 
             Container.Bind<BombFactory>().AsSingle();
             Container.Bind<EnemySkinService>().AsSingle();
