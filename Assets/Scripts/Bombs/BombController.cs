@@ -13,6 +13,7 @@ namespace Bombs
         [SerializeField] protected float throwInterval;
         [SerializeField] private float force;
         [SerializeField] private BombConfig bombConfig;
+        [SerializeField] private bool isPlayer;
         private SizeController _sizeController;
         protected BombProperties BombProperties;
         private BombFactory _bombFactory;
@@ -82,28 +83,15 @@ namespace Bombs
             }
 
             _canThrow = false;
-
+            
             Bomb bomb = _bombFactory.Create(_bombSkinIndex);
             bomb.transform.position = bombSpawnPoint.position;
             bomb.GetComponent<RigidbodyGravity>().SetBombProperties(BombProperties);
 
             Vector3 force = BombProperties.Direction * (BombProperties.InitialSpeed / BombProperties.Mass);
             
-            //Velocity , Angle , Initial Position
-            //force, angle, InitialPosition
-            
-            //Time = 2 * force * sin(angle) / gravity
-
-            // print($"Angle {(360 - bombSpawnPoint.rotation.eulerAngles.x) % 360}");
-            //
-            // float sinus = Mathf.Sin((360 - bombSpawnPoint.rotation.eulerAngles.x) % 360);
-            // float time = force.magnitude * (2 * sinus / _bombProperties.Gravity.y);
-            //
-            // //time *= 2.57085f;
-            //
-            // print(time);
-            
-            bomb.Throw(force, _sizeController);
+            //TODO: find a better solution, maybe create an enemy and player bomb using factory
+            bomb.Throw(force, _sizeController, isPlayer);
 
             return true;
         }

@@ -22,6 +22,8 @@ namespace Installers
             Container.Bind<CameraService>().AsSingle();
             Container.Bind<InputService>().AsSingle();
 
+            Container.Bind<KillService>().AsSingle();
+            
             Container.Bind<PlatformFactory>().AsSingle();
             Container.Bind<MapService>().AsSingle();
 

@@ -3397,6 +3397,7 @@ MonoBehaviour:
   throwInterval: 3
   force: 5
   bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
+  isPlayer: 1
 --- !u!114 &-6604846308212314379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3743,10 +3744,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90fd5caa0184b70bb7543d95327732c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSpawnPoint: {fileID: 0}
-  throwInterval: 0
-  force: 0
-  bombConfig: {fileID: 0}
+  bombSpawnPoint: {fileID: 3671208612101914674}
+  throwInterval: 3
+  force: 5
+  bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
+  isPlayer: 1
 --- !u!1 &9029437092719501621
 GameObject:
   m_ObjectHideFlags: 0

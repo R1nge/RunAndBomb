@@ -235,6 +235,7 @@ MonoBehaviour:
   throwInterval: 3
   force: 5
   bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
+  isPlayer: 0
 --- !u!114 &2405671927389759639
 MonoBehaviour:
   m_ObjectHideFlags: 0

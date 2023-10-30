@@ -20,14 +20,15 @@ namespace Bombs
         private bool _exploded;
         private SoundService _soundService;
         private ExplosionVFXPool _explosionVFXPool;
-        private VibrationService _vibrationService;
+        private KillService _killService;
+        private bool _isPlayer;
 
         [Inject]
-        private void Inject(SoundService soundService, ExplosionVFXPool explosionVFXPool, VibrationService vibrationService)
+        private void Inject(SoundService soundService, ExplosionVFXPool explosionVFXPool, KillService killService)
         {
             _soundService = soundService;
             _explosionVFXPool = explosionVFXPool;
-            _vibrationService = vibrationService;
+            _killService = killService;
         }
 
         private void Awake()
@@ -37,9 +38,10 @@ namespace Bombs
             _colliders = new Collider[6];
         }
 
-        public void Throw(Vector3 force, SizeController owner)
+        public void Throw(Vector3 force, SizeController owner, bool isPlayer)
         {
             _owner = owner;
+            _isPlayer = isPlayer;
             _rigidbody.AddForce(force, ForceMode.Impulse);
         }
 
@@ -64,16 +66,15 @@ namespace Bombs
                         {
                             continue;
                         }
-
-                        //TODO: find a better way, maybe move it to the bomb controller
-                        if (_owner.TryGetComponent(out Player player))
+                        
+                        if (_isPlayer)
                         {
-                            _vibrationService.VibrateSingle();
+                            _killService.Kill();
                         }
                         
                         damageable.TakeDamage();
                         
-                        _owner.GetComponent<SizeController>().IncreaseSize();
+                        _owner.IncreaseSize();
                     }
                 }
             }
