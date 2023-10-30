@@ -215,8 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84a577cf77046a6a93ad96007e5f477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 8961505902426165892}
+  lerpColor: {r: 1, g: 1, b: 1, a: 0}
   detectTransform: {fileID: 2684444699073941225}
-  radius: 2.5
+  radius: 3
   ignore:
     serializedVersion: 2
     m_Bits: 375

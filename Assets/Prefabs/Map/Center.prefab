@@ -132,6 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84a577cf77046a6a93ad96007e5f477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 2378104278032458534}
+  _rigidbody: {fileID: 0}
+  lerpColor: {r: 0, g: 0, b: 0, a: 0}
   detectTransform: {fileID: 0}
   radius: 0
   ignore:
