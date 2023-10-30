@@ -17,6 +17,7 @@ namespace Services.Maps
         private readonly ConfigProvider _configProvider;
         private readonly PlatformFactory _platformFactory;
         private readonly List<Platform> _platforms = new();
+        private readonly List<Platform> _fallenPlatforms = new();
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
         private NavMeshSurface _navMeshSurface;
 
@@ -58,8 +59,12 @@ namespace Services.Maps
         
         public void DestroyMap()
         {
-            var count = _platforms.Count;
-            for (int i =  count - 1; i >= 0; i--)
+            for (int i =  _fallenPlatforms.Count - 1; i >= 0; i--)
+            {
+                Object.Destroy(_fallenPlatforms[i].gameObject);
+            }
+
+            for (int i = _platforms.Count - 1; i >= 0; i--)
             {
                 Object.Destroy(_platforms[i].gameObject);
             }
@@ -74,6 +79,8 @@ namespace Services.Maps
                 var index = Random.Range(1, _platforms.Count);
                 yield return new WaitForSeconds(_configProvider.MapConfig.DestroyInterval);
                 _platforms[index].Drop();
+                _fallenPlatforms.Add(_platforms[index]);
+                _platforms.RemoveAt(index);
                 OnTileDestroyed?.Invoke();
                 yield return new WaitForSeconds(.1f);
                 _navMeshSurface.BuildNavMesh();
@@ -85,6 +92,10 @@ namespace Services.Maps
 
         private void Add(Platform platform) => _platforms.Add(platform);
 
-        private void Clear() => _platforms.Clear();
+        private void Clear()
+        {
+            _platforms.Clear();
+            _fallenPlatforms.Clear();
+        }
     }
 }
