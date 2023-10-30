@@ -22,6 +22,8 @@ namespace Installers
             
             Container.Bind<LoadingScreenAssetProvider>().AsSingle();
             Container.Bind<StartScreenAssetProvider>().AsSingle();
+
+            Container.Bind<VibrationService>().AsSingle();
         }
     }
 }

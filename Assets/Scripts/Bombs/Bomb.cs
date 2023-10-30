@@ -1,4 +1,5 @@
 ﻿using Common;
+using Players;
 using Services;
 using UnityEngine;
 using Zenject;
@@ -19,12 +20,14 @@ namespace Bombs
         private bool _exploded;
         private SoundService _soundService;
         private ExplosionVFXPool _explosionVFXPool;
+        private VibrationService _vibrationService;
 
         [Inject]
-        private void Inject(SoundService soundService, ExplosionVFXPool explosionVFXPool)
+        private void Inject(SoundService soundService, ExplosionVFXPool explosionVFXPool, VibrationService vibrationService)
         {
             _soundService = soundService;
             _explosionVFXPool = explosionVFXPool;
+            _vibrationService = vibrationService;
         }
 
         private void Awake()
@@ -62,6 +65,12 @@ namespace Bombs
                             continue;
                         }
 
+                        //TODO: find a better way, maybe move it to the bomb controller
+                        if (_owner.TryGetComponent(out Player player))
+                        {
+                            _vibrationService.VibrateSingle();
+                        }
+                        
                         damageable.TakeDamage();
                         
                         _owner.GetComponent<SizeController>().IncreaseSize();

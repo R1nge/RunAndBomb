@@ -8,16 +8,16 @@ namespace UIs
     {
         [SerializeField] private GameObject timerParent;
         [SerializeField] private Image timerRadial;
-        private BombController _bombController;
+        private PlayerBombController _bombController;
 
         private void Awake()
         {
-            _bombController = GetComponent<BombController>();
+            _bombController = GetComponent<PlayerBombController>();
             _bombController.OnTimerStarted += Show;
             _bombController.OnTimerEnded += Hide;
             _bombController.OnTimerChanged += UpdateSlider;
 
-            timerParent.SetActive(false);
+            Hide();
         }
 
         private void UpdateSlider(float time, float totalTime) => timerRadial.fillAmount = time / totalTime;

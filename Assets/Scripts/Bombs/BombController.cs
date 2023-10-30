@@ -1,31 +1,25 @@
-﻿using System;
-using Common;
+﻿using Common;
 using Data;
 using Services.Data;
 using Services.Factories;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Bombs
 {
-    public class BombController : MonoBehaviour
+    public abstract class BombController : MonoBehaviour
     {
-        public event Action OnTimerStarted, OnTimerEnded;
-        public event Action<float, float> OnTimerChanged;
         [SerializeField] private Transform bombSpawnPoint;
-        [SerializeField] private float throwInterval;
+        [SerializeField] protected float throwInterval;
         [SerializeField] private float force;
         [SerializeField] private BombConfig bombConfig;
         private SizeController _sizeController;
-        private TrajectoryPredictor _trajectoryPredictor;
-        private BombProperties _bombProperties;
+        protected BombProperties BombProperties;
         private BombFactory _bombFactory;
         private ConfigProvider _configProvider;
-        private float _currentTime;
-        private bool _canThrow = true;
+        protected float CurrentTime;
+        protected bool _canThrow = true;
         private float _multiplier;
-        private bool _hasTrajectoryPredictor;
         private int _bombSkinIndex;
 
         public bool CanThrow => _canThrow;
@@ -37,68 +31,49 @@ namespace Bombs
             _configProvider = configProvider;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _sizeController = GetComponent<SizeController>();
             
-            _bombProperties = new BombProperties();
+            BombProperties = new BombProperties();
 
-            _currentTime = throwInterval;
-
-            _hasTrajectoryPredictor = TryGetComponent(out TrajectoryPredictor trajectoryPredictor);
-
-            if (_hasTrajectoryPredictor)
-            {
-                _trajectoryPredictor = trajectoryPredictor;
-            }
+            CurrentTime = throwInterval;
 
             _bombSkinIndex = Random.Range(0, _configProvider.BombSkinsConfig.Bombs.Length);
         }
 
-        public void Process()
+        public virtual void Process()
         {
-            if (!_canThrow)
+            if (_canThrow)
             {
-                OnTimerStarted?.Invoke();
-
-                _currentTime -= Time.deltaTime;
-
-                OnTimerChanged?.Invoke(_currentTime, throwInterval);
-
-                if (_currentTime <= 0)
-                {
-                    _canThrow = true;
-                    _currentTime = throwInterval;
-                    OnTimerEnded?.Invoke();
-                }
+                Predict();
             }
             else
             {
-                Predict();
-                
-                if (_hasTrajectoryPredictor)
-                {
-                    Draw();
-                }
+                CurrentTime -= Time.deltaTime;
             }
         }
 
-        public void SetMultiplier(float multiplier) => _bombProperties.InitialSpeed = force * multiplier;
+        protected void ResetTimer()
+        {
+            if (CurrentTime <= 0)
+            {
+                _canThrow = true;
+                CurrentTime = throwInterval;
+            }
+        }
+
+        public void SetMultiplier(float multiplier) => BombProperties.InitialSpeed = force * multiplier;
 
         private void Predict()
         {
-            _bombProperties.Mass = bombConfig.Mass;
-            _bombProperties.Drag = bombConfig.Drag;
-            _bombProperties.Direction = bombSpawnPoint.transform.forward;
-            _bombProperties.InitialPosition = bombSpawnPoint.transform.position;
-            _bombProperties.Gravity = Physics.gravity * _bombProperties.Mass;
+            BombProperties.Mass = bombConfig.Mass;
+            BombProperties.Drag = bombConfig.Drag;
+            BombProperties.Direction = bombSpawnPoint.transform.forward;
+            BombProperties.InitialPosition = bombSpawnPoint.transform.position;
+            BombProperties.Gravity = Physics.gravity * BombProperties.Mass;
         }
-
-        private void Draw()
-        {
-            _trajectoryPredictor.PredictTrajectory(_bombProperties);
-        }
-
+        
         public bool TryThrow()
         {
             if (!_canThrow)
@@ -110,9 +85,9 @@ namespace Bombs
 
             Bomb bomb = _bombFactory.Create(_bombSkinIndex);
             bomb.transform.position = bombSpawnPoint.position;
-            bomb.GetComponent<RigidbodyGravity>().SetBombProperties(_bombProperties);
+            bomb.GetComponent<RigidbodyGravity>().SetBombProperties(BombProperties);
 
-            Vector3 force = _bombProperties.Direction * (_bombProperties.InitialSpeed / _bombProperties.Mass);
+            Vector3 force = BombProperties.Direction * (BombProperties.InitialSpeed / BombProperties.Mass);
             
             //Velocity , Angle , Initial Position
             //force, angle, InitialPosition

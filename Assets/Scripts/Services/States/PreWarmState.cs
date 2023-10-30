@@ -19,6 +19,7 @@ namespace Services.States
 
         public async void Enter()
         {
+            Vibration.Init();
             await _loadingScreenAssetProvider.LoadLoadingScreenAsset();
             await _startScreenAssetProvider.LoadStartUIAsset();
             _explosionVFXPool.CreatePool(20);
