@@ -20,6 +20,7 @@ namespace Players
 
         private void InputStateChanged(bool isEnabled)
         {
+            print($"Input state: {isEnabled}");
             joystick.enabled = isEnabled;
             joystick.gameObject.SetActive(isEnabled);
         }

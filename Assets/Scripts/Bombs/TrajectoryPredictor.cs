@@ -25,7 +25,11 @@ namespace Bombs
 
         private void Awake() => _trajectoryLine = GetComponent<LineRenderer>();
 
-        private void Start() => SetTrajectoryVisible(false);
+        private void Start()
+        {
+            SetTrajectoryVisible(false);
+            SetHitMarkerVisible(false);
+        }
 
         public void PredictTrajectory(BombProperties projectile)
         {
@@ -48,11 +52,12 @@ namespace Bombs
                 {
                     UpdateLineRender(i, (i - 1, hit.point));
                     MoveHitMarker(hit);
+                    SetHitMarkerVisible(true);
                     break;
                 }
 
                 //If nothing is hit, continue rendering the arc without a visual marker
-                hitMarker.gameObject.SetActive(false);
+                SetHitMarkerVisible(false);
                 position = nextPosition;
                 UpdateLineRender(maxPoints, (i, position)); //Unnecessary to set count here, but not harmful
             }
@@ -78,8 +83,6 @@ namespace Bombs
 
         private void MoveHitMarker(RaycastHit hit)
         {
-            hitMarker.gameObject.SetActive(true);
-
             // Offset marker from surface
             const float offset = 0.15f;
             hitMarker.position = hit.point + hit.normal * offset;
@@ -88,8 +91,13 @@ namespace Bombs
 
         public void SetTrajectoryVisible(bool visible)
         {
-            if (_trajectoryLine.enabled == visible && hitMarker.gameObject.activeInHierarchy == visible) return;
+            if (_trajectoryLine.enabled == visible) return;
             _trajectoryLine.enabled = visible;
+        }
+
+        public void SetHitMarkerVisible(bool visible)
+        {
+            if (hitMarker.gameObject.activeInHierarchy == visible) return;
             hitMarker.gameObject.SetActive(visible);
         }
     }

@@ -79,8 +79,9 @@ namespace Players
                         _playerAnimator.PlayWalkingAnimation(_playerMovement.CurrentSpeed);
                         _bombController.SetMultiplier(_playerMovement.CurrentSpeed);
                         _playerMovement.ProcessMovement();
-                        _bombController.Process();
                         _trajectoryPredictor.SetTrajectoryVisible(_bombController.CanThrow);
+                        _trajectoryPredictor.SetHitMarkerVisible(_bombController.CanThrow);
+                        _bombController.Process();
                     }
 
                     break;
@@ -104,6 +105,7 @@ namespace Players
             _currentState = PlayerState.Dead;
 
             _trajectoryPredictor.SetTrajectoryVisible(false);
+            _trajectoryPredictor.SetHitMarkerVisible(false);
             _nicknameUI.Hide();
             _colliderController.DisableCharacterColliders();
             _ragdollController.EnableRagdoll();
@@ -114,7 +116,7 @@ namespace Players
         public void Idle()
         {
             _currentState = PlayerState.Idle;
-            
+
             _nicknameUI.Hide();
             _throwTimerUI.Hide();
         }
@@ -122,7 +124,7 @@ namespace Players
         public void Alive()
         {
             _currentState = PlayerState.Alive;
-            
+
             _nicknameUI.Show();
         }
 
@@ -132,6 +134,7 @@ namespace Players
 
             _playerAnimator.PlayDanceAnimation();
             _trajectoryPredictor.SetTrajectoryVisible(false);
+            _trajectoryPredictor.SetHitMarkerVisible(false);
             _nicknameUI.Hide();
             _throwTimerUI.Hide();
         }
