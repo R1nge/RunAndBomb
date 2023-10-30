@@ -31,7 +31,7 @@ namespace Services.Factories
         {
             Task<Player> playerAsset = _playerAssetProvider.LoadPlayerAsset();
             await playerAsset;
-            var player = _container.InstantiatePrefabForComponent<Player>(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0].position, Quaternion.identity, null);
+            var player = _container.InstantiatePrefabForComponent<Player>(playerAsset.Result, _spawnPositionsProvider.SpawnPositions[0], Quaternion.identity, null);
             _playerReferenceHolder.SetPlayer(player);
             player.SetNickName(_playerDataHolder.PlayerStatisticsModel.Name);
         }

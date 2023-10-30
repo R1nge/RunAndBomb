@@ -11,8 +11,6 @@
     <type fullname="Common.RigidbodyGravity" preserve="all" />
     <type fullname="Common.SizeController" preserve="all" />
     <type fullname="Data.BombConfig" preserve="all" />
-    <type fullname="Enemies.Enemy" preserve="all" />
-    <type fullname="Enemies.EnemyAnimator" preserve="all" />
     <type fullname="FloatingJoystick" preserve="all" />
     <type fullname="LoadingScreen" preserve="all" />
     <type fullname="Players.Player" preserve="all" />
@@ -67,9 +65,6 @@
     <type fullname="TMPro.TMP_GlyphAdjustmentRecord" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_GlyphPairAdjustmentRecord" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_GlyphValueRecord" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.AI.NavMeshAgent" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.AnimationClip" preserve="all" />

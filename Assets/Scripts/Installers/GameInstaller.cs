@@ -12,16 +12,15 @@ namespace Installers
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private SpawnPositionsProvider spawnPositionsProvider;
         [SerializeField] private SoundService soundService;
-        [SerializeField] private CameraService cameraService;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(spawnPositionsProvider);
+            
             Container.BindInstance(soundService);
-            Container.BindInstance(cameraService);
 
+            Container.Bind<SpawnPositionsProvider>().AsSingle();
+            Container.Bind<CameraService>().AsSingle();
             Container.Bind<InputService>().AsSingle();
 
             Container.Bind<PlatformFactory>().AsSingle();
@@ -45,11 +44,12 @@ namespace Installers
 
             Container.Bind<ExplosionVFXAssetProvider>().AsSingle();
             Container.Bind<ExplosionVFXFactory>().AsSingle();
-            
+
             Container.Bind<BombFactory>().AsSingle();
             Container.Bind<EnemySkinService>().AsSingle();
             Container.Bind<EnemyCounter>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
+            Container.Bind<EnemySpawner>().AsSingle();
 
             Container.Bind<StateMachine>().AsSingle();
 

@@ -1,9 +1,8 @@
 ﻿using Cinemachine;
-using UnityEngine;
 
 namespace Services
 {
-    public class CameraService : MonoBehaviour
+    public class CameraService
     {
         private CinemachineVirtualCamera _main;
         private CinemachineVirtualCamera _player;

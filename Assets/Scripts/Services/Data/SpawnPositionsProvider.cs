@@ -1,27 +1,16 @@
-﻿using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
 namespace Services.Data
 {
-    public class SpawnPositionsProvider : MonoBehaviour
+    public class SpawnPositionsProvider
     {
-        [SerializeField] private Transform parent;
-        private Transform[] _spawnPositions;
+        private Vector3[] _spawnPositions;
 
-        public Transform[] SpawnPositions => _spawnPositions;
+        public Vector3[] SpawnPositions => _spawnPositions;
 
         public void CreateSpawnPoints(int num, Vector3 point, float radius)
         {
-            if (_spawnPositions != null)
-            {
-                for (int i = _spawnPositions.Length - 1; i >= 0; i--)
-                {
-                    Destroy(_spawnPositions[i].gameObject);  
-                }
-            }
-            
-            _spawnPositions = new Transform[num];
+            _spawnPositions = new Vector3[num];
             
             for (int i = num - 1; i >= 0; i--)
             {
@@ -33,19 +22,8 @@ namespace Services.Data
                 var spawnDir = new Vector3(horizontal, 0, vertical);
 
                 Vector3 spawnPos = point + spawnDir * radius;
-
-                var transform = new GameObject
-                {
-                    name = $"SpawnPosition {i}",
-                    transform =
-                    {
-                        position = spawnPos,
-                        parent = parent
-                    }
-                };
-
-                transform.transform.LookAt(point);
-                _spawnPositions[i] = transform.transform;
+                
+                _spawnPositions[i] = spawnPos;
             }
         }
     }

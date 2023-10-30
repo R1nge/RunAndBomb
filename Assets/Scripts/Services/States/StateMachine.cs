@@ -13,7 +13,7 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemyFactory enemyFactory, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider)
+        public StateMachine(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
@@ -21,7 +21,7 @@ namespace Services.States
                 { GameStateType.LoadData, new LoadDataState(this, playerDataService, uiService) },
                 { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapService) },
                 { GameStateType.Init, new InitGameState(uiService, playerDataService, cameraService, mapService, playerFactory, spawnPositionsProvider, configProvider, playerReferenceHolder) },
-                { GameStateType.Game, new GameState(enemyFactory, uiService, mapService, coroutineRunner, inputService, cameraService, playerReferenceHolder) },
+                { GameStateType.Game, new GameState(enemySpawner, uiService, mapService, coroutineRunner, inputService, cameraService, playerReferenceHolder) },
                 { GameStateType.Win, new WinGameState(playerDataService, uiService, cameraService, playerReferenceHolder) },
                 { GameStateType.Lose, new LoseGameState(uiService) }
             };

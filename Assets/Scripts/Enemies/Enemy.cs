@@ -1,4 +1,5 @@
-﻿using Bombs;
+﻿using System.Collections;
+using Bombs;
 using Common;
 using Enemies.States;
 using Services;
@@ -68,7 +69,6 @@ namespace Enemies
         {
             _enemyMovement = new EnemyMovement(transform, _navMeshAgent, _configProvider, _enemyAnimator, _mapService);
             _enemyMovement.Init();
-            
             _bombController.SetMultiplier(_navMeshAgent.speed);
             
             _enemyAttack = new EnemyAttack(_bombController, _enemyAnimator, _navMeshAgent);
@@ -81,8 +81,14 @@ namespace Enemies
             _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_enemyDeathController));
 
-            _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
+            _navMeshAgent.enabled = true;
+            // yield return new WaitForSeconds(5f);
+            //
+            // _navMeshAgent.updatePosition = true;
+            // _navMeshAgent.updateRotation = true;
             
+            _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
+
             InvokeRepeating(nameof(DetectCharacter), _configProvider.EnemyConfig.DelayBeforeNextScan, _configProvider.EnemyConfig.DelayBeforeNextScan);
         }
 
@@ -94,11 +100,11 @@ namespace Enemies
             {
                 return;
             }
-            
+
             int hits = Physics.OverlapSphereNonAlloc(transform.position, _configProvider.EnemyConfig.ScanRadius, _colliders, layerMask: ~ignore);
 
             Transform target = null;
-            
+
             for (int i = 0; i < hits; i++)
             {
                 if (_colliders[i].TryGetComponent(out IDamageable damageable))
