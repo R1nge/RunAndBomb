@@ -13,11 +13,11 @@ namespace Bombs
         [SerializeField] protected float throwInterval;
         [SerializeField] private float force;
         [SerializeField] private BombConfig bombConfig;
-        [SerializeField] private bool isPlayer;
         private SizeController _sizeController;
         protected BombProperties BombProperties;
         private BombFactory _bombFactory;
         private ConfigProvider _configProvider;
+        protected bool IsPlayer;
         protected float CurrentTime;
         protected bool _canThrow = true;
         private float _multiplier;
@@ -91,7 +91,7 @@ namespace Bombs
             Vector3 force = BombProperties.Direction * (BombProperties.InitialSpeed / BombProperties.Mass);
             
             //TODO: find a better solution, maybe create an enemy and player bomb using factory
-            bomb.Throw(force, _sizeController, isPlayer);
+            bomb.Throw(force, _sizeController, IsPlayer);
 
             return true;
         }

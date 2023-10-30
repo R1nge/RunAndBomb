@@ -12,6 +12,7 @@ namespace Bombs
         {
             base.Awake();
             _trajectoryPredictor = GetComponent<TrajectoryPredictor>();
+            IsPlayer = true;
         }
 
         public override void Process()
