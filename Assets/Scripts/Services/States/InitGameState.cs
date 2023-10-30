@@ -38,6 +38,10 @@ namespace Services.States
             _cameraService.SwitchToMain();
         }
 
-        public void Exit() => _playerDataService.Save();
+        public void Exit()
+        {
+            _playerDataService.Save();
+            _playerReferenceHolder.Player.SetNickName(_playerDataService.Model.Name);
+        }
     }
 }
