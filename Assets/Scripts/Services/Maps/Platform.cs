@@ -17,7 +17,7 @@ namespace Services.Maps
 
             for (int i = 0; i < hits; i++)
             {
-                if (_colliders[i].TryGetComponent(out Enemy enemy))
+                if (_colliders[i].transform.root.TryGetComponent(out Enemy enemy))
                 {
                     enemy.Fall();
                 }
