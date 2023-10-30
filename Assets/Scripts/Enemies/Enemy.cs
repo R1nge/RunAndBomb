@@ -81,12 +81,6 @@ namespace Enemies
             _enemyStateMachine.AddState(EnemyStateType.Attack, new EnemyAttackState(_enemyStateMachine, _enemyAttack));
             _enemyStateMachine.AddState(EnemyStateType.Death, new EnemyDeathState(_enemyDeathController));
 
-            _navMeshAgent.enabled = true;
-            // yield return new WaitForSeconds(5f);
-            //
-            // _navMeshAgent.updatePosition = true;
-            // _navMeshAgent.updateRotation = true;
-            
             _enemyStateMachine.ChangeState(EnemyStateType.Patrol);
 
             InvokeRepeating(nameof(DetectCharacter), _configProvider.EnemyConfig.DelayBeforeNextScan, _configProvider.EnemyConfig.DelayBeforeNextScan);
