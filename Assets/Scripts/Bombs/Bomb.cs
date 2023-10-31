@@ -88,6 +88,8 @@ namespace Bombs
             explosionVFX.transform.position = transform.position;
             
             meshRenderer.enabled = false;
+
+            _rigidbody.isKinematic = true;
             
             Destroy(gameObject, explosionSource.clip.length);
         }
