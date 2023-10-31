@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Services.Data;
 
@@ -24,7 +23,6 @@ namespace Services.States
         {
             _loadingScreen = await _uiService.ShowLoadingScreen();
 
-            //Placeholder code for the demonstration purposes.
             var asyncLoadings = new List<IAsyncLoadingOperation>
             {
                 new AsyncPlaceHolderLoadingOperation()
@@ -54,8 +52,6 @@ namespace Services.States
                 current++;
                 _loadingScreen.UpdatePercent(current + 1, loadings.Count);
             }
-
-            await Task.Delay(500);
 
             _stateMachine.ChangeState(GameStateType.Reset);
         }

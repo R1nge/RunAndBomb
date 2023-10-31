@@ -2,6 +2,16 @@
 {
     public class VibrationService
     {
-        public void VibrateSingle() => Vibration.VibratePeek();
+        private readonly SettingsService _settingsService;
+        
+        private VibrationService(SettingsService settingsService) => _settingsService = settingsService;
+
+        public void VibrateSingle()
+        {
+            if (_settingsService.Settingss.VibrationEnabled)
+            {
+                Vibration.VibratePeek();
+            }
+        }
     }
 }

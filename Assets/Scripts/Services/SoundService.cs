@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Zenject;
 
 namespace Services
 {
@@ -12,25 +13,33 @@ namespace Services
         [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
         [SerializeField] private List<AssetReferenceT<AudioClip>> explosionSounds;
         private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
+        private SettingsService _settingsService;
+
+        [Inject]
+        private void Inject(SettingsService settingsService)
+        {
+            _settingsService = settingsService;
+        }
 
         private void Awake()
         {
+            //TODO: load sounds if only if sounds enabled
             _handles = new Dictionary<SoundType, List<AsyncOperationHandle>>();
-            
+
             var clickSounds = new List<AsyncOperationHandle>
             {
                 clickSound.LoadAssetAsync()
             };
-            
+
             _handles.Add(SoundType.Click, clickSounds);
 
             var deathSoundsHandles = new List<AsyncOperationHandle>();
-            
+
             for (int i = 0; i < deathSounds.Count; i++)
             {
                 deathSoundsHandles.Add(deathSounds[i].LoadAssetAsync());
             }
-            
+
             _handles.Add(SoundType.Death, deathSoundsHandles);
 
             var explosionSoundsHandle = new List<AsyncOperationHandle>();
@@ -45,6 +54,8 @@ namespace Services
 
         public void PlayClickSound()
         {
+            if (!SoundsEnabled()) return;
+
             if (_handles[SoundType.Click][0].IsValid() && clickSource.clip)
             {
                 clickSource.Play();
@@ -57,6 +68,8 @@ namespace Services
 
         public void PlayDeathSound(AudioSource source)
         {
+            if (!SoundsEnabled()) return;
+
             int index = Random.Range(0, deathSounds.Count);
 
             if (_handles[SoundType.Death][index].IsValid() && source.clip)
@@ -71,8 +84,10 @@ namespace Services
 
         public void PlayExplosionSound(AudioSource source)
         {
+            if (!SoundsEnabled()) return;
+
             int index = Random.Range(0, explosionSounds.Count);
-            
+
             if (_handles[SoundType.Explosion][index].IsValid() && source.clip)
             {
                 source.Play();
@@ -82,6 +97,8 @@ namespace Services
             source.clip = _handles[SoundType.Explosion][index].Result as AudioClip;
             source.Play();
         }
+
+        private bool SoundsEnabled() => _settingsService.Settingss.SoundEnabled;
 
         private enum SoundType
         {

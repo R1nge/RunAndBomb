@@ -13,10 +13,12 @@ namespace Installers
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private SoundService soundService;
+        [SerializeField] private PopupService popupService;
 
         public override void InstallBindings()
         {
             Container.BindInstance(soundService);
+            Container.BindInstance(popupService);
 
             Container.Bind<SpawnPositionsProvider>().AsSingle();
             Container.Bind<CameraService>().AsSingle();
