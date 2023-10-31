@@ -90,8 +90,15 @@ namespace Bombs
             meshRenderer.enabled = false;
 
             _rigidbody.isKinematic = true;
-            
-            Destroy(gameObject, explosionSource.clip.length);
+
+            if (explosionSource.clip != null)
+            {
+                Destroy(gameObject, explosionSource.clip.length);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnDrawGizmos()

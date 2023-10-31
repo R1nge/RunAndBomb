@@ -1,4 +1,5 @@
-﻿using Services.Data;
+﻿using Data;
+using Services.Data;
 using Services.Data.Player;
 using Services.Factories;
 using Services.Maps;
@@ -17,7 +18,9 @@ namespace Services.States
         private readonly ConfigProvider _configProvider;
         private readonly PlayerReferenceHolder _playerReferenceHolder;
 
-        public InitGameState(UIService uiService, IPlayerDataService playerDataService, CameraService cameraService, MapService mapService, PlayerFactory playerFactory, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, PlayerReferenceHolder playerReferenceHolder)
+        public InitGameState(UIService uiService, IPlayerDataService playerDataService, CameraService cameraService,
+            MapService mapService, PlayerFactory playerFactory, SpawnPositionsProvider spawnPositionsProvider,
+            ConfigProvider configProvider, PlayerReferenceHolder playerReferenceHolder)
         {
             _uiService = uiService;
             _playerDataService = playerDataService;
@@ -31,7 +34,8 @@ namespace Services.States
 
         public async void Enter()
         {
-            _spawnPositionsProvider.CreateSpawnPoints(_configProvider.MapConfig.SpawnPositionsAmount, new Vector3(0,2f,0), _configProvider.MapConfig.SpawnRadius);
+            MapConfig mapConfig = _configProvider.MapConfig;
+            _spawnPositionsProvider.CreateSpawnPoints(mapConfig.SpawnPositionsAmount, new Vector3(0, mapConfig.SpawnPositionY, 0), mapConfig.SpawnRadius);
             _mapService.Generate();
             await _playerFactory.Create();
             await _uiService.ShowStartScreen();

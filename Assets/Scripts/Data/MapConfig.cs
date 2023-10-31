@@ -14,6 +14,7 @@ namespace Data
 
         [SerializeField] private int spawnPositionsAmount;
         [SerializeField] private float spawnRadius;
+        [SerializeField] private float spawnPositionY = 2.05f;
         
         public Platform BasePlatform => basePlatform;
         public Platform[] Platforms => platforms;
@@ -23,5 +24,6 @@ namespace Data
 
         public int SpawnPositionsAmount => spawnPositionsAmount;
         public float SpawnRadius => spawnRadius;
+        public float SpawnPositionY => spawnPositionY;
     }
 }
