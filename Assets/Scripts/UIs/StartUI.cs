@@ -1,4 +1,5 @@
 ﻿using Services.Data;
+using Services.Data.Player;
 using Services.States;
 using TMPro;
 using UnityEngine;
@@ -12,13 +13,13 @@ namespace UIs
         [SerializeField] private TMP_InputField nameInputField;
         [SerializeField] private Button start;
         private StateMachine _stateMachine;
-        private PlayerDataHolder _playerDataHolder;
+        private IPlayerDataService _playerDataService;
 
         [Inject]
-        private void Inject(StateMachine stateMachine, PlayerDataHolder playerDataHolder)
+        private void Inject(StateMachine stateMachine, IPlayerDataService playerDataService)
         {
             _stateMachine = stateMachine;
-            _playerDataHolder = playerDataHolder;
+            _playerDataService = playerDataService;
         }
 
         public void Init()
@@ -28,9 +29,9 @@ namespace UIs
             start.onClick.AddListener(StartGame);
         }
 
-        private void SetLoadedNickname() => nameInputField.text = _playerDataHolder.PlayerStatisticsModel.Name;
+        private void SetLoadedNickname() => nameInputField.text = _playerDataService.Model.Name;
 
-        private void SaveNickname(string nickname) => _playerDataHolder.PlayerStatisticsModel.Name = nickname;
+        private void SaveNickname(string nickname) => _playerDataService.Model.Name = nickname;
 
         private void StartGame() => _stateMachine.ChangeState(GameStateType.Game);
 

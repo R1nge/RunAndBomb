@@ -1,14 +1,16 @@
-﻿namespace Services
+﻿using Services.Data.Settings;
+
+namespace Services
 {
     public class VibrationService
     {
-        private readonly SettingsService _settingsService;
-        
-        private VibrationService(SettingsService settingsService) => _settingsService = settingsService;
+        private readonly ISettingsDataService _settingsDataService;
+
+        private VibrationService(ISettingsDataService settingsDataService) => _settingsDataService = settingsDataService;
 
         public void VibrateSingle()
         {
-            if (_settingsService.Settingss.VibrationEnabled)
+            if (_settingsDataService.Model.VibrationEnabled)
             {
                 Vibration.VibratePeek();
             }

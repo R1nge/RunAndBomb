@@ -1,33 +1,32 @@
-﻿using Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Services.Data
+namespace Services.Data.Settings
 {
-    public class PlayerPrefsPlayerDataProvider : IPlayerDataProvider
+    public class PlayerPrefsSettingsDataProvider : ISettingsDataProvider
     {
-        private const string DATA_KEY = "PlayerData";
-
-        public PlayerStatisticsModel Load()
+        private const string DATA_KEY = "SettingsData";
+        
+        public Services.Settings Load()
         {
-            PlayerStatisticsModel data;
+            Services.Settings data;
 
             string json = PlayerPrefs.GetString(DATA_KEY);
 
             if (string.IsNullOrEmpty(json))
             {
                 Debug.LogWarning("Data doesn't exist. Creating a new one");
-                data = new PlayerStatisticsModel("NoName", 1);
+                data = new Services.Settings(true, true);
             }
             else
             {
-                data = JsonConvert.DeserializeObject<PlayerStatisticsModel>(json);
+                data = JsonConvert.DeserializeObject<Services.Settings>(json);
             }
 
             return data;
         }
 
-        public void Save(PlayerStatisticsModel data)
+        public void Save(Services.Settings data)
         {
             string json = JsonConvert.SerializeObject(data);
             PlayerPrefs.SetString(DATA_KEY, json);

@@ -1,19 +1,15 @@
-﻿namespace Services
+﻿using Services.Data.Settings;
+
+namespace Services
 {
     public class SettingsService
     {
-        private Settings _settings;
+        private readonly ISettingsDataService _settingsDataService;
 
-        public Settings Settingss => _settings;
+        private SettingsService(ISettingsDataService settingsDataService) => _settingsDataService = settingsDataService;
 
-        public void SetSoundStatus(bool isEnabled) => _settings.SoundEnabled = isEnabled;
+        public void SetSoundStatus(bool isEnabled) => _settingsDataService.Model.SoundEnabled = isEnabled;
 
-        public void SetVibrationStatus(bool isEnabled) => _settings.VibrationEnabled = isEnabled;
-
-        public struct Settings
-        {
-            public bool SoundEnabled;
-            public bool VibrationEnabled;
-        }
+        public void SetVibrationStatus(bool isEnabled) => _settingsDataService.Model.VibrationEnabled = isEnabled;
     }
 }

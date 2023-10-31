@@ -1,6 +1,8 @@
 ﻿using Services;
 using Services.Assets;
 using Services.Data;
+using Services.Data.Player;
+using Services.Data.Settings;
 using UnityEngine;
 using Zenject;
 
@@ -15,16 +17,18 @@ namespace Installers
         {
             Container.BindInstance(coroutineRunner);
             Container.BindInstance(configProvider);
-
-            Container.Bind<PlayerDataHolder>().AsSingle();
+            
             Container.BindInterfacesTo<PlayerPrefsPlayerDataProvider>().AsSingle();
             Container.BindInterfacesTo<PlayerDataService>().AsSingle();
+
+            Container.BindInterfacesTo<PlayerPrefsSettingsDataProvider>().AsSingle();
+            Container.BindInterfacesTo<SettingsDataService>().AsSingle();
+            
+            Container.Bind<SettingsService>().AsSingle();
+            Container.Bind<VibrationService>().AsSingle();
             
             Container.Bind<LoadingScreenAssetProvider>().AsSingle();
             Container.Bind<StartScreenAssetProvider>().AsSingle();
-
-            Container.Bind<SettingsService>().AsSingle();
-            Container.Bind<VibrationService>().AsSingle();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Data;
 using Services;
 using Services.Data;
+using Services.Data.Player;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -12,20 +13,20 @@ namespace UIs
         [SerializeField] private TextMeshProUGUI enemiesLeft;
         [SerializeField] private TextMeshProUGUI levelText;
         private EnemyCounter _enemyCounter;
-        private PlayerDataHolder _playerDataHolder;
+        private IPlayerDataService _playerDataService;
 
         [Inject]
-        private void Inject(EnemyCounter enemyCounter, PlayerDataHolder playerDataHolder)
+        private void Inject(EnemyCounter enemyCounter, IPlayerDataService playerDataService)
         {
             _enemyCounter = enemyCounter;
-            _playerDataHolder = playerDataHolder;
+            _playerDataService = playerDataService;
         }
 
         private void Start()
         {
             _enemyCounter.OnEnemyCountChanged += UpdateEnemyCount;
             UpdateEnemyCount(_enemyCounter.EnemyCount);
-            UpdateLevel(_playerDataHolder.PlayerStatisticsModel);
+            UpdateLevel(_playerDataService.Model);
         }
 
         private void UpdateEnemyCount(int amount) => enemiesLeft.text = $"Enemies left: {amount}";

@@ -1,21 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Services.Data;
+using Services.Data.Player;
+using Services.Data.Settings;
 
 namespace Services.States
 {
     public class LoadDataState : IGameState
     {
-        private readonly IPlayerDataService _playerDataService;
         private readonly StateMachine _stateMachine;
+        private readonly IPlayerDataService _playerDataService;
+        private readonly ISettingsDataService _settingsDataService;
         private readonly UIService _uiService;
 
         private LoadingScreen _loadingScreen;
 
-        public LoadDataState(StateMachine stateMachine, IPlayerDataService playerDataService, UIService uiService)
+        public LoadDataState(StateMachine stateMachine, IPlayerDataService playerDataService, ISettingsDataService settingsDataService, UIService uiService)
         {
-            _playerDataService = playerDataService;
             _stateMachine = stateMachine;
+            _playerDataService = playerDataService;
+            _settingsDataService = settingsDataService;
             _uiService = uiService;
         }
 
@@ -30,7 +34,8 @@ namespace Services.States
 
             var loadings = new List<ILoadingOperation>
             {
-                new DataLoadingOperation(_playerDataService),
+                new PlayerDataLoadingOperation(_playerDataService),
+                new SettingsDataLoadingOperation(_settingsDataService)
             };
 
             int total = loadings.Count + asyncLoadings.Count;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Services.Data.Settings;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -13,13 +14,10 @@ namespace Services
         [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
         [SerializeField] private List<AssetReferenceT<AudioClip>> explosionSounds;
         private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
-        private SettingsService _settingsService;
+        private ISettingsDataService _settingsDataService;
 
         [Inject]
-        private void Inject(SettingsService settingsService)
-        {
-            _settingsService = settingsService;
-        }
+        private void Inject(ISettingsDataService settingsDataService) => _settingsDataService = settingsDataService;
 
         private void Awake()
         {
@@ -98,7 +96,7 @@ namespace Services
             source.Play();
         }
 
-        private bool SoundsEnabled() => _settingsService.Settingss.SoundEnabled;
+        private bool SoundsEnabled() => _settingsDataService.Model.SoundEnabled;
 
         private enum SoundType
         {
