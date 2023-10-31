@@ -15,15 +15,38 @@ namespace Services
         [SerializeField] private List<AssetReferenceT<AudioClip>> explosionSounds;
         private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
         private ISettingsDataService _settingsDataService;
+        private SettingsService _settingsService;
 
         [Inject]
-        private void Inject(ISettingsDataService settingsDataService) => _settingsDataService = settingsDataService;
+        private void Inject(ISettingsDataService settingsDataService, SettingsService settingService)
+        {
+            _settingsDataService = settingsDataService;
+            _settingsService = settingService;
+        }
 
         private void Awake()
         {
-            //TODO: load sounds if only if sounds enabled
             _handles = new Dictionary<SoundType, List<AsyncOperationHandle>>();
+            
+            _settingsService.OnSoundsStatusChanged += SoundsStatusChanged;
+        }
 
+        private void SoundsStatusChanged(bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                LoadSounds();
+            }
+            else
+            {
+                UnloadSounds();
+            }
+        }
+
+        private void LoadSounds()
+        {
+            _handles.Clear();
+            
             var clickSounds = new List<AsyncOperationHandle>
             {
                 clickSound.LoadAssetAsync()
@@ -48,6 +71,24 @@ namespace Services
             }
 
             _handles.Add(SoundType.Explosion, explosionSoundsHandle);
+        }
+
+        private void UnloadSounds()
+        {
+            for (int i = 0; i < _handles[SoundType.Click].Count; i++)
+            {
+                Addressables.Release(_handles[SoundType.Click][i].Result);
+            }
+
+            for (int i = 0; i < _handles[SoundType.Death].Count; i++)
+            {
+                Addressables.Release(_handles[SoundType.Death][i].Result);
+            }
+
+            for (int i = 0; i < _handles[SoundType.Explosion].Count; i++)
+            {
+                Addressables.Release(_handles[SoundType.Explosion][i].Result);
+            }
         }
 
         public void PlayClickSound()
