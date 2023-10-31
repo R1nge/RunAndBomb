@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Services.Data.Settings;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Services
 {
@@ -27,9 +29,11 @@ namespace Services
         private void Awake()
         {
             _handles = new Dictionary<SoundType, List<AsyncOperationHandle>>();
-            
+            _settingsDataService.OnModelLoaded += OnSettingsLoaded;
             _settingsService.OnSoundsStatusChanged += SoundsStatusChanged;
         }
+
+        private void OnSettingsLoaded(Settings settings) => SoundsStatusChanged(settings.SoundEnabled);
 
         private void SoundsStatusChanged(bool isEnabled)
         {
@@ -46,7 +50,7 @@ namespace Services
         private void LoadSounds()
         {
             _handles.Clear();
-            
+
             var clickSounds = new List<AsyncOperationHandle>
             {
                 clickSound.LoadAssetAsync()
@@ -75,6 +79,8 @@ namespace Services
 
         private void UnloadSounds()
         {
+            if (_handles.Count == 0) return;
+
             for (int i = 0; i < _handles[SoundType.Click].Count; i++)
             {
                 Addressables.Release(_handles[SoundType.Click][i].Result);
@@ -138,6 +144,12 @@ namespace Services
         }
 
         private bool SoundsEnabled() => _settingsDataService.Model.SoundEnabled;
+
+        private void OnDestroy()
+        {
+            _settingsDataService.OnModelLoaded -= OnSettingsLoaded;
+            _settingsService.OnSoundsStatusChanged -= SoundsStatusChanged;
+        }
 
         private enum SoundType
         {
