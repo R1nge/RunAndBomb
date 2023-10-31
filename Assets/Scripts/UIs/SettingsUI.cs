@@ -7,6 +7,8 @@ namespace UIs
 {
     public class SettingsUI : MonoBehaviour
     {
+        [SerializeField] private Button open, close;
+        [SerializeField] private Canvas ui;
         [SerializeField] private Button sounds, vibration;
         private SettingsService _settingsService;
         
@@ -15,12 +17,21 @@ namespace UIs
 
         private void Awake()
         {
+            ui.gameObject.SetActive(false);
+            
+            open.onClick.AddListener(Open);
+            close.onClick.AddListener(Close);
+            
             sounds.onClick.AddListener(SwitchSounds);
             vibration.onClick.AddListener(SwitchVibration);
             
             sounds.image.color = _settingsService.Settingss.SoundEnabled ? Color.green : Color.red;
             vibration.image.color  = _settingsService.Settingss.VibrationEnabled ? Color.green : Color.red;
         }
+
+        private void Open() => ui.gameObject.SetActive(true);
+
+        private void Close() => ui.gameObject.SetActive(false);
 
         private void SwitchSounds()
         {
