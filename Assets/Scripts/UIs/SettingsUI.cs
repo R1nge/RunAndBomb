@@ -12,6 +12,7 @@ namespace UIs
         [SerializeField] private Button open, close;
         [SerializeField] private Canvas ui;
         [SerializeField] private Button sounds, vibration;
+        [SerializeField] private Image soundsBackground, vibrationBackground;
         private SettingsService _settingsService;
         private ISettingsDataService _settingsDataService;
         
@@ -35,8 +36,8 @@ namespace UIs
 
         private void Open()
         {
-            sounds.image.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
-            vibration.image.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
+            soundsBackground.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
+            vibrationBackground.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
             ui.gameObject.SetActive(true);
         }
 
@@ -49,13 +50,13 @@ namespace UIs
         private void SwitchSounds()
         {
             _settingsService.SetSoundStatus(!_settingsDataService.Model.SoundEnabled);
-            sounds.image.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
+            soundsBackground.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
         }
 
         private void SwitchVibration()
         {
             _settingsService.SetVibrationStatus(!_settingsDataService.Model.VibrationEnabled);
-            vibration.image.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
+            vibrationBackground.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
         }
     }
 }

@@ -16,9 +16,7 @@ namespace Services
 
         private GameObject _previousScreen;
 
-        private UIService(LoadingScreenFactory loadingScreenFactory, StartScreenFactory startScreenFactory,
-            GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory,
-            LoseScreenFactory loseScreenFactory)
+        private UIService(LoadingScreenFactory loadingScreenFactory, StartScreenFactory startScreenFactory, GamePlayScreenFactory gamePlayScreenFactory, WinScreenFactory winScreenFactory, LoseScreenFactory loseScreenFactory)
         {
             _loadingScreenFactory = loadingScreenFactory;
             _startScreenFactory = startScreenFactory;
@@ -37,20 +35,20 @@ namespace Services
         public async Task<StartUI> ShowStartScreen()
         {
             _loadingScreenFactory.Release();
-            
+
             Object.Destroy(_previousScreen);
-            
+
             StartUI screen = await _startScreenFactory.Create();
             screen.Init();
             _previousScreen = screen.gameObject;
 
             return screen;
         }
-        
+
         public async Task<InGameUI> ShowGameScreen()
         {
             Object.Destroy(_previousScreen);
-            
+
             InGameUI screen = await _gamePlayScreenFactory.Create();
             _previousScreen = screen.gameObject;
 
@@ -66,7 +64,7 @@ namespace Services
 
             return screen;
         }
-        
+
         public async Task<LoseUI> ShowLoseScreen()
         {
             Object.Destroy(_previousScreen);

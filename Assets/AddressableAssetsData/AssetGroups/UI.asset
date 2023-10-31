@@ -47,6 +47,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8b739de09a7d07479d92dd4aa00a285
+    m_Address: Vibrate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ee4addf20e73f9499ebbe089c1720a1
+    m_Address: Sound-On
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 151021d7e32c71044b8354f5def1735e
+    m_Address: Sound-None
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eabad62e1b3d55e4a8de69c8f9eb8ffa
+    m_Address: Gear
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5717759334022784da4d7aa4e5d52ea0
+    m_Address: Music-On
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32642a96bba31e04e9f3ce4f03ff52b3
+    m_Address: Music-Off
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3052a5b142301d843b61f5391397255a, type: 2}
   m_SchemaSet:
