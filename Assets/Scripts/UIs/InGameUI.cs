@@ -13,10 +13,8 @@ namespace UIs
     {
         [SerializeField] private TextMeshProUGUI enemiesLeft;
         [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private float killPopupDuration;
         [SerializeField] private KillPopupUI[] killPopups;
         private bool _killPopupIsActive;
-        private YieldInstruction _wait;
         private EnemyCounter _enemyCounter;
         private IPlayerDataService _playerDataService;
 
@@ -29,7 +27,6 @@ namespace UIs
 
         private void Start()
         {
-            _wait = new WaitForSeconds(killPopupDuration);
             _enemyCounter.OnEnemyCountChanged += UpdateEnemyCount;
             UpdateEnemyCount(_enemyCounter.EnemyCount);
             UpdateLevel(_playerDataService.Model);
@@ -42,18 +39,17 @@ namespace UIs
                 Debug.LogWarning("Kill popup is already active");
                 return;
             }
-            
-            _killPopupIsActive = true;
 
-            int index = Random.Range(0, killPopups.Length);
-            killPopups[index].Show();
-            StartCoroutine(HideKillPopup(index));
+            StartCoroutine(ShowKillPopupCoroutine());
         }
 
-        private IEnumerator HideKillPopup(int index)
+        private IEnumerator ShowKillPopupCoroutine()
         {
-            yield return _wait;
+            _killPopupIsActive = true;
+            int index = Random.Range(0, killPopups.Length);
+            yield return killPopups[index].Show();
             killPopups[index].Hide();
+            _killPopupIsActive = false;
         }
 
         private void UpdateEnemyCount(int amount) => enemiesLeft.text = $"Enemies left: {amount}";

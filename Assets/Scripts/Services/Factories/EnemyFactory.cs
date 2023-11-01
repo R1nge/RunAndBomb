@@ -22,6 +22,7 @@ namespace Services.Factories
 
         public Enemy Create()
         {
+            //TODO: use addressables for the enemy
             var enemy = _container.InstantiatePrefabForComponent<Enemy>(_enemySkinService.GetRandomSkin());
             _restartService.AddEnemy(enemy);
             enemy.GetComponent<NicknameUI>().SetNickname(NameGenerator.GenerateName());

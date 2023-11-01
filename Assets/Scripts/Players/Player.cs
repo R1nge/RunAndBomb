@@ -107,6 +107,7 @@ namespace Players
             _trajectoryPredictor.SetTrajectoryVisible(false);
             _trajectoryPredictor.SetHitMarkerVisible(false);
             _nicknameUI.Hide();
+            _throwTimerUI.Hide();
             _colliderController.DisableCharacterColliders();
             _ragdollController.EnableRagdoll();
             _deathSound.PlayDeathSound();

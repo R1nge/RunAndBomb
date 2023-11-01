@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb725aad36249229cd18ea39b88e583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleLerpDuration: 0.25
+  rotationLerpDuration: 0.25
 --- !u!1 &2115660114986459461
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,8 +195,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -348,6 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb725aad36249229cd18ea39b88e583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleLerpDuration: 0.25
+  rotationLerpDuration: 0.25
 --- !u!1 &8793876961098508148
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb725aad36249229cd18ea39b88e583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleLerpDuration: 0.25
+  rotationLerpDuration: 0.25
 --- !u!1 &9142036370365860895
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,8 +509,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -671,7 +677,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesLeft: {fileID: 2734179262665525796}
   levelText: {fileID: 5888910168067630753}
-  killPopupDuration: 2
   killPopups:
   - {fileID: 698465668759583169}
   - {fileID: 6626448298472291562}
