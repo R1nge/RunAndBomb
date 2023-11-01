@@ -41,13 +41,15 @@ namespace Installers
             Container.Bind<PlayerReferenceHolder>().AsSingle();
             Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
-            
+
+            Container.Bind<ExplosionVFXAssetProvider>().AsSingle();
             Container.Bind<ExplosionVFXFactory>().AsSingle();
             Container.Bind<ExplosionVFXPool>().AsSingle();
-
+            
             Container.Bind<BombFactory>().AsSingle();
-            Container.Bind<EnemySkinService>().AsSingle();
+            
             Container.Bind<EnemyCounter>().AsSingle();
+            Container.Bind<EnemyAssetProvider>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<EnemySpawner>().AsSingle();
 

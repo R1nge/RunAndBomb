@@ -1,4 +1,6 @@
-﻿using Enemies;
+﻿using System.Threading.Tasks;
+using Enemies;
+using Services.Assets;
 using UIs;
 using Zenject;
 
@@ -7,23 +9,22 @@ namespace Services.Factories
     public class EnemyFactory
     {
         private readonly DiContainer _container;
-        private readonly EnemySkinService _enemySkinService;
+        private readonly EnemyAssetProvider _enemyAssetProvider;
         private readonly EnemyCounter _enemyCounter;
-
         private readonly RestartService _restartService;
 
-        private EnemyFactory(DiContainer container, EnemySkinService enemySkinService, EnemyCounter enemyCounter, RestartService restartService)
+        private EnemyFactory(DiContainer container, EnemyAssetProvider enemyAssetProvider, EnemyCounter enemyCounter, RestartService restartService)
         {
             _container = container;
-            _enemySkinService = enemySkinService;
+            _enemyAssetProvider = enemyAssetProvider;
             _enemyCounter = enemyCounter;
             _restartService = restartService;
         }
 
-        public Enemy Create()
+        public async Task<Enemy> Create()
         {
-            //TODO: use addressables for the enemy
-            var enemy = _container.InstantiatePrefabForComponent<Enemy>(_enemySkinService.GetRandomSkin());
+            Enemy skin = await _enemyAssetProvider.GetRandomSkin();
+            Enemy enemy = _container.InstantiatePrefabForComponent<Enemy>(skin);
             _restartService.AddEnemy(enemy);
             enemy.GetComponent<NicknameUI>().SetNickname(NameGenerator.GenerateName());
             _enemyCounter.Increase();

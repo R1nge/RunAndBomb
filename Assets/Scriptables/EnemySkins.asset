@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: EnemySkins
   m_EditorClassIdentifier: 
   skins:
-  - {fileID: 4769448536235314912, guid: 798b4c29093e0b34fb9dd0c1bacfa0fb, type: 3}
+  - m_AssetGUID: 798b4c29093e0b34fb9dd0c1bacfa0fb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

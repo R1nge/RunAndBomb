@@ -18,11 +18,11 @@ namespace Services
             _configProvider = configProvider;
         }
 
-        public void Spawn()
+        public async void Spawn()
         {
             for (int i = 1; i < _configProvider.MapConfig.SpawnPositionsAmount; i++)
             {
-                Enemy enemy = _enemyFactory.Create();
+                Enemy enemy = await _enemyFactory.Create();
                 enemy.transform.position = _spawnPositionsProvider.SpawnPositions[i];
             }
         }

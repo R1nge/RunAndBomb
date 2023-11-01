@@ -11,7 +11,7 @@ namespace Services
 
         private ExplosionVFXPool(ExplosionVFXFactory explosionVFXFactory) => _explosionVFXFactory = explosionVFXFactory;
 
-        public void CreatePool(int amount)
+        public async void CreatePool(int amount)
         {
             if (_pool != null)
             {
@@ -28,7 +28,7 @@ namespace Services
 
             for (int i = 0; i < amount; i++)
             {
-                GameObject explosion = _explosionVFXFactory.Create();
+                GameObject explosion = await _explosionVFXFactory.Create();
                 explosion.SetActive(false);
                 _pool.Enqueue(explosion);
             }

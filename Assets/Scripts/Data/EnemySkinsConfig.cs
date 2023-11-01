@@ -1,13 +1,14 @@
 ﻿using Enemies;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Data
 {
     [CreateAssetMenu(fileName = "EnemySkins", menuName = "Configs/EnemySkins")]
     public class EnemySkinsConfig : ScriptableObject
     {
-        [SerializeField] private Enemy[] skins;
+        [SerializeField] private AssetReferenceGameObject[] skins;
 
-        public Enemy[] Skins => skins;
+        public AssetReferenceGameObject[] Skins => skins;
     }
 }
