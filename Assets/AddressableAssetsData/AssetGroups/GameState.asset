@@ -87,51 +87,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 206dbeeffc1f31f439e4ead2bf5e6e48
-    m_Address: BombBasketball
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 92f2d0654af874d46b0a79d8a9a135d8
-    m_Address: BombBeach
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 383b9f879caa9634a991008578276403
-    m_Address: BombDisco
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 467b05f8897a2c545a4cdd73ecf8a142
-    m_Address: BombEarth
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0d3b308dd481ff6459f8ad7dcc573a5f
-    m_Address: BombMine
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 387797dff7bea95419377e22021f1440
-    m_Address: BombPokeball
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8ddbc27e08eacb44698ea1cc831b179d
-    m_Address: BombPumpkin
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 79b02b6aed48a064da495513bbc9b6d6
-    m_Address: BombSoccer
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9f4202abfbd28fe439dcdb4b25c95a8c
-    m_Address: BombWatermelon
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3052a5b142301d843b61f5391397255a, type: 2}
   m_SchemaSet:

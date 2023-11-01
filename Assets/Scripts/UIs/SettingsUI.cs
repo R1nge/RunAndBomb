@@ -1,6 +1,6 @@
-﻿using System;
-using Services;
+﻿using Services;
 using Services.Data.Settings;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,7 +12,7 @@ namespace UIs
         [SerializeField] private Button open, close;
         [SerializeField] private Canvas ui;
         [SerializeField] private Button sounds, vibration;
-        [SerializeField] private Image soundsBackground, vibrationBackground;
+        [SerializeField] private TextMeshProUGUI soundText, vibrationText;
         private SettingsService _settingsService;
         private ISettingsDataService _settingsDataService;
         
@@ -36,8 +36,8 @@ namespace UIs
 
         private void Open()
         {
-            soundsBackground.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
-            vibrationBackground.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
+            soundText.text = _settingsDataService.Model.SoundEnabled ? "ENABLED" : "DISABLED";
+            vibrationText.text = _settingsDataService.Model.VibrationEnabled ? "ENABLED" : "DISABLED";
             ui.gameObject.SetActive(true);
         }
 
@@ -50,13 +50,13 @@ namespace UIs
         private void SwitchSounds()
         {
             _settingsService.SetSoundStatus(!_settingsDataService.Model.SoundEnabled);
-            soundsBackground.color = _settingsDataService.Model.SoundEnabled ? Color.green : Color.red;
+            soundText.text = _settingsDataService.Model.SoundEnabled ? "ENABLED" : "DISABLED";
         }
 
         private void SwitchVibration()
         {
             _settingsService.SetVibrationStatus(!_settingsDataService.Model.VibrationEnabled);
-            vibrationBackground.color  = _settingsDataService.Model.VibrationEnabled ? Color.green : Color.red;
+            vibrationText.text = _settingsDataService.Model.VibrationEnabled ? "ENABLED" : "DISABLED";
         }
     }
 }

@@ -1,6 +1,5 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Bombs.Bomb" preserve="all" />
     <type fullname="Bombs.EnemyBombController" preserve="all" />
     <type fullname="Bombs.PlayerBombController" preserve="all" />
     <type fullname="Bombs.TrajectoryPredictor" preserve="all" />
@@ -8,7 +7,6 @@
     <type fullname="Common.DeathSound" preserve="all" />
     <type fullname="Common.LookAtCamera" preserve="all" />
     <type fullname="Common.RagdollController" preserve="all" />
-    <type fullname="Common.RigidbodyGravity" preserve="all" />
     <type fullname="Common.SizeController" preserve="all" />
     <type fullname="Data.BombConfig" preserve="all" />
     <type fullname="Enemies.Enemy" preserve="all" />
