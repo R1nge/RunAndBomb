@@ -3,18 +3,18 @@
     public class KillService
     {
         private readonly VibrationService _vibrationService;
-        private readonly PopupService _popupService;
+        private readonly UIService _uiService;
 
-        private KillService(VibrationService vibrationService, PopupService popupService)
+        private KillService(VibrationService vibrationService, UIService uiService)
         {
             _vibrationService = vibrationService;
-            _popupService = popupService;
+            _uiService = uiService;
         }
 
         public void Kill()
         {
             _vibrationService.VibrateSingle();
-            _popupService.ActivateKillPopup();
+            _uiService.ShowKillPopup();
         }
     }
 }

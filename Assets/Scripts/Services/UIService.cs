@@ -55,6 +55,15 @@ namespace Services
             return screen;
         }
 
+        //TODO: find a better solution
+        public void ShowKillPopup()
+        {
+            if (_previousScreen.TryGetComponent(out InGameUI inGameUI))
+            {
+                inGameUI.ShowKillPopup();
+            }   
+        }
+
         public async Task<WinUI> ShowWinScreen()
         {
             Object.Destroy(_previousScreen);
