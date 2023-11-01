@@ -190,8 +190,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1828249519741229250}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
+  m_Radius: 0.2
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -234,7 +234,6 @@ MonoBehaviour:
   bombSpawnPoint: {fileID: 8627021192071738832}
   throwInterval: 3
   force: 5
-  bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
 --- !u!114 &2405671927389759639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,8 +545,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

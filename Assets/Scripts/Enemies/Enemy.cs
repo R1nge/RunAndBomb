@@ -33,6 +33,8 @@ namespace Enemies
         private MapService _mapService;
         private Collider[] _colliders;
 
+        protected EnemyStateType CurrentState => _enemyStateMachine.CurrentEnemyStateType;
+
         [Inject]
         private void Inject(EnemyCounter enemyCounter, CoroutineRunner coroutineRunner, ConfigProvider configProvider, MapService mapService)
         {
@@ -101,17 +103,26 @@ namespace Enemies
 
             for (int i = 0; i < hits; i++)
             {
-                if (_colliders[i].TryGetComponent(out IDamageable damageable))
+                if (_colliders[i].transform.root.TryGetComponent(out BombController bombController))
                 {
-                    if (_colliders[i].TryGetComponent(out BombController bombController))
+                    if (bombController.TryGetComponent(out Enemy enemy))
+                    {
+                        if (enemy.CurrentState != EnemyStateType.Death)
+                        {
+                            target = enemy.transform;
+                        }
+                    }
+                    else
                     {
                         target = bombController.transform;
-                        break;
                     }
+                        
+                    break;
                 }
             }
 
             _enemyMovement.SetTarget(target);
+            _enemyAttack.SetTarget(target);
             _enemyStateMachine.ChangeState(EnemyStateType.Chase);
         }
 
