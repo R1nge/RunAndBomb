@@ -12,7 +12,6 @@ namespace Bombs
         [SerializeField] private Transform bombSpawnPoint;
         [SerializeField] protected float throwInterval;
         [SerializeField] private float force;
-        [SerializeField] private BombConfig bombConfig;
         private SizeController _sizeController;
         protected BombProperties BombProperties;
         private BombFactory _bombFactory;
@@ -68,8 +67,8 @@ namespace Bombs
 
         private void Predict()
         {
-            BombProperties.Mass = bombConfig.Mass;
-            BombProperties.Drag = bombConfig.Drag;
+            BombProperties.Mass = _configProvider.BombConfig.Mass;
+            BombProperties.Drag = _configProvider.BombConfig.Drag;
             BombProperties.Direction = bombSpawnPoint.transform.forward;
             BombProperties.InitialPosition = bombSpawnPoint.transform.position;
             BombProperties.Gravity = Physics.gravity * BombProperties.Mass;

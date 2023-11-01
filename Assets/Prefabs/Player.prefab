@@ -3274,7 +3274,6 @@ GameObject:
   - component: {fileID: 5471163636810818818}
   - component: {fileID: 4859803368792669851}
   - component: {fileID: 6203839157239255626}
-  - component: {fileID: 1204064658606363671}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -3396,7 +3395,6 @@ MonoBehaviour:
   bombSpawnPoint: {fileID: 3671208612101914674}
   throwInterval: 3
   force: 5
-  bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
 --- !u!114 &-6604846308212314379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3731,22 +3729,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1204064658606363671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8814835284728001307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e90fd5caa0184b70bb7543d95327732c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombSpawnPoint: {fileID: 3671208612101914674}
-  throwInterval: 3
-  force: 5
-  bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
 --- !u!1 &9029437092719501621
 GameObject:
   m_ObjectHideFlags: 0
