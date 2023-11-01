@@ -133,9 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 2378104278032458534}
-  _rigidbody: {fileID: 0}
   lerpColor: {r: 0, g: 0, b: 0, a: 0}
-  detectTransform: {fileID: 0}
+  detectTransform: {fileID: 7921722021476837149}
   radius: 0
   ignore:
     serializedVersion: 2

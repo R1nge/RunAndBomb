@@ -71,7 +71,7 @@ namespace Services.Maps
             meshRenderer.material.color = lerpColor;
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.DrawSphere(detectTransform.position, radius);
         }

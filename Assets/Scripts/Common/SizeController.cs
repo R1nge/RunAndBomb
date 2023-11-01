@@ -24,8 +24,8 @@ namespace Common
         public void IncreaseSize()
         {
             CurrentSize += sizeModifier;
-            StartCoroutine(LerpFunction(transform, CurrentSize, 2));
-            StartCoroutine(LerpFunction(hitMarker, CurrentSize, 2));
+            StartCoroutine(LerpFunction(transform, CurrentSize, .5f));
+            StartCoroutine(LerpFunction(hitMarker, CurrentSize, .5f));
         }
 
         private IEnumerator LerpFunction(Transform transform, float endValue, float duration)

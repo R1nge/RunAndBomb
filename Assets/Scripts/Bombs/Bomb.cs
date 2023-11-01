@@ -103,7 +103,7 @@ namespace Bombs
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawSphere(transform.position, _owner.CurrentSize * radius);
+            Gizmos.DrawSphere(transform.position, radius);
         }
     }
 }
