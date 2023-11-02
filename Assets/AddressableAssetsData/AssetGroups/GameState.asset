@@ -22,8 +22,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e87fbcb00bcb19d42894ab8b88720016
-    m_Address: DeathSound
+  - m_GUID: a7f6efe367f02254396c9e33a88933e8
+    m_Address: DeathSound3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -32,13 +32,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a7f6efe367f02254396c9e33a88933e8
-    m_Address: DeathSound3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 28a6ef019b8d09243963b39afdca3c5a
-    m_Address: DeathSound5
+  - m_GUID: c1a005a600f842d4caa5bf16b419c286
+    m_Address: DeathSound1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

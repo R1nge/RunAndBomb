@@ -22,14 +22,9 @@ namespace Enemies
 
         public void Attack()
         {
-            //TODO: calculate distance to the target
-
             _bombController.transform.LookAt(_target);
 
-
             float distance = Vector3.Distance(_bombController.transform.position, _target.transform.position);
-
-            Debug.Log(distance);
 
             if (distance == 0)
             {

@@ -274,6 +274,7 @@ MonoBehaviour:
   bombConfig: {fileID: 11400000, guid: 8abd672c10412a847aa84fb3a1ed44f2, type: 2}
   uiConfig: {fileID: 11400000, guid: 6442f413d25a4014d8cb3acd4d6d4f93, type: 2}
   mapConfig: {fileID: 11400000, guid: d2a33871251ea344ebacc52a1ff023a4, type: 2}
+  soundConfig: {fileID: 11400000, guid: 5cea5122c95017342b869b4ca3e11f0e, type: 2}
 --- !u!1 &8731600845187914002
 GameObject:
   m_ObjectHideFlags: 0

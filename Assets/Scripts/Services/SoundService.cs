@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Services.Data;
 using Services.Data.Settings;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,16 +13,15 @@ namespace Services
     public class SoundService : MonoBehaviour
     {
         [SerializeField] private AudioSource clickSource;
-        [SerializeField] private AssetReferenceT<AudioClip> clickSound;
-        [SerializeField] private List<AssetReferenceT<AudioClip>> deathSounds;
-        [SerializeField] private List<AssetReferenceT<AudioClip>> explosionSounds;
         private Dictionary<SoundType, List<AsyncOperationHandle>> _handles;
+        private ConfigProvider _configProvider;
         private ISettingsDataService _settingsDataService;
         private SettingsService _settingsService;
 
         [Inject]
-        private void Inject(ISettingsDataService settingsDataService, SettingsService settingService)
+        private void Inject(ConfigProvider configProvider, ISettingsDataService settingsDataService, SettingsService settingService)
         {
+            _configProvider = configProvider;
             _settingsDataService = settingsDataService;
             _settingsService = settingService;
         }
@@ -53,25 +53,25 @@ namespace Services
 
             var clickSounds = new List<AsyncOperationHandle>
             {
-                clickSound.LoadAssetAsync()
+                _configProvider.SoundConfig.ClickSound.LoadAssetAsync()
             };
 
             _handles.Add(SoundType.Click, clickSounds);
 
             var deathSoundsHandles = new List<AsyncOperationHandle>();
 
-            for (int i = 0; i < deathSounds.Count; i++)
+            for (int i = 0; i < _configProvider.SoundConfig.DeathSounds.Count; i++)
             {
-                deathSoundsHandles.Add(deathSounds[i].LoadAssetAsync());
+                deathSoundsHandles.Add(_configProvider.SoundConfig.DeathSounds[i].LoadAssetAsync());
             }
 
             _handles.Add(SoundType.Death, deathSoundsHandles);
 
             var explosionSoundsHandle = new List<AsyncOperationHandle>();
 
-            for (int i = 0; i < explosionSounds.Count; i++)
+            for (int i = 0; i < _configProvider.SoundConfig.ExplosionSounds.Count; i++)
             {
-                explosionSoundsHandle.Add(explosionSounds[i].LoadAssetAsync());
+                explosionSoundsHandle.Add(_configProvider.SoundConfig.ExplosionSounds[i].LoadAssetAsync());
             }
 
             _handles.Add(SoundType.Explosion, explosionSoundsHandle);
@@ -115,7 +115,7 @@ namespace Services
         {
             if (!SoundsEnabled()) return;
 
-            int index = Random.Range(0, deathSounds.Count);
+            int index = Random.Range(0, _configProvider.SoundConfig.DeathSounds.Count);
 
             if (_handles[SoundType.Death][index].IsValid() && source.clip)
             {
@@ -131,7 +131,7 @@ namespace Services
         {
             if (!SoundsEnabled()) return;
 
-            int index = Random.Range(0, explosionSounds.Count);
+            int index = Random.Range(0, _configProvider.SoundConfig.ExplosionSounds.Count);
 
             if (_handles[SoundType.Explosion][index].IsValid() && source.clip)
             {

@@ -838,7 +838,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   deathSounds:
-  - m_AssetGUID: e87fbcb00bcb19d42894ab8b88720016
+  - m_AssetGUID: c1a005a600f842d4caa5bf16b419c286
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -851,10 +851,6 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   - m_AssetGUID: 9110316e67061ce4bb0af21c7640d88a
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
-  - m_AssetGUID: 28a6ef019b8d09243963b39afdca3c5a
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1

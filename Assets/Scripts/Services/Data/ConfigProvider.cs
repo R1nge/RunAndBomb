@@ -12,6 +12,7 @@ namespace Services.Data
         [SerializeField] private BombConfig bombConfig;
         [SerializeField] private UIConfig uiConfig;
         [SerializeField] private MapConfig mapConfig;
+        [SerializeField] private SoundConfig soundConfig;
 
         public PlayerConfig PlayerConfig => playerConfig;
         public EnemyConfig EnemyConfig => enemyConfig;
@@ -20,5 +21,6 @@ namespace Services.Data
         public BombConfig BombConfig => bombConfig;
         public UIConfig UIConfig => uiConfig;
         public MapConfig MapConfig => mapConfig;
+        public SoundConfig SoundConfig => soundConfig;
     }
 }
