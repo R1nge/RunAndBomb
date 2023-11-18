@@ -7,9 +7,9 @@ namespace Services.Maps
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player))
+            if (other.transform.root.TryGetComponent(out IDamageable damageable))
             {
-                player.TakeDamage();
+                damageable.TakeDamage();
             }
         }
     }

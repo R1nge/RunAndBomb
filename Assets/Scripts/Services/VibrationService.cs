@@ -10,10 +10,13 @@ namespace Services
 
         public void VibrateSingle()
         {
+#if !UNITY_WEBGL
             if (_settingsDataService.Model.VibrationEnabled)
             {
                 Vibration.VibratePeek();
             }
+#endif
         }
     }
+
 }

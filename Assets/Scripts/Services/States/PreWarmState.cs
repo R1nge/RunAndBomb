@@ -19,7 +19,9 @@ namespace Services.States
 
         public async void Enter()
         {
+#if !UNITY_WEBGL
             Vibration.Init();
+#endif
             await _loadingScreenAssetProvider.LoadLoadingScreenAsset();
             await _startScreenAssetProvider.LoadStartUIAsset();
             _explosionVFXPool.CreatePool(20);
