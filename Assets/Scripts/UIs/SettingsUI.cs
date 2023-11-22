@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Threading.Tasks;
 using Services;
 using Services.Data.Settings;
 using TMPro;
@@ -28,9 +28,11 @@ namespace UIs
             _settingsDataService = settingsDataService;
         }
 
-        private void Awake()
+        private async void Awake()
         {
             ui.gameObject.SetActive(false);
+            
+            await LocalizationSettings.InitializationOperation.Task;
 
             open.onClick.AddListener(Open);
             close.onClick.AddListener(Close);
@@ -38,15 +40,14 @@ namespace UIs
             sounds.onClick.AddListener(SwitchSounds);
             vibration.onClick.AddListener(SwitchVibration);
 
-            english.onClick.AddListener(() => StartCoroutine(SetLanguage(0)));
-            russian.onClick.AddListener(() => StartCoroutine(SetLanguage(1)));
-            ukrainian.onClick.AddListener(() => StartCoroutine(SetLanguage(2)));
+            english.onClick.AddListener(() => SetLanguage(0));
+            russian.onClick.AddListener(() => SetLanguage(1));
+            ukrainian.onClick.AddListener(() => SetLanguage(2));
         }
 
-        private void Open()
+        private async void Open()
         {
-            soundText.text = _settingsDataService.Model.SoundEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
-            vibrationText.text = _settingsDataService.Model.VibrationEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
+            await LoadLocalization();
             ui.gameObject.SetActive(true);
         }
 
@@ -56,25 +57,32 @@ namespace UIs
             _settingsDataService.Save();
         }
 
-        private void SwitchSounds()
+        private async void SwitchSounds()
         {
             _settingsService.SetSoundStatus(!_settingsDataService.Model.SoundEnabled);
-            soundText.text = _settingsDataService.Model.SoundEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
+            await LoadLocalization();
         }
 
-        private void SwitchVibration()
+        private async void SwitchVibration()
         {
             _settingsService.SetVibrationStatus(!_settingsDataService.Model.VibrationEnabled);
-            vibrationText.text = _settingsDataService.Model.VibrationEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
+            await LoadLocalization();
         }
 
-        private IEnumerator SetLanguage(int index)
+        private async void SetLanguage(int index)
         {
-            yield return LocalizationSettings.InitializationOperation;
             //en 0, ru 1, ua 2
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
-            vibrationText.text = _settingsDataService.Model.VibrationEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
-            soundText.text = _settingsDataService.Model.SoundEnabled ? enabled.GetLocalizedString() : disabled.GetLocalizedString();
+            await LoadLocalization();
+        }
+
+        private async Task LoadLocalization()
+        {
+            string enabledString = await enabled.GetLocalizedStringAsync().Task;
+            string disabledString = await disabled.GetLocalizedStringAsync().Task;
+
+            vibrationText.text = _settingsDataService.Model.SoundEnabled ? enabledString : disabledString;
+            soundText.text = _settingsDataService.Model.SoundEnabled ? enabledString : disabledString;
         }
     }
 }
