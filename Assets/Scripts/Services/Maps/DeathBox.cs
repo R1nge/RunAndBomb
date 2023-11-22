@@ -1,5 +1,4 @@
-﻿using Players;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Services.Maps
 {
