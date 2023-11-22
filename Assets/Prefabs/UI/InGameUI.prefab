@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 1951440130603710304}
   - component: {fileID: 3028588101772170651}
   - component: {fileID: 2734179262665525796}
+  - component: {fileID: 2642319637368541859}
   m_Layer: 5
   m_Name: EnemiesLeft
   m_TagString: Untagged
@@ -162,8 +163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 472.58, y: 200}
+  m_AnchoredPosition: {x: 0, y: -125}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3028588101772170651
 CanvasRenderer:
@@ -195,15 +196,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d683a69a5e224f4387e7e7b95f1c1cf, type: 2}
+  m_sharedMaterial: {fileID: -3762051459861187991, guid: 1d683a69a5e224f4387e7e7b95f1c1cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4282861567
-  m_fontColor: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -262,6 +263,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2642319637368541859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483679926223399492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:e71ec77e7c6da1e4980db0ec6de863d1
+    m_TableEntryReference:
+      m_KeyId: 11597640974336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2734179262665525796}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &7928382175370511297
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +494,7 @@ GameObject:
   - component: {fileID: 4759074615781665412}
   - component: {fileID: 8874922159640940256}
   - component: {fileID: 5888910168067630753}
+  - component: {fileID: 3952829748484807137}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -476,8 +518,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
-  m_SizeDelta: {x: 472.58, y: 200}
+  m_AnchoredPosition: {x: 0, y: -325}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8874922159640940256
 CanvasRenderer:
@@ -509,15 +551,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 06d8925771eca7c4dbdcdb25145b2577, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d683a69a5e224f4387e7e7b95f1c1cf, type: 2}
+  m_sharedMaterial: {fileID: -3762051459861187991, guid: 1d683a69a5e224f4387e7e7b95f1c1cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4282861567
-  m_fontColor: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -576,6 +618,34 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3952829748484807137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142036370365860895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:e71ec77e7c6da1e4980db0ec6de863d1
+    m_TableEntryReference:
+      m_KeyId: 11641425313792
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &9179218762675774256
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,3 +751,24 @@ MonoBehaviour:
   - {fileID: 698465668759583169}
   - {fileID: 6626448298472291562}
   - {fileID: 8848305318338557479}
+  enemies:
+    m_TableReference:
+      m_TableCollectionName: GUID:e71ec77e7c6da1e4980db0ec6de863d1
+    m_TableEntryReference:
+      m_KeyId: 11597640974336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  level:
+    m_TableReference:
+      m_TableCollectionName: GUID:e71ec77e7c6da1e4980db0ec6de863d1
+    m_TableEntryReference:
+      m_KeyId: 11641425313792
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
