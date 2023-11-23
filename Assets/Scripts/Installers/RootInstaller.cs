@@ -17,16 +17,18 @@ namespace Installers
         {
             Container.BindInstance(coroutineRunner);
             Container.BindInstance(configProvider);
-            
+
             Container.BindInterfacesTo<PlayerPrefsPlayerDataProvider>().AsSingle();
             Container.BindInterfacesTo<PlayerDataService>().AsSingle();
 
             Container.BindInterfacesTo<PlayerPrefsSettingsDataProvider>().AsSingle();
             Container.BindInterfacesTo<SettingsDataService>().AsSingle();
-            
+
+            Container.Bind<LocalizationService>().AsSingle();
+
             Container.Bind<SettingsService>().AsSingle();
             Container.Bind<VibrationService>().AsSingle();
-            
+
             Container.Bind<LoadingScreenAssetProvider>().AsSingle();
             Container.Bind<StartScreenAssetProvider>().AsSingle();
         }

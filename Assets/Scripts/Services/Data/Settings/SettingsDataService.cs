@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Services.Data.Settings
 {
@@ -12,7 +13,12 @@ namespace Services.Data.Settings
         public Services.Settings Model => _model;
         public event Action<Services.Settings> OnModelLoaded;
 
-        public void Save() => _settingsDataProvider.Save(_model);
+        public void Save()
+        {
+            _settingsDataProvider.Save(_model);
+            Debug.Log($"SAVED: {_model.Language}");
+        }
+
         public void Load()
         {
             _model = _settingsDataProvider.Load();

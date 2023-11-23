@@ -20,12 +20,14 @@ namespace UIs
         [SerializeField] private LocalizedString enabled, disabled;
         private SettingsService _settingsService;
         private ISettingsDataService _settingsDataService;
+        private LocalizationService _localizationService;
 
         [Inject]
-        private void Inject(SettingsService settingService, ISettingsDataService settingsDataService)
+        private void Inject(SettingsService settingService, ISettingsDataService settingsDataService, LocalizationService localizationService)
         {
             _settingsService = settingService;
             _settingsDataService = settingsDataService;
+            _localizationService = localizationService;
         }
 
         private async void Awake()
@@ -40,9 +42,9 @@ namespace UIs
             sounds.onClick.AddListener(SwitchSounds);
             vibration.onClick.AddListener(SwitchVibration);
 
-            english.onClick.AddListener(() => SetLanguage(0));
-            russian.onClick.AddListener(() => SetLanguage(1));
-            ukrainian.onClick.AddListener(() => SetLanguage(2));
+            english.onClick.AddListener(() => SetLanguage(LocalizationService.Languages.EN));
+            russian.onClick.AddListener(() => SetLanguage(LocalizationService.Languages.RU));
+            ukrainian.onClick.AddListener(() => SetLanguage(LocalizationService.Languages.UA));
         }
 
         private async void Open()
@@ -69,10 +71,9 @@ namespace UIs
             await LoadLocalization();
         }
 
-        private async void SetLanguage(int index)
+        private async void SetLanguage(LocalizationService.Languages language)
         {
-            //en 0, ru 1, ua 2
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
+            await _localizationService.SetLocalization(language);
             await LoadLocalization();
         }
 

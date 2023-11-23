@@ -16,7 +16,7 @@ namespace Services.Data.Settings
             if (string.IsNullOrEmpty(json))
             {
                 Debug.LogWarning("Data doesn't exist. Creating a new one");
-                data = new Services.Settings(true, true);
+                data = new Services.Settings(true, true, LocalizationService.Languages.EN);
             }
             else
             {

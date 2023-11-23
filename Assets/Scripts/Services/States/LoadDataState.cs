@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Services.Data;
 using Services.Data.Player;
 using Services.Data.Settings;
+using UnityEngine;
 
 namespace Services.States
 {
@@ -12,20 +13,21 @@ namespace Services.States
         private readonly IPlayerDataService _playerDataService;
         private readonly ISettingsDataService _settingsDataService;
         private readonly UIService _uiService;
+        private readonly LocalizationService _localizationService;
 
-        private LoadingScreen _loadingScreen;
-
-        public LoadDataState(StateMachine stateMachine, IPlayerDataService playerDataService, ISettingsDataService settingsDataService, UIService uiService)
+        public LoadDataState(StateMachine stateMachine, IPlayerDataService playerDataService, ISettingsDataService settingsDataService, UIService uiService, LocalizationService localizationService)
         {
             _stateMachine = stateMachine;
             _playerDataService = playerDataService;
             _settingsDataService = settingsDataService;
             _uiService = uiService;
+            _localizationService = localizationService;
         }
 
         public async void Enter()
         {
-            _loadingScreen = await _uiService.ShowLoadingScreen();
+            //TODO: create a loading service
+            LoadingScreen loadingScreen = await _uiService.ShowLoadingScreen();
 
             var asyncLoadings = new List<IAsyncLoadingOperation>
             {
@@ -40,7 +42,7 @@ namespace Services.States
 
             int total = loadings.Count + asyncLoadings.Count;
 
-            _loadingScreen.UpdatePercent(0, total);
+            loadingScreen.UpdatePercent(0, total);
 
             var current = 0;
 
@@ -48,15 +50,17 @@ namespace Services.States
             {
                 await asyncLoadings[i].Load();
                 current++;
-                _loadingScreen.UpdatePercent(current + 1, loadings.Count);
+                loadingScreen.UpdatePercent(current + 1, loadings.Count);
             }
 
             for (int i = 0; i < loadings.Count; i++)
             {
                 loadings[i].Load();
                 current++;
-                _loadingScreen.UpdatePercent(current + 1, loadings.Count);
+                loadingScreen.UpdatePercent(current + 1, loadings.Count);
             }
+            
+            await _localizationService.SetLocalization(_settingsDataService.Model.Language);
 
             _stateMachine.ChangeState(GameStateType.Reset);
         }
