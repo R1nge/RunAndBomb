@@ -4,7 +4,6 @@ using Services.Data.Settings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using Zenject;
 
@@ -30,11 +29,9 @@ namespace UIs
             _localizationService = localizationService;
         }
 
-        private async void Awake()
+        private void Awake()
         {
             ui.gameObject.SetActive(false);
-            
-            await LocalizationSettings.InitializationOperation.Task;
 
             open.onClick.AddListener(Open);
             close.onClick.AddListener(Close);
