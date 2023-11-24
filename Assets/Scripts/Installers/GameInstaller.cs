@@ -53,11 +53,9 @@ namespace Installers
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<EnemySpawner>().AsSingle();
 
+            Container.Bind<GameStatesFactory>().AsSingle();
             Container.Bind<StateMachine>().AsSingle();
 
-            //TODO: localization service (load, save selected language)
-            //TODO: notifications
-            
             Container.Bind<RestartService>().AsSingle();
             Container.BindInterfacesTo<WinService>().AsSingle();
         }

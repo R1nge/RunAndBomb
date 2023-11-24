@@ -15,17 +15,17 @@ namespace Services.States
         private readonly Dictionary<GameStateType, IGameState> _states;
         private IGameState _currentGameState;
 
-        public StateMachine(IPlayerDataService playerDataService, ISettingsDataService settingsDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LocalizationService localizationService)
+        public StateMachine(GameStatesFactory gameStatesFactory)
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
-                { GameStateType.PreWarm, new PreWarmState(this, loadingScreenAssetProvider, startScreenAssetProvider, explosionVFXPool) },
-                { GameStateType.LoadData, new LoadDataState(this, playerDataService, settingsDataService, uiService, localizationService) },
-                { GameStateType.Reset, new ResetState(this, coroutineRunner, restartService, mapService) },
-                { GameStateType.Init, new InitGameState(uiService, playerDataService, cameraService, mapService, playerFactory, spawnPositionsProvider, configProvider, playerReferenceHolder) },
-                { GameStateType.Game, new GameState(enemySpawner, uiService, mapService, coroutineRunner, inputService, cameraService, playerReferenceHolder) },
-                { GameStateType.Win, new WinGameState(playerDataService, uiService, cameraService, playerReferenceHolder) },
-                { GameStateType.Lose, new LoseGameState(uiService) }
+                { GameStateType.PreWarm, gameStatesFactory.CreatePreWarmState(this) },
+                { GameStateType.LoadData, gameStatesFactory.CreateLoadDataState(this) },
+                { GameStateType.Reset, gameStatesFactory.CreateResetState(this) },
+                { GameStateType.Init, gameStatesFactory.CreateInitGameState(this) },
+                { GameStateType.Game, gameStatesFactory.CreateGameState(this) },
+                { GameStateType.Win, gameStatesFactory.CreateWinGameState(this) },
+                { GameStateType.Lose, gameStatesFactory.CreateLoseGameState(this) }
             };
         }
 
