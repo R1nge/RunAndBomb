@@ -53,9 +53,17 @@ namespace UIs
             _killPopupIsActive = false;
         }
 
-        private void UpdateEnemyCount(int amount) => enemiesLeft.text = $"{enemies.GetLocalizedString() + amount}";
+        private async void UpdateEnemyCount(int amount)
+        {
+            string enemiesString = await enemies.GetLocalizedStringAsync().Task;
+            enemiesLeft.text = $"{enemiesString + amount}";
+        }
 
-        private void UpdateLevel(PlayerStatisticsModel data) => levelText.text = $"{level.GetLocalizedString() + data.Level}";
+        private async void UpdateLevel(PlayerStatisticsModel data)
+        {
+            string levelString = await level.GetLocalizedStringAsync().Task;
+            levelText.text = $"{levelString + data.Level}";
+        }
 
         private void OnDestroy() => _enemyCounter.OnEnemyCountChanged -= UpdateEnemyCount;
     }

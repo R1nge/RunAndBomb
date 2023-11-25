@@ -61,7 +61,7 @@ namespace Bombs
                 {
                     if (_colliders[i].TryGetComponent(out BombController bombController))
                     {
-                        if(_owner.gameObject == null) break;
+                        if(_owner == null) break;
                         
                         if (_owner.gameObject == _colliders[i].transform.root.gameObject)
                         {
