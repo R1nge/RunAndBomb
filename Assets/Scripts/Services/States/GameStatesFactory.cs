@@ -11,7 +11,6 @@ namespace Services.States
     public class GameStatesFactory
     {
         private readonly IPlayerDataService _playerDataService;
-        private readonly ISettingsDataService _settingsDataService;
         private readonly CoroutineRunner _coroutineRunner;
         private readonly UIService _uiService;
         private readonly PlayerFactory _playerFactory;
@@ -26,12 +25,11 @@ namespace Services.States
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
         private readonly ConfigProvider _configProvider;
         private readonly ExplosionVFXPool _explosionVFXPool;
-        private readonly LocalizationService _localizationService;
+        private readonly LoadingService _loadingService;
 
-        private GameStatesFactory(IPlayerDataService playerDataService, ISettingsDataService settingsDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LocalizationService localizationService)
+        private GameStatesFactory(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LoadingService loadingService)
         {
             _playerDataService = playerDataService;
-            _settingsDataService = settingsDataService;
             _coroutineRunner = coroutineRunner;
             _uiService = uiService;
             _playerFactory = playerFactory;
@@ -46,7 +44,7 @@ namespace Services.States
             _spawnPositionsProvider = spawnPositionsProvider;
             _configProvider = configProvider;
             _explosionVFXPool = explosionVFXPool;
-            _localizationService = localizationService;
+            _loadingService = loadingService;
         }
 
         public IGameState CreatePreWarmState(StateMachine stateMachine)
@@ -56,7 +54,7 @@ namespace Services.States
 
         public IGameState CreateLoadDataState(StateMachine stateMachine)
         {
-            return new LoadDataState(stateMachine, _playerDataService, _settingsDataService, _uiService, _localizationService);
+            return new LoadDataState(stateMachine, _loadingService);
         }
 
         public IGameState CreateResetState(StateMachine stateMachine)

@@ -23,7 +23,7 @@ namespace Installers
             Container.Bind<InputService>().AsSingle();
 
             Container.Bind<KillService>().AsSingle();
-            
+
             Container.Bind<PlatformFactory>().AsSingle();
             Container.Bind<MapService>().AsSingle();
 
@@ -38,6 +38,8 @@ namespace Installers
             Container.Bind<LoseScreenFactory>().AsSingle();
             Container.Bind<UIService>().AsSingle();
 
+            Container.Bind<LoadingService>().AsSingle();
+
             Container.Bind<PlayerReferenceHolder>().AsSingle();
             Container.Bind<PlayerAssetProvider>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
@@ -45,9 +47,9 @@ namespace Installers
             Container.Bind<ExplosionVFXAssetProvider>().AsSingle();
             Container.Bind<ExplosionVFXFactory>().AsSingle();
             Container.Bind<ExplosionVFXPool>().AsSingle();
-            
+
             Container.Bind<BombFactory>().AsSingle();
-            
+
             Container.Bind<EnemyCounter>().AsSingle();
             Container.Bind<EnemyAssetProvider>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
