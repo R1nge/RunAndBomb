@@ -7,7 +7,6 @@ using Services.Factories;
 using Unity.AI.Navigation;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Services.Maps
 {

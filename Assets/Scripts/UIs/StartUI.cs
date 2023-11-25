@@ -1,5 +1,4 @@
-﻿using Services.Data;
-using Services.Data.Player;
+﻿using Services.Data.Player;
 using Services.States;
 using TMPro;
 using UnityEngine;

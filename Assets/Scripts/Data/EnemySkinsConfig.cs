@@ -1,5 +1,4 @@
-﻿using Enemies;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Data
