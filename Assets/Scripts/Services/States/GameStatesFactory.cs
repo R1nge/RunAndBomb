@@ -25,8 +25,9 @@ namespace Services.States
         private readonly ConfigProvider _configProvider;
         private readonly ExplosionVFXPool _explosionVFXPool;
         private readonly LoadingService _loadingService;
+        private readonly NotificationService _notificationService;
 
-        private GameStatesFactory(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LoadingService loadingService)
+        private GameStatesFactory(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LoadingService loadingService, NotificationService notificationService)
         {
             _playerDataService = playerDataService;
             _coroutineRunner = coroutineRunner;
@@ -44,11 +45,12 @@ namespace Services.States
             _configProvider = configProvider;
             _explosionVFXPool = explosionVFXPool;
             _loadingService = loadingService;
+            _notificationService = notificationService;
         }
 
         public IGameState CreatePreWarmState(StateMachine stateMachine)
         {
-            return new PreWarmState(stateMachine, _loadingScreenAssetProvider, _startScreenAssetProvider, _explosionVFXPool);
+            return new PreWarmState(stateMachine, _loadingScreenAssetProvider, _startScreenAssetProvider, _explosionVFXPool, _notificationService);
         }
 
         public IGameState CreateLoadDataState(StateMachine stateMachine)

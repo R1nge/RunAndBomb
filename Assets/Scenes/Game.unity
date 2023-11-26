@@ -832,45 +832,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSource: {fileID: 1361163367}
-  clickSound:
-    m_AssetGUID: 3b919b5edef59ce49871853bb89caa80
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  deathSounds:
-  - m_AssetGUID: c1a005a600f842d4caa5bf16b419c286
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 57b6d4d2ec68f214192b2a1132eb39f6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: a7f6efe367f02254396c9e33a88933e8
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 9110316e67061ce4bb0af21c7640d88a
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
-  explosionSounds:
-  - m_AssetGUID: 9e4028aa1e5197543ab819138c230120
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: f991b9a407dcc8c4dab6c263811f7707
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 40b8b47f4ba7f224ca89c95a551a439d
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 37309cf3ae8d31145ab8d94462753e81
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
 --- !u!4 &1615049420
 Transform:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ namespace Installers
             Container.BindInterfacesTo<PlayerPrefsSettingsDataProvider>().AsSingle();
             Container.BindInterfacesTo<SettingsDataService>().AsSingle();
 
+            Container.Bind<NotificationService>().AsSingle();
             Container.Bind<LocalizationService>().AsSingle();
 
             Container.Bind<SettingsService>().AsSingle();
