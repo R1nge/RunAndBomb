@@ -16,8 +16,6 @@ namespace Services.Factories
         private readonly SpawnPositionsProvider _spawnPositionsProvider;
         private readonly PlayerReferenceHolder _playerReferenceHolder;
 
-        private GameObject _model;
-
         private PlayerFactory(DiContainer container, PlayerAssetProvider playerAssetProvider, IPlayerDataService playerDataService, SpawnPositionsProvider spawnPositionsProvider, PlayerReferenceHolder playerReferenceHolder)
         {
             _container = container;

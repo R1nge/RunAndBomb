@@ -27,7 +27,7 @@ namespace Bombs
             {
                 OnTimerStarted?.Invoke();
 
-                OnTimerChanged?.Invoke(CurrentTime, throwInterval);
+                OnTimerChanged?.Invoke(CurrentTime, throwIntervalMin);
 
                 if (CurrentTime <= 0)
                 {

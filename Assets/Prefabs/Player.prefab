@@ -3393,7 +3393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombSpawnPoint: {fileID: 3671208612101914674}
-  throwInterval: 3
+  throwIntervalMin: 3
+  throwIntervalMax: 3
   force: 5
 --- !u!114 &-6604846308212314379
 MonoBehaviour:

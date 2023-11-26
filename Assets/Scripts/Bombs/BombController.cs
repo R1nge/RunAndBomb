@@ -9,7 +9,7 @@ namespace Bombs
     public abstract class BombController : MonoBehaviour
     {
         [SerializeField] private Transform bombSpawnPoint;
-        [SerializeField] protected float throwInterval;
+        [SerializeField] protected float throwIntervalMin, throwIntervalMax;
         [SerializeField] private float force;
         private SizeController _sizeController;
         protected BombProperties BombProperties;
@@ -33,10 +33,10 @@ namespace Bombs
         protected virtual void Awake()
         {
             _sizeController = GetComponent<SizeController>();
-            
+
             BombProperties = new BombProperties();
 
-            CurrentTime = throwInterval;
+            ResetCurrentTime();
 
             _bombSkinIndex = Random.Range(0, _configProvider.BombSkinsConfig.Bombs.Length);
         }
@@ -58,11 +58,32 @@ namespace Bombs
             if (CurrentTime <= 0)
             {
                 _canThrow = true;
-                CurrentTime = throwInterval;
+                ResetCurrentTime();
             }
         }
 
         public void SetMultiplier(float multiplier) => BombProperties.InitialSpeed = force * multiplier;
+
+        public bool TryThrow()
+        {
+            if (!_canThrow)
+            {
+                return false;
+            }
+
+            _canThrow = false;
+
+            Bomb bomb = _bombFactory.Create(_bombSkinIndex);
+            bomb.transform.position = bombSpawnPoint.position;
+            bomb.GetComponent<RigidbodyGravity>().SetBombProperties(BombProperties);
+
+            Vector3 force = BombProperties.Direction * (BombProperties.InitialSpeed / BombProperties.Mass);
+
+            //TODO: find a better solution, maybe create an enemy and player bomb using factory
+            bomb.Throw(force, _sizeController, IsPlayer);
+
+            return true;
+        }
 
         private void Predict()
         {
@@ -72,26 +93,7 @@ namespace Bombs
             BombProperties.InitialPosition = bombSpawnPoint.transform.position;
             BombProperties.Gravity = Physics.gravity * BombProperties.Mass;
         }
-        
-        public bool TryThrow()
-        {
-            if (!_canThrow)
-            {
-                return false;
-            }
 
-            _canThrow = false;
-            
-            Bomb bomb = _bombFactory.Create(_bombSkinIndex);
-            bomb.transform.position = bombSpawnPoint.position;
-            bomb.GetComponent<RigidbodyGravity>().SetBombProperties(BombProperties);
-
-            Vector3 force = BombProperties.Direction * (BombProperties.InitialSpeed / BombProperties.Mass);
-            
-            //TODO: find a better solution, maybe create an enemy and player bomb using factory
-            bomb.Throw(force, _sizeController, IsPlayer);
-
-            return true;
-        }
+        private void ResetCurrentTime() => CurrentTime = Random.Range(throwIntervalMin, throwIntervalMax);
     }
 }

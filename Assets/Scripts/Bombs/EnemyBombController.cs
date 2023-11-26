@@ -5,7 +5,7 @@
         public override void Process()
         {
             base.Process();
-            
+
             if (CurrentTime <= 0)
             {
                 ResetTimer();
