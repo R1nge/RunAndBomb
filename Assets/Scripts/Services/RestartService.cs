@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Bombs;
 using Enemies;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Services
     public class RestartService
     {
         private readonly List<Enemy> _enemies = new();
+        private readonly List<Bomb> _bombs = new();
         private readonly PlayerReferenceHolder _playerReferenceHolder;
         private readonly EnemyCounter _enemyCounter;
 
@@ -20,10 +22,12 @@ namespace Services
         {
             DestroyEnemies();
             DestroyPlayer();
-            ResetCamera();
+            DestroyBombs();
         }
 
         public void AddEnemy(Enemy enemy) => _enemies.Add(enemy);
+        
+        public void AddBomb(Bomb bomb) => _bombs.Add(bomb);
 
         private void DestroyEnemies()
         {
@@ -45,6 +49,15 @@ namespace Services
             }
         }
 
-        private void ResetCamera() { }
+        private void DestroyBombs()
+        {
+            for (int i = _bombs.Count - 1; i >= 0; i--)
+            {
+                if (_bombs[i] == null) continue;
+                Object.Destroy(_bombs[i].gameObject);
+            }
+            
+            _bombs.Clear();
+        }
     }
 }
