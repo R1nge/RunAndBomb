@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Services.Data.Notifications;
 using Services.Data.Player;
 using Services.Data.Settings;
 
@@ -11,13 +12,15 @@ namespace Services.Data
         private readonly ISettingsDataService _settingsDataService;
         private readonly UIService _uiService;
         private readonly LocalizationService _localizationService;
+        private readonly INotificationDataService _notificationDataService;
 
-        private LoadingService(IPlayerDataService playerDataService, ISettingsDataService settingsDataService, UIService uiService, LocalizationService localizationService)
+        private LoadingService(IPlayerDataService playerDataService, ISettingsDataService settingsDataService, UIService uiService, LocalizationService localizationService, INotificationDataService notificationDataService)
         {
             _playerDataService = playerDataService;
             _settingsDataService = settingsDataService;
             _uiService = uiService;
             _localizationService = localizationService;
+            _notificationDataService = notificationDataService;
         }
 
         public async Task Load()
@@ -32,7 +35,8 @@ namespace Services.Data
             var loadings = new List<ILoadingOperation>
             {
                 new PlayerDataLoadingOperation(_playerDataService),
-                new SettingsDataLoadingOperation(_settingsDataService)
+                new SettingsDataLoadingOperation(_settingsDataService),
+                new NotificationDataLoadingOperation(_notificationDataService)
             };
 
             int total = loadings.Count + asyncLoadings.Count;

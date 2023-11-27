@@ -27,7 +27,8 @@ namespace Services.States
         private readonly LoadingService _loadingService;
         private readonly NotificationService _notificationService;
 
-        private GameStatesFactory(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LoadingService loadingService, NotificationService notificationService)
+        private GameStatesFactory(IPlayerDataService playerDataService, CoroutineRunner coroutineRunner, UIService uiService, PlayerFactory playerFactory, EnemySpawner enemySpawner, MapService mapService, RestartService restartService, LoadingScreenAssetProvider loadingScreenAssetProvider, StartScreenAssetProvider startScreenAssetProvider, InputService inputService, CameraService cameraService, PlayerReferenceHolder playerReferenceHolder, SpawnPositionsProvider spawnPositionsProvider, ConfigProvider configProvider, ExplosionVFXPool explosionVFXPool, LoadingService loadingService,
+            NotificationService notificationService)
         {
             _playerDataService = playerDataService;
             _coroutineRunner = coroutineRunner;
@@ -50,12 +51,12 @@ namespace Services.States
 
         public IGameState CreatePreWarmState(StateMachine stateMachine)
         {
-            return new PreWarmState(stateMachine, _loadingScreenAssetProvider, _startScreenAssetProvider, _explosionVFXPool, _notificationService);
+            return new PreWarmState(stateMachine, _loadingScreenAssetProvider, _startScreenAssetProvider, _explosionVFXPool);
         }
 
         public IGameState CreateLoadDataState(StateMachine stateMachine)
         {
-            return new LoadDataState(stateMachine, _loadingService);
+            return new LoadDataState(stateMachine, _loadingService, _notificationService);
         }
 
         public IGameState CreateResetState(StateMachine stateMachine)

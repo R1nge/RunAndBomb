@@ -1,6 +1,7 @@
 ﻿using Services;
 using Services.Assets;
 using Services.Data;
+using Services.Data.Notifications;
 using Services.Data.Player;
 using Services.Data.Settings;
 using UnityEngine;
@@ -17,6 +18,9 @@ namespace Installers
         {
             Container.BindInstance(coroutineRunner);
             Container.BindInstance(configProvider);
+
+            Container.BindInterfacesTo<NotificationPlayerPrefsDataProvider>().AsSingle();
+            Container.BindInterfacesTo<NotificationDataService>().AsSingle();
 
             Container.BindInterfacesTo<PlayerPrefsPlayerDataProvider>().AsSingle();
             Container.BindInterfacesTo<PlayerDataService>().AsSingle();

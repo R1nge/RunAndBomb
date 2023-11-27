@@ -1,4 +1,5 @@
 ﻿using System;
+using Services.Data.Notifications;
 using Unity.Notifications.Android;
 using UnityEngine;
 using UnityEngine.Android;
@@ -7,6 +8,13 @@ namespace Services
 {
     public class NotificationService
     {
+        private readonly INotificationDataService _notificationDataService;
+
+        private NotificationService(INotificationDataService notificationDataService)
+        {
+            _notificationDataService = notificationDataService;
+        }
+        
         public void RequestNotificationPermission()
         {
             if (GetSDKLevel() >= 33)
@@ -33,18 +41,29 @@ namespace Services
 
         public void SendNotification(string title, string text, DateTime dateTime)
         {
-            var notification = new AndroidNotification
+            if (_notificationDataService.Model.FireTime > dateTime)
             {
-                Title = title,
-                Text = text,
-                FireTime = dateTime,
-                SmallIcon = "small_icon" 
-            };
+                var notification = new AndroidNotification
+                {
+                    Title = title,
+                    Text = text,
+                    FireTime = dateTime,
+                    SmallIcon = "small_icon" 
+                };
             
-            AndroidNotificationCenter.SendNotification(notification, "channel_id");
+                AndroidNotificationCenter.SendNotification(notification, "channel_id");
+                
+                _notificationDataService.Model.FireTime = dateTime;
+                _notificationDataService.Save();
+            }
+            else
+            {
+                Debug.Log("Notification is already scheduled");
+            }
         }
 
-        private int GetSDKLevel() {
+        private int GetSDKLevel() 
+        {
             IntPtr clazz = AndroidJNI.FindClass("android/os/Build$VERSION");
             IntPtr fieldID = AndroidJNI.GetStaticFieldID(clazz, "SDK_INT", "I");
             int sdkLevel = AndroidJNI.GetStaticIntField(clazz, fieldID);
